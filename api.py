@@ -42,7 +42,7 @@ def tokenize():
     tokens = nlu_pipeline.extract_tokens(corpus.text)
     lemmas = nlu_pipeline.extract_lemma(corpus.text)
     pos_tags = nlu_pipeline.extract_pos_tags(corpus.text)
-    syn_deps = nlu_pipeline.extract_syn_dep(corpus.text)
+    syn_deps = extract_syn_dep(corpus.text)
     is_stops = nlu_pipeline.extract_is_stop(corpus.text)
     named_ents = nlu_pipeline.extract_named_ents(corpus.text)
 

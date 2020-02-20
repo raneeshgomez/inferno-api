@@ -16,3 +16,13 @@ class Corpus:
         self.syn_deps = syn_deps
         self.is_stops = is_stops
         self.named_entities = named_entities
+
+    def fetch_all_linguistic_sets(self):
+        return {
+            "tokens": self.tokens,
+            "lemmas": self.lemmas,
+            "pos_tags": self.pos_tags,
+            "syn_deps": self.syn_deps,
+            "is_stops": self.is_stops,
+            "named_ents": self.named_entities
+        }
