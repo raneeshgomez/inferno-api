@@ -1,11 +1,22 @@
 from preprocessor.pipeline import NluPipeline
+from preprocessor.textranker import TextRanker
+from preprocessor.tf_idf_scorer import TfIdfScorer
 from engine.sparql_query_engine import SparqlQueryEngine
 from svo_extractor.subject_verb_object_extract import findSVOs, nlp
 from models.corpus import Corpus
 from openie import StanfordOpenIE
 from pycorenlp import StanfordCoreNLP
 from rake_nltk import Rake
+import pke
+import requests
 import pprint
+
+# DBPedia Resource <http://dbpedia.org/resource/Asturias>
+# Fuseki Resource <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#%s>
+
+# Base URLs for Spotlight API
+annotate_base_url = "http://api.dbpedia-spotlight.org/en/annotate"
+candidates_base_url = "http://api.dbpedia-spotlight.org/en/candidates"
 
 # engine = SparqlQueryEngine()
 # query_string = "SELECT * " \
@@ -38,9 +49,11 @@ corpus = Corpus("Mars is the fourth planet from the Sun and the second-smallest 
                 "are typically limited to resolving features about 300 kilometers (190 mi) across when Earth and Mars "
                 "are closest because of Earth's atmosphere.")
 
+# corpus = Corpus("Future astrobiology missions are planned, including the Mars 2020 and ExoMars rovers.")
+
 # Preprocess corpus for NLU
 
-# nlu_pipeline = NluPipeline(corpus.text)
+nlu_pipeline = NluPipeline(corpus.text)
 # tokens = nlu_pipeline.extract_tokens()
 # lemmas = nlu_pipeline.extract_lemma()
 # pos_tags = nlu_pipeline.extract_pos_tags()
@@ -52,7 +65,7 @@ corpus = Corpus("Mars is the fourth planet from the Sun and the second-smallest 
 
 # corpus.store_preprocess_pipeline(tokens, lemmas, pos_tags, syn_deps, is_stops, named_ents)
 # pp = pprint.PrettyPrinter(indent=4)
-# pp.pprint(corpus.named_entities)
+# pp.pprint(nlu_pipeline.extract_pos_tags())
 
 # Using SVO Extractor (https://github.com/peter3125/enhanced-subject-verb-object-extraction)
 
@@ -65,10 +78,10 @@ corpus = Corpus("Mars is the fourth planet from the Sun and the second-smallest 
 # with StanfordOpenIE() as client:
 #     for triple in client.annotate(corpus.text):
 #         print('|-', triple)
-#
-#     graph_image = 'graph.png'
-#     client.generate_graphviz_graph(corpus.text, graph_image)
-#     print('Graph generated: %s.' % graph_image)
+
+    # graph_image = 'graph.png'
+    # client.generate_graphviz_graph(corpus.text, graph_image)
+    # print('Graph generated: %s.' % graph_image)
 
 # Using pycorenlp (https://github.com/smilli/py-corenlp) and Stanford CoreNLP
 # Requires Stanford CoreNLP Java Server to be running
@@ -85,13 +98,96 @@ corpus = Corpus("Mars is the fourth planet from the Sun and the second-smallest 
 
 # r = Rake()
 # r.extract_keywords_from_text(corpus.text)
-# ranked_phrases = r.get_ranked_phrases()
+# ranked_phrases = r.get_ranked_phrases_with_scores()
 # pp = pprint.PrettyPrinter(indent=2)
 # pp.pprint(ranked_phrases)
 
 # Using TF-IDF Scoring
 
-nlu_pipeline = NluPipeline(corpus.text)
-pp = pprint.PrettyPrinter(indent=2)
-pp.pprint(nlu_pipeline.get_tf_idf_scores_for_text())
+# tf_idf_scorer = TfIdfScorer(corpus.text)
+# pp = pprint.PrettyPrinter(indent=2)
+# pp.pprint(tf_idf_scorer.get_tf_idf_scores_for_text())
 
+# Using TextRank
+
+# engine = SparqlQueryEngine()
+# textranker = TextRanker(corpus.text)
+# # Analyze corpus with specified candidate POS
+# textranker.analyze(candidate_pos=['NOUN', 'PROPN', 'VERB', 'ADJ'], window_size=4, lower=False)
+# # Extract keywords using TextRank algorithm
+# keywords = textranker.get_all_keywords()
+# # Store keywords
+# corpus.store_keywords(keywords)
+# for i, (key, value) in enumerate(keywords.items()):
+#     vo_query_string = """
+#             SELECT *
+#                 WHERE {
+#                    <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#%s> ?p ?o.
+#             }
+#     """
+#     vo_query_string = vo_query_string % key
+#     query_result = engine.query_fuseki(vo_query_string)
+#     if not query_result['results']['bindings']:
+#         so_query_string = """
+#                 SELECT *
+#                     WHERE {
+#                        ?s <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#%s> ?o.
+#                 }
+#         """
+#         so_query_string = so_query_string % key
+#         query_result = engine.query_fuseki(so_query_string)
+#     pp = pprint.PrettyPrinter(indent=2)
+#     pp.pprint("*********************************** " + key + " -> " + str(value) + " ***********************************")
+#     pp.pprint(query_result)
+
+
+# Using DBpedia Spotlight API
+
+engine = SparqlQueryEngine()
+params = {
+        "text": corpus.text,
+        "confidence": 0.35
+}
+# Response content type
+headers = {"accept": "application/json"}
+res = requests.get(annotate_base_url, params=params, headers=headers)
+if res.status_code == 200:
+    pp = pprint.PrettyPrinter(indent=4)
+    pp.pprint(res.text)
+    # for candidate in res.json()['annotation']['surfaceForm']:
+    #     vo_query_string = """
+    #             PREFIX dbr: <http://dbpedia.org/resource/>
+    #             PREFIX dbo: <http://dbpedia.org/ontology/>
+    #
+    #             SELECT *
+    #                 WHERE {
+    #                    dbr:%s dbo:abstract ?o .
+    #                    FILTER (lang(?o) = 'en')
+    #             }
+    #     """
+    #     vo_query_string = vo_query_string % candidate['resource']['@uri']
+    #     query_result = engine.query_dbpedia(vo_query_string)
+    #     pp.pprint(candidate['@name'] + " -> " + candidate['resource']['@uri'])
+    #     pp.pprint(query_result)
+else:
+    # Something went wrong
+    print("DBpedia Spotlight Error" + str(res.status_code))
+
+
+# Using PKE (https://github.com/boudinfl/pke)
+
+# # initialize keyphrase extraction model, here TopicRank
+# extractor = pke.unsupervised.TopicRank()
+# # load the content of the document, here document is expected to be in raw
+# # format (i.e. a simple text file) and preprocessing is carried out using spacy
+# extractor.load_document(input=corpus.text, language='en')
+# # keyphrase candidate selection, in the case of TopicRank: sequences of nouns
+# # and adjectives (i.e. `(Noun|Adj)*`)
+# extractor.candidate_selection()
+# # candidate weighting, in the case of TopicRank: using a random walk algorithm
+# extractor.candidate_weighting()
+# # N-best selection, keyphrases contains the 10 highest scored candidates as
+# # (keyphrase, score) tuples
+# keyphrases = extractor.get_n_best(n=20)
+# pp = pprint.PrettyPrinter(indent=4)
+# pp.pprint(keyphrases)

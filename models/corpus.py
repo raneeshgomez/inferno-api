@@ -1,3 +1,6 @@
+from collections import OrderedDict
+
+
 class Corpus:
 
     def __init__(self, text):
@@ -8,6 +11,7 @@ class Corpus:
         self.syn_deps = []
         self.is_stops = []
         self.named_entities = []
+        self.keywords = OrderedDict()
 
     def store_preprocess_pipeline(self, tokens, lemmas, pos_tags, syn_deps, is_stops, named_entities):
         self.tokens = tokens
@@ -26,3 +30,6 @@ class Corpus:
             "is_stops": self.is_stops,
             "named_ents": self.named_entities
         }
+
+    def store_keywords(self, keywords):
+        self.keywords = keywords

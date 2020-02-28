@@ -15,10 +15,8 @@ class SparqlQueryEngine:
         sparql.setReturnFormat(JSON)
 
         try:
-            ret = sparql.query().convert()
-            for result in ret:
-                print(ret)
-            # ret is a stream with the results in XML, see <http://www.w3.org/TR/rdf-sparql-XMLres/>
+            ret = sparql.query().convert() # ret is a stream with the results in XML, see <http://www.w3.org/TR/rdf-sparql-XMLres/>
+            return ret
         except:
             print('SPARQL ERROR!')
 
@@ -28,10 +26,8 @@ class SparqlQueryEngine:
         sparql.setReturnFormat(JSON)
 
         try:
-            ret = sparql.query().convert()
-            for result in ret:
-                print(ret)
-            # ret is a stream with the results in XML, see <http://www.w3.org/TR/rdf-sparql-XMLres/>
+            ret = sparql.query().convert() # ret is a stream with the results in XML, see <http://www.w3.org/TR/rdf-sparql-XMLres/>
+            return ret
         except:
             print('SPARQL ERROR!')
 
