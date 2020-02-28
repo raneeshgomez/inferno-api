@@ -39,14 +39,19 @@ def generate_recommendations():
             'fact': "This is the starter fact"
         }
         response = jsonify(starter_fact)
-        # response.headers.add('Access-Control-Allow-Origin', '*')
         return response, 200
     elif request.method == 'POST':
         data = request.json
         text = data['corpus']
         corpus = Corpus(text)
-
-        return "Endpoint under construction", 200
+        recommendations = {
+            'recommendations': [
+                "Recommendation 01",
+                "Recommendation 02"
+            ]
+        }
+        response = jsonify(recommendations)
+        return response, 200
     
 
 if __name__ == '__main__':
