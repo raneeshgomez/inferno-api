@@ -1,9 +1,9 @@
-from preprocessor.pipeline import NluPipeline
-from preprocessor.textranker import TextRanker
-from preprocessor.tf_idf_scorer import TfIdfScorer
-from engine.sparql_query_engine import SparqlQueryEngine
+from preprocessor.SpacyPipeline import SpacyPipeline
+from preprocessor.TextRanker import TextRanker
+from preprocessor.TfIdfScorer import TfIdfScorer
+from ontologies.SparqlQueryEngine import SparqlQueryEngine
 from svo_extractor.subject_verb_object_extract import findSVOs, nlp
-from models.corpus import Corpus
+from models.Corpus import Corpus
 from openie import StanfordOpenIE
 from pycorenlp import StanfordCoreNLP
 from rake_nltk import Rake
@@ -18,13 +18,13 @@ import pprint
 annotate_base_url = "http://api.dbpedia-spotlight.org/en/annotate"
 candidates_base_url = "http://api.dbpedia-spotlight.org/en/candidates"
 
-# engine = SparqlQueryEngine()
+# ontologies = SparqlQueryEngine()
 # query_string = "SELECT * " \
 #                "WHERE { " \
 #                     "?s <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#mean_distance_to_sun> ?o. " \
 #                     "FILTER (?o < 6)" \
 #                "}"
-# print(engine.query_fuseki(query_string))
+# print(ontologies.query_fuseki(query_string))
 
 corpus = Corpus("Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System, "
                 "after Mercury. Named af"
@@ -53,7 +53,7 @@ corpus = Corpus("Mars is the fourth planet from the Sun and the second-smallest 
 
 # Preprocess corpus for NLU
 
-nlu_pipeline = NluPipeline(corpus.text)
+nlu_pipeline = SpacyPipeline(corpus.text)
 # tokens = nlu_pipeline.extract_tokens()
 # lemmas = nlu_pipeline.extract_lemma()
 # pos_tags = nlu_pipeline.extract_pos_tags()
@@ -110,7 +110,7 @@ nlu_pipeline = NluPipeline(corpus.text)
 
 # Using TextRank
 
-# engine = SparqlQueryEngine()
+# ontologies = SparqlQueryEngine()
 # textranker = TextRanker(corpus.text)
 # # Analyze corpus with specified candidate POS
 # textranker.analyze(candidate_pos=['NOUN', 'PROPN', 'VERB', 'ADJ'], window_size=4, lower=False)
@@ -126,7 +126,7 @@ nlu_pipeline = NluPipeline(corpus.text)
 #             }
 #     """
 #     vo_query_string = vo_query_string % key
-#     query_result = engine.query_fuseki(vo_query_string)
+#     query_result = ontologies.query_fuseki(vo_query_string)
 #     if not query_result['results']['bindings']:
 #         so_query_string = """
 #                 SELECT *

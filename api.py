@@ -3,14 +3,10 @@ from flask import Flask, flash, redirect, url_for, session, logging, request, js
 from flask_cors import CORS, cross_origin
 
 # Custom imports
-from models.corpus import Corpus
-from preprocessor.pipeline import NluPipeline
+from models.Corpus import Corpus
+from controllers.RecommendationsController import RecommendationController
 
-# Base URLs for Spotlight API
-annotate_base_url = "http://api.dbpedia-spotlight.org/en/annotate"
-candidates_base_url = "http://api.dbpedia-spotlight.org/en/candidates"
-
-
+# Define constants for host and port configuration
 HOST = 'localhost'
 PORT = 5000
 
@@ -18,8 +14,11 @@ PORT = 5000
 # The first argument is the name of the module or package
 # This is needed so that Flask knows where to look for templates and static assets
 app = Flask(__name__)
+
+# Configure CORS
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
+
 
 # *******************************************************************
 # Define routes
@@ -34,25 +33,35 @@ def home():
 @app.route('/api/recommendation', methods=['GET', 'POST'])
 @cross_origin()
 def generate_recommendations():
+    controller = RecommendationController()
     if request.method == 'GET':
-        starter_fact = {
-            'fact': "This is the starter fact"
-        }
-        response = jsonify(starter_fact)
-        return response, 200
+        result = controller.fetch_starter_fact()
+        # If result status is falsy
+        if not result['status']:
+            # If an invalid composition domain has been specified
+            if result['error'] == "Invalid domain":
+                response_code = 400
+            else:
+                # 3rd party API or SPARQL errors
+                response_code = 500
+        else:
+            response_code = 200
+        response_data = jsonify(result)
+        return response_data, response_code
     elif request.method == 'POST':
         data = request.json
         text = data['corpus']
         corpus = Corpus(text)
-        recommendations = {
-            'recommendations': [
-                "Recommendation 01",
-                "Recommendation 02"
-            ]
-        }
-        response = jsonify(recommendations)
-        return response, 200
-    
+        result = controller.fetch_recommendations(corpus)
+        # If result status is falsy
+        if not result['status']:
+            # 3rd party API or SPARQL errors
+            response_code = 500
+        else:
+            response_code = 200
+        response = jsonify(result)
+        return response, response_code
+
 
 if __name__ == '__main__':
     """ 
@@ -62,4 +71,4 @@ if __name__ == '__main__':
     "__main__", but instead it would be equal to "app" (since the name of this module is app.py).
     Therefore, the if condition here would not be satisfied and the code inside it would not run.
     """
-    app.run(host=HOST, port=PORT)
+    app.run(host=HOST, port=PORT, debug=True)

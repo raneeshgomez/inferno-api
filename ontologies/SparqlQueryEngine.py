@@ -15,10 +15,10 @@ class SparqlQueryEngine:
         sparql.setReturnFormat(JSON)
 
         try:
-            ret = sparql.query().convert() # ret is a stream with the results in XML, see <http://www.w3.org/TR/rdf-sparql-XMLres/>
+            ret = sparql.query().convert()
             return ret
         except:
-            print('SPARQL ERROR!')
+            return "SPARQL Error!"
 
     def query_dbpedia(self, query):
         sparql = SPARQLWrapper(self.DBPEDIA_URL)
@@ -26,8 +26,7 @@ class SparqlQueryEngine:
         sparql.setReturnFormat(JSON)
 
         try:
-            ret = sparql.query().convert() # ret is a stream with the results in XML, see <http://www.w3.org/TR/rdf-sparql-XMLres/>
+            ret = sparql.query().convert()
             return ret
         except:
-            print('SPARQL ERROR!')
-
+            return "SPARQL Error!"

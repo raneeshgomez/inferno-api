@@ -3,7 +3,7 @@ import spacy
 nlp = spacy.load("en_core_web_lg")
 
 
-class NluPipeline:
+class SpacyPipeline:
 
     def __init__(self, text):
         self.text = text
