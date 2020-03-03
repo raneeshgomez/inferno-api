@@ -1,7 +1,7 @@
 import spacy
 import neuralcoref
 
-nlp = spacy.load("en_core_web_lg")
+nlp = spacy.load("en")
 
 # Add NeuralCoref into Spacy's annotation pipeline
 coref = neuralcoref.NeuralCoref(nlp.vocab)

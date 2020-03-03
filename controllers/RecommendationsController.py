@@ -3,7 +3,7 @@ import pprint
 
 # Custom imports
 from models.Corpus import Corpus
-from ontologies.SparqlQueryEngine import SparqlQueryEngine
+from ontologies.SparqlRepository import SparqlRepository
 from preprocessor.NLUAnnotator import NLUAnnotator
 from preprocessor.TextRanker import TextRanker
 
@@ -11,7 +11,7 @@ from preprocessor.TextRanker import TextRanker
 class RecommendationController:
 
     def __init__(self):
-        self.sparql_engine = SparqlQueryEngine()
+        self.sparql = SparqlRepository()
         # Base URLs for DBpedia Spotlight API
         self.spotlight_annotate_base_url = "http://api.dbpedia-spotlight.org/en/annotate"
         self.spotlight_candidates_base_url = "http://api.dbpedia-spotlight.org/en/candidates"
@@ -20,15 +20,7 @@ class RecommendationController:
 
     def fetch_starter_fact(self, domain="Solar System"):
         if domain == "Solar System":
-            starter_fact_query = """
-                        PREFIX fss: <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#>
-    
-                        SELECT *
-                            WHERE {
-                               fss:Solar_System fss:description ?o .
-                        }
-                    """
-            result = self.sparql_engine.query_fuseki(starter_fact_query)
+            result = self.sparql.get_description_by_subject("Solar_System")
             if result == "SPARQL Error!":
                 return {
                     'result': '',
@@ -36,7 +28,7 @@ class RecommendationController:
                     'error': result
                 }
             return {
-                'result': result['results']['bindings'][0]['o']['value'],
+                'result': result['results']['bindings'][0]['object']['value'],
                 'status': True,
                 'error': ''
             }
@@ -76,17 +68,7 @@ class RecommendationController:
 
         vo_result_list = []
         for i, (key, value) in enumerate(subject_keywords.items()):
-            vo_query_string = """
-                    PREFIX fss: <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#>
-
-                    SELECT *
-                        WHERE {
-                           ?s ?p ?o .
-                           FILTER CONTAINS(?s, fss:%s)
-                    }
-            """
-            vo_query_string = vo_query_string % key
-            query_result = self.sparql_engine.query_fuseki(vo_query_string)
+            query_result = self.sparql.get_individuals_by_name_or_desc_with_regex(key)
             if query_result == "SPARQL Error!":
                 return {
                     'result': '',
@@ -98,17 +80,7 @@ class RecommendationController:
 
         so_result_list = []
         for i, (key, value) in enumerate(predicate_keywords.items()):
-            so_query_string = """
-                            PREFIX fss: <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#>
-
-                            SELECT *
-                                WHERE {
-                                   ?s ?p ?o .
-                                   FILTER CONTAINS(?p, fss:%s)
-                            }
-                    """
-            so_query_string = so_query_string % key
-            query_result = self.sparql_engine.query_fuseki(so_query_string)
+            query_result = self.sparql.get_individuals_by_name_or_desc_with_regex(key)
             if query_result == "SPARQL Error!":
                 return {
                     'result': '',
