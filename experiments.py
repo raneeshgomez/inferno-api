@@ -1,4 +1,4 @@
-from preprocessor.SpacyPipeline import SpacyPipeline
+from preprocessor.NLUAnnotator import NLUAnnotator
 from preprocessor.TextRanker import TextRanker
 from preprocessor.TfIdfScorer import TfIdfScorer
 from ontologies.SparqlQueryEngine import SparqlQueryEngine
@@ -49,11 +49,13 @@ corpus = Corpus("Mars is the fourth planet from the Sun and the second-smallest 
                 "are typically limited to resolving features about 300 kilometers (190 mi) across when Earth and Mars "
                 "are closest because of Earth's atmosphere.")
 
-# corpus = Corpus("Future astrobiology missions are planned, including the Mars 2020 and ExoMars rovers.")
+# corpus = Corpus("Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System"
+#                 ". Named after the Roman god of war, it is often referred to as the 'Red Planet' because "
+#                 "the iron oxide prevalent on its surface gives it a reddish appearance.")
 
 # Preprocess corpus for NLU
 
-nlu_pipeline = SpacyPipeline(corpus.text)
+# nlu_pipeline = SpacyPipeline(corpus.text)
 # tokens = nlu_pipeline.extract_tokens()
 # lemmas = nlu_pipeline.extract_lemma()
 # pos_tags = nlu_pipeline.extract_pos_tags()
@@ -110,50 +112,75 @@ nlu_pipeline = SpacyPipeline(corpus.text)
 
 # Using TextRank
 
-# ontologies = SparqlQueryEngine()
-# textranker = TextRanker(corpus.text)
-# # Analyze corpus with specified candidate POS
-# textranker.analyze(candidate_pos=['NOUN', 'PROPN', 'VERB', 'ADJ'], window_size=4, lower=False)
-# # Extract keywords using TextRank algorithm
-# keywords = textranker.get_all_keywords()
-# # Store keywords
-# corpus.store_keywords(keywords)
-# for i, (key, value) in enumerate(keywords.items()):
-#     vo_query_string = """
-#             SELECT *
-#                 WHERE {
-#                    <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#%s> ?p ?o.
-#             }
-#     """
-#     vo_query_string = vo_query_string % key
-#     query_result = ontologies.query_fuseki(vo_query_string)
-#     if not query_result['results']['bindings']:
-#         so_query_string = """
-#                 SELECT *
-#                     WHERE {
-#                        ?s <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#%s> ?o.
-#                 }
-#         """
-#         so_query_string = so_query_string % key
-#         query_result = engine.query_fuseki(so_query_string)
-#     pp = pprint.PrettyPrinter(indent=2)
-#     pp.pprint("*********************************** " + key + " -> " + str(value) + " ***********************************")
-#     pp.pprint(query_result)
+sparql_engine = SparqlQueryEngine()
+pp = pprint.PrettyPrinter(indent=2)
+
+subject_textranker = TextRanker(corpus.text)
+# Analyze corpus with specified candidate POS
+subject_textranker.analyze(candidate_pos=['NOUN', 'PROPN'], window_size=4, lower=False)
+# Extract keywords using TextRank algorithm
+subject_keywords = subject_textranker.get_all_keywords()
+pp.pprint(subject_keywords)
+
+predicate_textranker = TextRanker(corpus.text)
+# Analyze corpus with specified candidate POS
+predicate_textranker.analyze(candidate_pos=['VERB', 'ADJ'], window_size=4, lower=False)
+# Extract keywords using TextRank algorithm
+predicate_keywords = predicate_textranker.get_all_keywords()
+pp.pprint(predicate_keywords)
+
+vo_result_list = []
+for i, (key, value) in enumerate(subject_keywords.items()):
+    vo_query_string = """
+                    PREFIX fss: <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#>
+
+                    SELECT DISTINCT ?class
+                        WHERE {
+                           ?class fss:description ?description
+                           FILTER(regex(str(?name), "%s") || regex(str(?description), "%s"))
+                    }
+            """
+    vo_query_string = vo_query_string % (key, key)
+    query_result = sparql_engine.query_fuseki(vo_query_string)
+    if query_result == "SPARQL Error!":
+        pp.pprint(query_result)
+    vo_result_list.append(query_result)
+
+so_result_list = []
+for i, (key, value) in enumerate(predicate_keywords.items()):
+    so_query_string = """
+                    PREFIX fss: <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#>
+
+                    SELECT DISTINCT ?class
+                        WHERE {
+                           ?class fss:description ?description
+                           FILTER(regex(str(?description), "%s"))
+                    }
+            """
+    so_query_string = so_query_string % key
+    query_result = sparql_engine.query_fuseki(so_query_string)
+    if query_result == "SPARQL Error!":
+        pp.pprint(query_result)
+    so_result_list.append(query_result)
+
+pp.pprint(vo_result_list)
+pp.pprint("***********************************************************************************************************")
+pp.pprint(so_result_list)
 
 
 # Using DBpedia Spotlight API
 
-engine = SparqlQueryEngine()
-params = {
-        "text": corpus.text,
-        "confidence": 0.35
-}
+# engine = SparqlQueryEngine()
+# params = {
+#         "text": corpus.text,
+#         "confidence": 0.35
+# }
 # Response content type
-headers = {"accept": "application/json"}
-res = requests.get(annotate_base_url, params=params, headers=headers)
-if res.status_code == 200:
-    pp = pprint.PrettyPrinter(indent=4)
-    pp.pprint(res.text)
+# headers = {"accept": "application/json"}
+# res = requests.get(annotate_base_url, params=params, headers=headers)
+# if res.status_code == 200:
+#     pp = pprint.PrettyPrinter(indent=4)
+#     pp.pprint(res.text)
     # for candidate in res.json()['annotation']['surfaceForm']:
     #     vo_query_string = """
     #             PREFIX dbr: <http://dbpedia.org/resource/>
@@ -169,9 +196,9 @@ if res.status_code == 200:
     #     query_result = engine.query_dbpedia(vo_query_string)
     #     pp.pprint(candidate['@name'] + " -> " + candidate['resource']['@uri'])
     #     pp.pprint(query_result)
-else:
+# else:
     # Something went wrong
-    print("DBpedia Spotlight Error" + str(res.status_code))
+    # print("DBpedia Spotlight Error" + str(res.status_code))
 
 
 # Using PKE (https://github.com/boudinfl/pke)
@@ -188,6 +215,6 @@ else:
 # extractor.candidate_weighting()
 # # N-best selection, keyphrases contains the 10 highest scored candidates as
 # # (keyphrase, score) tuples
-# keyphrases = extractor.get_n_best(n=20)
+# keyphrases = extractor.get_n_best(n=30)
 # pp = pprint.PrettyPrinter(indent=4)
 # pp.pprint(keyphrases)

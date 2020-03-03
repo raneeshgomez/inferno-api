@@ -51,8 +51,7 @@ def generate_recommendations():
     elif request.method == 'POST':
         data = request.json
         text = data['corpus']
-        corpus = Corpus(text)
-        result = controller.fetch_recommendations(corpus)
+        result = controller.fetch_recommendations(text)
         # If result status is falsy
         if not result['status']:
             # 3rd party API or SPARQL errors

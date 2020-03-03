@@ -8,27 +8,24 @@ class Corpus:
         self.tokens = []
         self.lemmas = []
         self.pos_tags = []
-        self.syn_deps = []
-        self.is_stops = []
         self.named_entities = []
+        self.corefs = []
         self.keywords = OrderedDict()
 
-    def store_preprocess_pipeline(self, tokens, lemmas, pos_tags, syn_deps, is_stops, named_entities):
+    def set_annotations(self, tokens, lemmas, pos_tags, named_entities, corefs):
         self.tokens = tokens
         self.lemmas = lemmas
         self.pos_tags = pos_tags
-        self.syn_deps = syn_deps
-        self.is_stops = is_stops
         self.named_entities = named_entities
+        self.corefs = corefs
 
     def fetch_all_linguistic_sets(self):
         return {
             "tokens": self.tokens,
             "lemmas": self.lemmas,
             "pos_tags": self.pos_tags,
-            "syn_deps": self.syn_deps,
-            "is_stops": self.is_stops,
-            "named_ents": self.named_entities
+            "named_ents": self.named_entities,
+            "corefs": self.corefs
         }
 
     def store_keywords(self, keywords):

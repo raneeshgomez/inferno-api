@@ -1,9 +1,14 @@
 import spacy
+import neuralcoref
 
 nlp = spacy.load("en_core_web_lg")
 
+# Add NeuralCoref into Spacy's annotation pipeline
+coref = neuralcoref.NeuralCoref(nlp.vocab)
+nlp.add_pipe(coref, name='neuralcoref')
 
-class SpacyPipeline:
+
+class NLUAnnotator:
 
     def __init__(self, text):
         self.text = text
@@ -18,8 +23,8 @@ class SpacyPipeline:
     def extract_pos_tags(self):
         return [[token.text, token.pos_, token.tag_] for token in self.doc]
 
-    def extract_is_stop(self):
-        return [[token.text, token.is_stop] for token in self.doc]
-
     def extract_named_ents(self):
         return [[ent.text, ent.label_] for ent in self.doc.ents]
+
+    def extract_corefs(self):
+        return self.doc._.coref_clusters

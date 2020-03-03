@@ -2,7 +2,10 @@ import requests
 import pprint
 
 # Custom imports
+from models.Corpus import Corpus
 from ontologies.SparqlQueryEngine import SparqlQueryEngine
+from preprocessor.NLUAnnotator import NLUAnnotator
+from preprocessor.TextRanker import TextRanker
 
 
 class RecommendationController:
@@ -44,49 +47,121 @@ class RecommendationController:
                 'error': 'Invalid domain'
             }
 
-    def fetch_recommendations(self, corpus):
+    def fetch_recommendations(self, text):
 
         # TODO ****************************** Only use last few sentences from corpus ******************************
 
-        params = {
-            "text": corpus.text,
-            "confidence": 0.35
-        }
-        # Response content type
-        headers = {"accept": "application/json"}
-        res = requests.get(self.spotlight_annotate_base_url, params=params, headers=headers)
-        if res.status_code == 200:
-            result_list = []
-            non_duplicate_list = {obj['@URI']: obj for obj in res.json()['Resources']}.values()
-            self.pp.pprint(non_duplicate_list)
-            for annotation in non_duplicate_list:
-                vo_query_string = """
-                        PREFIX dbo: <http://dbpedia.org/ontology/>
+        # Initialize new corpus
+        corpus = Corpus(text)
+        # Annotate corpus for NLU purposes
+        nlu = NLUAnnotator(text)
+        tokens = nlu.extract_tokens()
+        lemma = nlu.extract_lemma()
+        pos_tags = nlu.extract_pos_tags()
+        named_ents = nlu.extract_named_ents()
+        corefs = nlu.extract_corefs()
+        # Set annotations to corpus
+        corpus.set_annotations(tokens, lemma, pos_tags, named_ents, corefs)
 
-                        SELECT *
-                            WHERE {
-                               <%s> dbo:abstract ?o .
-                               FILTER (lang(?o) = 'en')
-                        }
-                """
-                vo_query_string = vo_query_string % annotation['@URI']
-                query_result = self.sparql_engine.query_dbpedia(vo_query_string)
-                if query_result == "SPARQL Error!":
-                    return {
-                        'result': '',
-                        'status': False,
-                        'error': query_result
+        subject_textranker = TextRanker(corpus.text)
+        # Analyze corpus with specified candidate POS
+        subject_textranker.analyze(candidate_pos=['NOUN', 'PROPN'], window_size=4, lower=False)
+        # Extract keywords using TextRank algorithm
+        subject_keywords = subject_textranker.get_all_keywords()
+        predicate_textranker = TextRanker(corpus.text)
+        # Analyze corpus with specified candidate POS
+        predicate_textranker.analyze(candidate_pos=['VERB', 'ADJ'], window_size=4, lower=False)
+        # Extract keywords using TextRank algorithm
+        predicate_keywords = predicate_textranker.get_all_keywords()
+
+        vo_result_list = []
+        for i, (key, value) in enumerate(subject_keywords.items()):
+            vo_query_string = """
+                    PREFIX fss: <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#>
+
+                    SELECT *
+                        WHERE {
+                           ?s ?p ?o .
+                           FILTER CONTAINS(?s, fss:%s)
                     }
-                if len(query_result['results']['bindings']) > 0:
-                    result_list.append(query_result['results']['bindings'][0]['o']['value'])
-            return {
-                'result': result_list,
-                'status': True,
-                'error': ''
-            }
-        else:
-            return {
-                'result': '',
-                'status': False,
-                'error': 'DBpedia Spotlight Error with code ' + str(res.status_code)
-            }
+            """
+            vo_query_string = vo_query_string % key
+            query_result = self.sparql_engine.query_fuseki(vo_query_string)
+            if query_result == "SPARQL Error!":
+                return {
+                    'result': '',
+                    'status': False,
+                    'error': query_result
+                }
+            if len(query_result['results']['bindings']) > 0:
+                vo_result_list.append(query_result['results']['bindings'])
+
+        so_result_list = []
+        for i, (key, value) in enumerate(predicate_keywords.items()):
+            so_query_string = """
+                            PREFIX fss: <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#>
+
+                            SELECT *
+                                WHERE {
+                                   ?s ?p ?o .
+                                   FILTER CONTAINS(?p, fss:%s)
+                            }
+                    """
+            so_query_string = so_query_string % key
+            query_result = self.sparql_engine.query_fuseki(so_query_string)
+            if query_result == "SPARQL Error!":
+                return {
+                    'result': '',
+                    'status': False,
+                    'error': query_result
+                }
+            if len(query_result['results']['bindings']) > 0:
+                so_result_list.append(query_result['results']['bindings'])
+
+        self.pp.pprint(vo_result_list)
+        self.pp.pprint("**********************************************************************************************")
+        self.pp.pprint(so_result_list)
+
+
+        # params = {
+        #     "text": corpus.text,
+        #     "confidence": 0.35
+        # }
+        # # Response content type
+        # headers = {"accept": "application/json"}
+        # res = requests.get(self.spotlight_annotate_base_url, params=params, headers=headers)
+        # if res.status_code == 200:
+        #     result_list = []
+        #     non_duplicate_list = {obj['@URI']: obj for obj in res.json()['Resources']}.values()
+        #     self.pp.pprint(non_duplicate_list)
+        #     for annotation in non_duplicate_list:
+        #         vo_query_string = """
+        #                 PREFIX dbo: <http://dbpedia.org/ontology/>
+        #
+        #                 SELECT *
+        #                     WHERE {
+        #                        <%s> dbo:abstract ?o .
+        #                        FILTER (lang(?o) = 'en')
+        #                 }
+        #         """
+        #         vo_query_string = vo_query_string % annotation['@URI']
+        #         query_result = self.sparql_engine.query_dbpedia(vo_query_string)
+        #         if query_result == "SPARQL Error!":
+        #             return {
+        #                 'result': '',
+        #                 'status': False,
+        #                 'error': query_result
+        #             }
+        #         if len(query_result['results']['bindings']) > 0:
+        #             result_list.append(query_result['results']['bindings'][0]['o']['value'])
+        #     return {
+        #         'result': result_list,
+        #         'status': True,
+        #         'error': ''
+        #     }
+        # else:
+        #     return {
+        #         'result': '',
+        #         'status': False,
+        #         'error': 'DBpedia Spotlight Error with code ' + str(res.status_code)
+        #     }

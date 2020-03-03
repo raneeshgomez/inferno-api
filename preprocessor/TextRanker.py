@@ -5,6 +5,7 @@ from spacy.lang.en.stop_words import STOP_WORDS
 
 nlp = spacy.load("en_core_web_sm", disable=['ner'])
 
+
 # Referred from https://towardsdatascience.com/textrank-for-keyword-extraction-by-python-c0bae21bcec0
 class TextRanker:
 
@@ -18,7 +19,6 @@ class TextRanker:
         self.steps = 10  # iteration steps
         self.node_weight = None  # save keywords and its weight
 
-    # **************************************** BEGIN TEXTRANK LOGIC ****************************************
 
     def set_custom_stopwords(self, stopwords):
         """Set custom stop words"""
@@ -134,5 +134,3 @@ class TextRanker:
             node_weight[word] = pr[index]
 
         self.node_weight = node_weight
-
-    # **************************************** END TEXTRANK LOGIC ****************************************
