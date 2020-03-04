@@ -14,7 +14,7 @@ class TextRanker:
         self.doc = nlp(self.text)
 
         # TextRank Configuration
-        self.d = 0.85  # damping coefficient, usually is .85
+        self.damping_coefficient = 0.85  # damping coefficient, usually is .85
         self.min_diff = 1e-5  # convergence threshold
         self.steps = 10  # iteration steps
         self.node_weight = None  # save keywords and its weight
@@ -122,7 +122,7 @@ class TextRanker:
         # Iteration
         previous_pr = 0
         for epoch in range(self.steps):
-            pr = (1 - self.d) + self.d * np.dot(g, pr)
+            pr = (1 - self.damping_coefficient) + self.damping_coefficient * np.dot(g, pr)
             if abs(previous_pr - sum(pr)) < self.min_diff:
                 break
             else:

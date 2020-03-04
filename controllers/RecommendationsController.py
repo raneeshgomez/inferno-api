@@ -55,44 +55,50 @@ class RecommendationController:
         # Set annotations to corpus
         corpus.set_annotations(tokens, lemma, pos_tags, named_ents, corefs)
 
-        subject_textranker = TextRanker(corpus.text)
-        # Analyze corpus with specified candidate POS
-        subject_textranker.analyze(candidate_pos=['NOUN', 'PROPN'], window_size=4, lower=False)
-        # Extract keywords using TextRank algorithm
-        subject_keywords = subject_textranker.get_all_keywords()
-        predicate_textranker = TextRanker(corpus.text)
-        # Analyze corpus with specified candidate POS
-        predicate_textranker.analyze(candidate_pos=['VERB', 'ADJ'], window_size=4, lower=False)
-        # Extract keywords using TextRank algorithm
-        predicate_keywords = predicate_textranker.get_all_keywords()
+        self.pp.pprint(corpus.text)
+        self.pp.pprint(named_ents)
+        self.pp.pprint(corefs)
+        resolved_text = nlu.doc._.coref_resolved
+        self.pp.pprint(resolved_text)
 
-        vo_result_list = []
-        for i, (key, value) in enumerate(subject_keywords.items()):
-            query_result = self.sparql.get_individuals_by_name_or_desc_with_regex(key)
-            if query_result == "SPARQL Error!":
-                return {
-                    'result': '',
-                    'status': False,
-                    'error': query_result
-                }
-            if len(query_result['results']['bindings']) > 0:
-                vo_result_list.append(query_result['results']['bindings'])
-
-        so_result_list = []
-        for i, (key, value) in enumerate(predicate_keywords.items()):
-            query_result = self.sparql.get_individuals_by_name_or_desc_with_regex(key)
-            if query_result == "SPARQL Error!":
-                return {
-                    'result': '',
-                    'status': False,
-                    'error': query_result
-                }
-            if len(query_result['results']['bindings']) > 0:
-                so_result_list.append(query_result['results']['bindings'])
-
-        self.pp.pprint(vo_result_list)
-        self.pp.pprint("**********************************************************************************************")
-        self.pp.pprint(so_result_list)
+        # subject_textranker = TextRanker(corpus.text)
+        # # Analyze corpus with specified candidate POS
+        # subject_textranker.analyze(candidate_pos=['NOUN', 'PROPN'], window_size=4, lower=False)
+        # # Extract keywords using TextRank algorithm
+        # subject_keywords = subject_textranker.get_all_keywords()
+        # predicate_textranker = TextRanker(corpus.text)
+        # # Analyze corpus with specified candidate POS
+        # predicate_textranker.analyze(candidate_pos=['VERB', 'ADJ'], window_size=4, lower=False)
+        # # Extract keywords using TextRank algorithm
+        # predicate_keywords = predicate_textranker.get_all_keywords()
+        #
+        # vo_result_list = []
+        # for i, (key, value) in enumerate(subject_keywords.items()):
+        #     query_result = self.sparql.get_individuals_by_name_or_desc_with_regex(key)
+        #     if query_result == "SPARQL Error!":
+        #         return {
+        #             'result': '',
+        #             'status': False,
+        #             'error': query_result
+        #         }
+        #     if len(query_result['results']['bindings']) > 0:
+        #         vo_result_list.append(query_result['results']['bindings'])
+        #
+        # so_result_list = []
+        # for i, (key, value) in enumerate(predicate_keywords.items()):
+        #     query_result = self.sparql.get_individuals_by_name_or_desc_with_regex(key)
+        #     if query_result == "SPARQL Error!":
+        #         return {
+        #             'result': '',
+        #             'status': False,
+        #             'error': query_result
+        #         }
+        #     if len(query_result['results']['bindings']) > 0:
+        #         so_result_list.append(query_result['results']['bindings'])
+        #
+        # self.pp.pprint(vo_result_list)
+        # self.pp.pprint("**********************************************************************************************")
+        # self.pp.pprint(so_result_list)
 
 
         # params = {
