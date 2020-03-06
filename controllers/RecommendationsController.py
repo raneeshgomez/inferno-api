@@ -3,8 +3,8 @@ import pprint
 
 # Custom imports
 from models.Corpus import Corpus
-from ontologies.SparqlRepository import SparqlRepository
-from preprocessor.NLUAnnotator import NLUAnnotator
+from sparql.SparqlRepository import SparqlRepository
+from preprocessor.SpacyNluAnnotator import SpacyNluAnnotator
 from preprocessor.TextRanker import TextRanker
 
 
@@ -40,13 +40,10 @@ class RecommendationController:
             }
 
     def fetch_recommendations(self, text):
-
-        # TODO ****************************** Only use last few sentences from corpus ******************************
-
         # Initialize new corpus
         corpus = Corpus(text)
         # Annotate corpus for NLU purposes
-        nlu = NLUAnnotator(text)
+        nlu = SpacyNluAnnotator(text)
         tokens = nlu.extract_tokens()
         lemma = nlu.extract_lemma()
         pos_tags = nlu.extract_pos_tags()

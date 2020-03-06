@@ -1,30 +1,33 @@
-from preprocessor.NLUAnnotator import NLUAnnotator
-from preprocessor.TextRanker import TextRanker
-from preprocessor.TfIdfScorer import TfIdfScorer
-from ontologies.SparqlQueryEngine import SparqlQueryEngine
-from svo_extractor.subject_verb_object_extract import findSVOs, nlp
+# from preprocessor.NLUAnnotator import NLUAnnotator
+# from preprocessor.TextRanker import TextRanker
+# from sparql.SparqlQueryEngine import SparqlQueryEngine
+# from svo_extractor.subject_verb_object_extract import findSVOs, nlp
+# from openie import StanfordOpenIE
+# from pycorenlp import StanfordCoreNLP
+# from rake_nltk import Rake
+# import pke
+# import requests
+import json
+
 from models.Corpus import Corpus
-from openie import StanfordOpenIE
-from pycorenlp import StanfordCoreNLP
-from rake_nltk import Rake
-import pke
-import requests
 import pprint
 
 # DBPedia Resource <http://dbpedia.org/resource/Asturias>
 # Fuseki Resource <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#%s>
 
 # Base URLs for Spotlight API
+from preprocessor.WatsonNluAnnotator import WatsonNluAnnotator
+
 annotate_base_url = "http://api.dbpedia-spotlight.org/en/annotate"
 candidates_base_url = "http://api.dbpedia-spotlight.org/en/candidates"
 
-# ontologies = SparqlQueryEngine()
+# sparql = SparqlQueryEngine()
 # query_string = "SELECT * " \
 #                "WHERE { " \
 #                     "?s <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#mean_distance_to_sun> ?o. " \
 #                     "FILTER (?o < 6)" \
 #                "}"
-# print(ontologies.query_fuseki(query_string))
+# print(sparql.query_fuseki(query_string))
 
 corpus = Corpus("Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System, "
                 "after Mercury. Named af"
@@ -96,6 +99,7 @@ corpus = Corpus("Mars is the fourth planet from the Sun and the second-smallest 
 # pp = pprint.PrettyPrinter(indent=2)
 # pp.pprint(output)
 
+
 # Using RAKE algorithm
 
 # r = Rake()
@@ -104,68 +108,63 @@ corpus = Corpus("Mars is the fourth planet from the Sun and the second-smallest 
 # pp = pprint.PrettyPrinter(indent=2)
 # pp.pprint(ranked_phrases)
 
-# Using TF-IDF Scoring
-
-# tf_idf_scorer = TfIdfScorer(corpus.text)
-# pp = pprint.PrettyPrinter(indent=2)
-# pp.pprint(tf_idf_scorer.get_tf_idf_scores_for_text())
 
 # Using TextRank
 
-sparql_engine = SparqlQueryEngine()
-pp = pprint.PrettyPrinter(indent=2)
-
-subject_textranker = TextRanker(corpus.text)
-# Analyze corpus with specified candidate POS
-subject_textranker.analyze(candidate_pos=['NOUN', 'PROPN'], window_size=4, lower=False)
-# Extract keywords using TextRank algorithm
-subject_keywords = subject_textranker.get_all_keywords()
-pp.pprint(subject_keywords)
-
-predicate_textranker = TextRanker(corpus.text)
-# Analyze corpus with specified candidate POS
-predicate_textranker.analyze(candidate_pos=['VERB', 'ADJ'], window_size=4, lower=False)
-# Extract keywords using TextRank algorithm
-predicate_keywords = predicate_textranker.get_all_keywords()
-pp.pprint(predicate_keywords)
-
-vo_result_list = []
-for i, (key, value) in enumerate(subject_keywords.items()):
-    vo_query_string = """
-                    PREFIX fss: <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#>
-
-                    SELECT DISTINCT ?class
-                        WHERE {
-                           ?class fss:description ?description
-                           FILTER(regex(str(?name), "%s") || regex(str(?description), "%s"))
-                    }
-            """
-    vo_query_string = vo_query_string % (key, key)
-    query_result = sparql_engine.query_fuseki(vo_query_string)
-    if query_result == "SPARQL Error!":
-        pp.pprint(query_result)
-    vo_result_list.append(query_result)
-
-so_result_list = []
-for i, (key, value) in enumerate(predicate_keywords.items()):
-    so_query_string = """
-                    PREFIX fss: <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#>
-
-                    SELECT DISTINCT ?class
-                        WHERE {
-                           ?class fss:description ?description
-                           FILTER(regex(str(?description), "%s"))
-                    }
-            """
-    so_query_string = so_query_string % key
-    query_result = sparql_engine.query_fuseki(so_query_string)
-    if query_result == "SPARQL Error!":
-        pp.pprint(query_result)
-    so_result_list.append(query_result)
-
-pp.pprint(vo_result_list)
-pp.pprint("***********************************************************************************************************")
-pp.pprint(so_result_list)
+# sparql_engine = SparqlQueryEngine()
+# pp = pprint.PrettyPrinter(indent=2)
+#
+# subject_textranker = TextRanker(corpus.text)
+# # Analyze corpus with specified candidate POS
+# subject_textranker.analyze(candidate_pos=['NOUN', 'PROPN'], window_size=4, lower=False)
+# # Extract keywords using TextRank algorithm
+# subject_keywords = subject_textranker.get_all_keywords()
+# pp.pprint(subject_keywords)
+#
+# predicate_textranker = TextRanker(corpus.text)
+# # Analyze corpus with specified candidate POS
+# predicate_textranker.analyze(candidate_pos=['VERB', 'ADJ'], window_size=4, lower=False)
+# # Extract keywords using TextRank algorithm
+# predicate_keywords = predicate_textranker.get_all_keywords()
+# pp.pprint(predicate_keywords)
+#
+# vo_result_list = []
+# for i, (key, value) in enumerate(subject_keywords.items()):
+#     vo_query_string = """
+#                     PREFIX fss: <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#>
+#
+#                     SELECT DISTINCT ?class
+#                         WHERE {
+#                            ?class fss:description ?description
+#                            FILTER(regex(str(?name), "%s") || regex(str(?description), "%s"))
+#                     }
+#             """
+#     vo_query_string = vo_query_string % (key, key)
+#     query_result = sparql_engine.query_fuseki(vo_query_string)
+#     if query_result == "SPARQL Error!":
+#         pp.pprint(query_result)
+#     vo_result_list.append(query_result)
+#
+# so_result_list = []
+# for i, (key, value) in enumerate(predicate_keywords.items()):
+#     so_query_string = """
+#                     PREFIX fss: <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#>
+#
+#                     SELECT DISTINCT ?class
+#                         WHERE {
+#                            ?class fss:description ?description
+#                            FILTER(regex(str(?description), "%s"))
+#                     }
+#             """
+#     so_query_string = so_query_string % key
+#     query_result = sparql_engine.query_fuseki(so_query_string)
+#     if query_result == "SPARQL Error!":
+#         pp.pprint(query_result)
+#     so_result_list.append(query_result)
+#
+# pp.pprint(vo_result_list)
+# pp.pprint("***********************************************************************************************************")
+# pp.pprint(so_result_list)
 
 
 # Using DBpedia Spotlight API
@@ -218,3 +217,66 @@ pp.pprint(so_result_list)
 # keyphrases = extractor.get_n_best(n=30)
 # pp = pprint.PrettyPrinter(indent=4)
 # pp.pprint(keyphrases)
+
+
+# Using TfIdfVectorizer in sklearn
+#
+# from sklearn.feature_extraction.text import TfidfVectorizer
+# from sklearn.cluster import KMeans
+# from sklearn.metrics import adjusted_rand_score
+# import numpy
+#
+# texts = ["This first text talks about houses and dogs",
+#         "This is about airplanes and airlines",
+#         "This is about dogs and houses too, but also about trees",
+#         "Trees and dogs are main characters in this story",
+#         "This story is about batman and superman fighting each other",
+#         "Nothing better than another story talking about airplanes, airlines and birds",
+#         "Superman defeats batman in the last round"]
+#
+# # vectorization of the texts
+# vectorizer = TfidfVectorizer(stop_words="english")
+# X = vectorizer.fit_transform(texts)
+# # used words (axis in our multi-dimensional space)
+# words = vectorizer.get_feature_names()
+# print("words", words)
+#
+#
+# n_clusters=3
+# number_of_seeds_to_try=10
+# max_iter = 300
+# number_of_process=2 # seads are distributed
+# model = KMeans(n_clusters=n_clusters, max_iter=max_iter, n_init=number_of_seeds_to_try, n_jobs=number_of_process).fit(X)
+#
+# labels = model.labels_
+# # indices of preferible words in each cluster
+# ordered_words = model.cluster_centers_.argsort()[:, ::-1]
+#
+# print("centers:", model.cluster_centers_)
+# print("labels", labels)
+# print("intertia:", model.inertia_)
+#
+# texts_per_cluster = numpy.zeros(n_clusters)
+# for i_cluster in range(n_clusters):
+#     for label in labels:
+#         if label==i_cluster:
+#             texts_per_cluster[i_cluster] +=1
+#
+# print("Top words per cluster:")
+# for i_cluster in range(n_clusters):
+#     print("Cluster:", i_cluster, "texts:", int(texts_per_cluster[i_cluster])),
+#     for term in ordered_words[i_cluster, :10]:
+#         print("\t"+words[term])
+#
+# print("\n")
+# print("Prediction")
+#
+# text_to_predict = "Why batman was defeated  by superman so easy?"
+# Y = vectorizer.transform([text_to_predict])
+# predicted_cluster = model.predict(Y)[0]
+# texts_per_cluster[predicted_cluster]+=1
+#
+# print(text_to_predict)
+# print("Cluster:", predicted_cluster, "texts:", int(texts_per_cluster[predicted_cluster])),
+# for term in ordered_words[predicted_cluster, :10]:
+#     print("\t"+words[term])

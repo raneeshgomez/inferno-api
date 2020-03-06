@@ -8,7 +8,7 @@ coref = neuralcoref.NeuralCoref(nlp.vocab)
 nlp.add_pipe(coref, name='neuralcoref')
 
 
-class NLUAnnotator:
+class SpacyNluAnnotator:
 
     def __init__(self, text):
         self.text = text

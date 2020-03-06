@@ -1,4 +1,4 @@
-from ontologies.SparqlQueryEngine import SparqlQueryEngine
+from sparql.SparqlQueryEngine import SparqlQueryEngine
 
 
 class SparqlRepository:

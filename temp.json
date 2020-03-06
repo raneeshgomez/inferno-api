@@ -1,0 +1,1029 @@
+{
+  "usage": {
+    "text_units": 1,
+    "text_characters": 1990,
+    "features": 5
+  },
+  "language": "en",
+  "semantic_roles": [
+    {
+      "subject": {
+        "text": "it"
+      },
+      "sentence": " Named after the Roman god of war, it is often referred to as the 'Red Planet' because the iron oxide prevalent on its surface gives it a reddish appearance.",
+      "action": {
+        "verb": {
+          "text": "Named",
+          "tense": "past"
+        },
+        "text": "Named",
+        "normalized": "Named"
+      }
+    },
+    {
+      "subject": {
+        "text": "it"
+      },
+      "sentence": " Named after the Roman god of war, it is often referred to as the 'Red Planet' because the iron oxide prevalent on its surface gives it a reddish appearance.",
+      "object": {
+        "text": "often referred to as the 'Red Planet'"
+      },
+      "action": {
+        "verb": {
+          "text": "be",
+          "tense": "present"
+        },
+        "text": "is",
+        "normalized": "be"
+      }
+    },
+    {
+      "subject": {
+        "text": "it"
+      },
+      "sentence": " Named after the Roman god of war, it is often referred to as the 'Red Planet' because the iron oxide prevalent on its surface gives it a reddish appearance.",
+      "object": {
+        "text": "to as the 'Red Planet'"
+      },
+      "action": {
+        "verb": {
+          "text": "refer",
+          "tense": "past"
+        },
+        "text": "is often referred",
+        "normalized": "be often refer"
+      }
+    },
+    {
+      "subject": {
+        "text": "the iron oxide prevalent on its surface"
+      },
+      "sentence": " Named after the Roman god of war, it is often referred to as the 'Red Planet' because the iron oxide prevalent on its surface gives it a reddish appearance.",
+      "object": {
+        "text": "a reddish appearance"
+      },
+      "action": {
+        "verb": {
+          "text": "give",
+          "tense": "present"
+        },
+        "text": "gives",
+        "normalized": "give"
+      }
+    },
+    {
+      "subject": {
+        "text": "Mars"
+      },
+      "sentence": " Mars is a terrestrial planet with a thin atmosphere, having surface features reminiscent both of the impact craters of the Moon and the valleys, deserts, and polar ice caps of Earth.",
+      "object": {
+        "text": "a terrestrial planet"
+      },
+      "action": {
+        "verb": {
+          "text": "be",
+          "tense": "present"
+        },
+        "text": "is",
+        "normalized": "be"
+      }
+    },
+    {
+      "subject": {
+        "text": "Mars"
+      },
+      "sentence": " Mars is a terrestrial planet with a thin atmosphere, having surface features reminiscent both of the impact craters of the Moon and the valleys, deserts, and polar ice caps of Earth.",
+      "object": {
+        "text": "surface features reminiscent both of the impact craters of the Moon and the valleys, deserts, and polar ice caps of Earth"
+      },
+      "action": {
+        "verb": {
+          "text": "have",
+          "tense": "present"
+        },
+        "text": "having",
+        "normalized": "have"
+      }
+    },
+    {
+      "subject": {
+        "text": "the tilt"
+      },
+      "sentence": " The rotational period and seasonal cycles of Mars are likewise similar to those of Earth, as is the tilt that produces the seasons.",
+      "object": {
+        "text": "the seasons"
+      },
+      "action": {
+        "verb": {
+          "text": "produce",
+          "tense": "present"
+        },
+        "text": "produces",
+        "normalized": "produce"
+      }
+    },
+    {
+      "subject": {
+        "text": "Mars"
+      },
+      "sentence": " Mars is the site of Olympus Mons, the largest volcano and second-highest known mountain in the Solar System, and of Valles Marineris, one of the largest canyons in the Solar System.",
+      "object": {
+        "text": "the site of Olympus Mons, the largest volcano and second-highest known mountain in the Solar System, and of Valles Marineris, one of the largest canyons in the Solar System"
+      },
+      "action": {
+        "verb": {
+          "text": "be",
+          "tense": "present"
+        },
+        "text": "is",
+        "normalized": "be"
+      }
+    },
+    {
+      "subject": {
+        "text": "40% of the planet"
+      },
+      "sentence": " The smooth Borealis basin in the northern hemisphere covers 40% of the planet and may be a giant impact feature.",
+      "object": {
+        "text": "The smooth Borealis basin in the northern hemisphere"
+      },
+      "action": {
+        "verb": {
+          "text": "cover",
+          "tense": "present"
+        },
+        "text": "covers",
+        "normalized": "cover"
+      }
+    },
+    {
+      "subject": {
+        "text": "The smooth Borealis basin"
+      },
+      "sentence": " The smooth Borealis basin in the northern hemisphere covers 40% of the planet and may be a giant impact feature.",
+      "object": {
+        "text": "a giant impact feature"
+      },
+      "action": {
+        "verb": {
+          "text": "be",
+          "tense": "future"
+        },
+        "text": "may be",
+        "normalized": "may be"
+      }
+    },
+    {
+      "subject": {
+        "text": "Mars"
+      },
+      "sentence": " Mars has two moons, Phobos and Deimos, which are small and irregularly shaped.",
+      "object": {
+        "text": "two moons, Phobos and Deimos, which are small and irregularly shaped"
+      },
+      "action": {
+        "verb": {
+          "text": "have",
+          "tense": "present"
+        },
+        "text": "has",
+        "normalized": "have"
+      }
+    },
+    {
+      "subject": {
+        "text": "These"
+      },
+      "sentence": " These may be captured asteroids, similar to 5261 Eureka, a Mars trojan.",
+      "object": {
+        "text": "captured asteroids, similar to 5261 Eureka, a Mars trojan"
+      },
+      "action": {
+        "verb": {
+          "text": "be",
+          "tense": "future"
+        },
+        "text": "be",
+        "normalized": "be"
+      }
+    },
+    {
+      "subject": {
+        "text": "asteroids, similar to 5261 Eureka, a Mars trojan"
+      },
+      "sentence": " These may be captured asteroids, similar to 5261 Eureka, a Mars trojan.",
+      "action": {
+        "verb": {
+          "text": "capture",
+          "tense": "future"
+        },
+        "text": "may be captured",
+        "normalized": "may be capture"
+      }
+    },
+    {
+      "subject": {
+        "text": "ongoing investigations"
+      },
+      "sentence": " There are ongoing investigations assessing the past habitability potential of Mars, as well as the possibility of extant life.",
+      "action": {
+        "verb": {
+          "text": "be",
+          "tense": "present"
+        },
+        "text": "are",
+        "normalized": "be"
+      }
+    },
+    {
+      "subject": {
+        "text": "ongoing investigations"
+      },
+      "sentence": " There are ongoing investigations assessing the past habitability potential of Mars, as well as the possibility of extant life.",
+      "object": {
+        "text": "the past habitability potential of Mars, as well as the possibility of extant life"
+      },
+      "action": {
+        "verb": {
+          "text": "assess",
+          "tense": "present"
+        },
+        "text": "assessing",
+        "normalized": "assess"
+      }
+    },
+    {
+      "subject": {
+        "text": "the Mars 2020 and ExoMars rovers"
+      },
+      "sentence": " Future astrobiology missions are planned, including the Mars 2020 and ExoMars rovers.",
+      "object": {
+        "text": "Future astrobiology missions"
+      },
+      "action": {
+        "verb": {
+          "text": "include",
+          "tense": "present"
+        },
+        "text": "including",
+        "normalized": "include"
+      }
+    },
+    {
+      "subject": {
+        "text": "Liquid water"
+      },
+      "sentence": " Liquid water cannot exist on the surface of Mars due to low atmospheric pressure, which is about \u200a6⁄1000 that of the Earth's, except at the lowest elevations for short periods.",
+      "action": {
+        "verb": {
+          "text": "exist",
+          "tense": "future",
+          "negated": true
+        },
+        "text": "exist",
+        "normalized": "exist"
+      }
+    },
+    {
+      "subject": {
+        "text": "Mars due to low atmospheric pressure"
+      },
+      "sentence": " Liquid water cannot exist on the surface of Mars due to low atmospheric pressure, which is about \u200a6⁄1000 that of the Earth's, except at the lowest elevations for short periods.",
+      "object": {
+        "text": "about \u200a6⁄1000 that of the Earth's, except at the lowest elevations for short periods"
+      },
+      "action": {
+        "verb": {
+          "text": "be",
+          "tense": "present"
+        },
+        "text": "is",
+        "normalized": "be"
+      }
+    },
+    {
+      "subject": {
+        "text": "The two polar ice caps"
+      },
+      "sentence": " The two polar ice caps appear to be made largely of water.",
+      "object": {
+        "text": "of water"
+      },
+      "action": {
+        "verb": {
+          "text": "make",
+          "tense": "past"
+        },
+        "text": "appear to be made",
+        "normalized": "appear to be make"
+      }
+    },
+    {
+      "subject": {
+        "text": "Mars"
+      },
+      "sentence": " Mars can easily be seen from Earth with the naked eye, as can its reddish coloring.",
+      "object": {
+        "text": "seen from Earth"
+      },
+      "action": {
+        "verb": {
+          "text": "be",
+          "tense": "future"
+        },
+        "text": "be",
+        "normalized": "be"
+      }
+    },
+    {
+      "subject": {
+        "text": "Its apparent magnitude"
+      },
+      "sentence": " Its apparent magnitude reaches −2.91, which is surpassed only by Jupiter, Venus, the Moon, and the Sun.",
+      "object": {
+        "text": "−2.91, which is surpassed only by Jupiter, Venus, the Moon, and the Sun"
+      },
+      "action": {
+        "verb": {
+          "text": "reach",
+          "tense": "present"
+        },
+        "text": "reaches",
+        "normalized": "reach"
+      }
+    },
+    {
+      "subject": {
+        "text": "−2.91"
+      },
+      "sentence": " Its apparent magnitude reaches −2.91, which is surpassed only by Jupiter, Venus, the Moon, and the Sun.",
+      "object": {
+        "text": "surpassed"
+      },
+      "action": {
+        "verb": {
+          "text": "be",
+          "tense": "present"
+        },
+        "text": "is",
+        "normalized": "be"
+      }
+    },
+    {
+      "subject": {
+        "text": "by Jupiter"
+      },
+      "sentence": " Its apparent magnitude reaches −2.91, which is surpassed only by Jupiter, Venus, the Moon, and the Sun.",
+      "object": {
+        "text": "−2.91"
+      },
+      "action": {
+        "verb": {
+          "text": "surpass",
+          "tense": "past"
+        },
+        "text": "is surpassed",
+        "normalized": "be surpass"
+      }
+    },
+    {
+      "subject": {
+        "text": "Optical ground-based telescopes"
+      },
+      "sentence": " Optical ground-based telescopes are typically limited to resolving features about 300 kilometers (190 mi) across when Earth and Mars are closest because of Earth's atmosphere.",
+      "action": "",
+        "verb": {
+          "text": "be",
+          "tense": "present"
+        },
+        "text": "are typically limited",
+        "normalized": "be typically limit"
+    },
+    {
+      "subject": {
+        "text": "Optical ground-based telescopes"
+      },
+      "sentence": " Optical ground-based telescopes are typically limited to resolving features about 300 kilometers (190 mi) across when Earth and Mars are closest because of Earth's atmosphere.",
+      "object": {
+        "text": "to resolving features about 300 kilometers (190 mi) across when Earth and Mars are closest because of Earth's atmosphere"
+      },
+      "action": {
+        "verb": {
+          "text": "limit",
+          "tense": "past"
+        },
+        "text": "limited",
+        "normalized": "limit"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "type": "basedIn",
+      "sentence": "Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System, after Mercury.",
+      "score": 0.608924,
+      "arguments": [
+        {
+          "text": "Solar System",
+          "location": [
+            77,
+            89
+          ],
+          "entities": [
+            {
+              "type": "Organization",
+              "text": "Solar System"
+            }
+          ]
+        },
+        {
+          "text": "planet",
+          "location": [
+            63,
+            69
+          ],
+          "entities": [
+            {
+              "type": "GeopoliticalEntity",
+              "text": "Red Planet"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "locatedAt",
+      "sentence": "Mars is a terrestrial planet with a thin atmosphere, having surface features reminiscent both of the impact craters of the Moon and the valleys, deserts, and polar ice caps of Earth.",
+      "score": 0.436361,
+      "arguments": [
+        {
+          "text": "Mars",
+          "location": [
+            263,
+            267
+          ],
+          "entities": [
+            {
+              "type": "EventPerformance",
+              "text": "Mars"
+            }
+          ]
+        },
+        {
+          "text": "planet",
+          "location": [
+            285,
+            291
+          ],
+          "entities": [
+            {
+              "type": "GeopoliticalEntity",
+              "text": "Red Planet"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "residesIn",
+      "sentence": "Mars is the site of Olympus Mons, the largest volcano and second-highest known mountain in the Solar System, and of Valles Marineris, one of the largest canyons in the Solar System.",
+      "score": 0.229333,
+      "arguments": [
+        {
+          "text": "one",
+          "location": [
+            712,
+            715
+          ],
+          "entities": [
+            {
+              "type": "Cardinal",
+              "text": "one"
+            }
+          ]
+        },
+        {
+          "text": "canyons",
+          "location": [
+            731,
+            738
+          ],
+          "entities": [
+            {
+              "type": "Location",
+              "text": "canyons"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "affectedBy",
+      "sentence": "These may be captured asteroids, similar to 5261 Eureka, a Mars trojan.",
+      "score": 0.930572,
+      "arguments": [
+        {
+          "text": "asteroids",
+          "location": [
+            974,
+            983
+          ],
+          "entities": [
+            {
+              "type": "Person",
+              "text": "asteroids"
+            }
+          ]
+        },
+        {
+          "text": "captured",
+          "location": [
+            965,
+            973
+          ],
+          "entities": [
+            {
+              "type": "EventCustody",
+              "text": "captured"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "residesIn",
+      "sentence": "These may be captured asteroids, similar to 5261 Eureka, a Mars trojan.",
+      "score": 0.809881,
+      "arguments": [
+        {
+          "text": "trojan",
+          "location": [
+            1016,
+            1022
+          ],
+          "entities": [
+            {
+              "type": "Person",
+              "text": "trojan"
+            }
+          ]
+        },
+        {
+          "text": "Mars",
+          "location": [
+            1011,
+            1015
+          ],
+          "entities": [
+            {
+              "type": "Location",
+              "text": "Mars"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "locatedAt",
+      "sentence": "Future astrobiology missions are planned, including the Mars 2020 and ExoMars rovers.",
+      "score": 0.409272,
+      "arguments": [
+        {
+          "text": "ExoMars rovers",
+          "location": [
+            1221,
+            1235
+          ],
+          "entities": [
+            {
+              "type": "Organization",
+              "text": "ExoMars rovers",
+              "disambiguation": {
+                "subtype": [
+                  "Commercial"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "text": "Mars",
+          "location": [
+            1207,
+            1211
+          ],
+          "entities": [
+            {
+              "type": "Location",
+              "text": "Mars"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "locatedAt",
+      "sentence": "Liquid water cannot exist on the surface of Mars due to low atmospheric pressure, which is about  6/1000 that of the Earth's, except at the lowest elevations for short periods.",
+      "score": 0.506736,
+      "arguments": [
+        {
+          "text": "Liquid water",
+          "location": [
+            1237,
+            1249
+          ],
+          "entities": [
+            {
+              "type": "Substance",
+              "text": "Liquid water"
+            }
+          ]
+        },
+        {
+          "text": "Mars",
+          "location": [
+            1281,
+            1285
+          ],
+          "entities": [
+            {
+              "type": "Location",
+              "text": "Mars"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "locatedAt",
+      "sentence": "Its apparent magnitude reaches -2.91, which is surpassed only by Jupiter, Venus, the Moon, and the Sun. Optical ground-based telescopes are typically limited to resolving features about 300 kilometers (190 mi) across when Earth and Mars are closest because of Earth's atmosphere.",
+      "score": 0.95823,
+      "arguments": [
+        {
+          "text": "Jupiter",
+          "location": [
+            1776,
+            1783
+          ],
+          "entities": [
+            {
+              "type": "GeopoliticalEntity",
+              "text": "Jupiter"
+            }
+          ]
+        },
+        {
+          "text": "Venus",
+          "location": [
+            1785,
+            1790
+          ],
+          "entities": [
+            {
+              "type": "GeopoliticalEntity",
+              "text": "Venus"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keywords": [
+    {
+      "text": "polar ice caps of Earth",
+      "relevance": 0.683944,
+      "count": 1
+    },
+    {
+      "text": "Liquid water",
+      "relevance": 0.646582,
+      "count": 1
+    },
+    {
+      "text": "apparent magnitude reaches",
+      "relevance": 0.643685,
+      "count": 1
+    },
+    {
+      "text": "surface features",
+      "relevance": 0.620191,
+      "count": 1
+    },
+    {
+      "text": "polar ice caps",
+      "relevance": 0.609885,
+      "count": 1
+    },
+    {
+      "text": "ongoing investigations",
+      "relevance": 0.608087,
+      "count": 1
+    },
+    {
+      "text": "impact craters of the Moon",
+      "relevance": 0.607271,
+      "count": 1
+    },
+    {
+      "text": "seasonal cycles of Mars",
+      "relevance": 0.603796,
+      "count": 1
+    },
+    {
+      "text": "Future astrobiology missions",
+      "relevance": 0.602051,
+      "count": 1
+    },
+    {
+      "text": "fourth planet",
+      "relevance": 0.596638,
+      "count": 1
+    },
+    {
+      "text": "smooth Borealis basin",
+      "relevance": 0.591708,
+      "count": 1
+    },
+    {
+      "text": "polar ice cap",
+      "relevance": 0.56507,
+      "count": 1
+    },
+    {
+      "text": "rotational period",
+      "relevance": 0.554802,
+      "count": 1
+    },
+    {
+      "text": "Roman god of war",
+      "relevance": 0.55227,
+      "count": 1
+    },
+    {
+      "text": "short periods",
+      "relevance": 0.549289,
+      "count": 1
+    },
+    {
+      "text": "past habitability potential of Mars",
+      "relevance": 0.548376,
+      "count": 1
+    },
+    {
+      "text": "volume of water ice",
+      "relevance": 0.541377,
+      "count": 1
+    },
+    {
+      "text": "site of Olympus Mons",
+      "relevance": 0.540011,
+      "count": 1
+    },
+    {
+      "text": "northern hemisphere covers",
+      "relevance": 0.539188,
+      "count": 1
+    },
+    {
+      "text": "low atmospheric pressure",
+      "relevance": 0.536229,
+      "count": 1
+    },
+    {
+      "text": "naked eye",
+      "relevance": 0.534564,
+      "count": 1
+    },
+    {
+      "text": "second-smallest planet",
+      "relevance": 0.530756,
+      "count": 1
+    },
+    {
+      "text": "Optical ground",
+      "relevance": 0.529918,
+      "count": 1
+    },
+    {
+      "text": "Mars",
+      "relevance": 0.527318,
+      "count": 7
+    },
+    {
+      "text": "surface",
+      "relevance": 0.524975,
+      "count": 1
+    },
+    {
+      "text": "largest volcano",
+      "relevance": 0.5159,
+      "count": 1
+    },
+    {
+      "text": "thin atmosphere",
+      "relevance": 0.515526,
+      "count": 1
+    },
+    {
+      "text": "Mars trojan",
+      "relevance": 0.514322,
+      "count": 1
+    },
+    {
+      "text": "Jupiter",
+      "relevance": 0.513941,
+      "count": 1
+    },
+    {
+      "text": "moons",
+      "relevance": 0.513864,
+      "count": 1
+    },
+    {
+      "text": "Venus",
+      "relevance": 0.513536,
+      "count": 1
+    },
+    {
+      "text": "water",
+      "relevance": 0.512684,
+      "count": 1
+    },
+    {
+      "text": "valleys",
+      "relevance": 0.512236,
+      "count": 1
+    },
+    {
+      "text": "Earth",
+      "relevance": 0.512131,
+      "count": 4
+    },
+    {
+      "text": "telescopes",
+      "relevance": 0.511452,
+      "count": 1
+    },
+    {
+      "text": "deserts",
+      "relevance": 0.510866,
+      "count": 1
+    },
+    {
+      "text": "kilometers",
+      "relevance": 0.510611,
+      "count": 1
+    },
+    {
+      "text": "giant impact feature",
+      "relevance": 0.510413,
+      "count": 1
+    },
+    {
+      "text": "Moon",
+      "relevance": 0.509244,
+      "count": 1
+    },
+    {
+      "text": "Red Planet",
+      "relevance": 0.508924,
+      "count": 1
+    },
+    {
+      "text": "asteroids",
+      "relevance": 0.508699,
+      "count": 1
+    },
+    {
+      "text": "Solar System",
+      "relevance": 0.508562,
+      "count": 3
+    },
+    {
+      "text": "terrestrial planet",
+      "relevance": 0.50846,
+      "count": 1
+    },
+    {
+      "text": "Sun",
+      "relevance": 0.507886,
+      "count": 1
+    },
+    {
+      "text": "mountain",
+      "relevance": 0.50775,
+      "count": 1
+    },
+    {
+      "text": "planet",
+      "relevance": 0.506081,
+      "count": 1
+    },
+    {
+      "text": "Phobos",
+      "relevance": 0.505729,
+      "count": 1
+    },
+    {
+      "text": "iron oxide prevalent",
+      "relevance": 0.505131,
+      "count": 1
+    },
+    {
+      "text": "tilt",
+      "relevance": 0.504748,
+      "count": 1
+    },
+    {
+      "text": "depth",
+      "relevance": 0.504748,
+      "count": 1
+    }
+  ],
+  "entities": [
+    {
+      "type": "GeographicFeature",
+      "text": "Valles Marineris",
+      "relevance": 0.953262,
+      "count": 1,
+      "confidence": 0.267614
+    },
+    {
+      "type": "Quantity",
+      "text": "40%",
+      "relevance": 0.887885,
+      "count": 1,
+      "confidence": 0.8
+    },
+    {
+      "type": "Quantity",
+      "text": "11 meters",
+      "relevance": 0.352913,
+      "count": 1,
+      "confidence": 0.8
+    },
+    {
+      "type": "Quantity",
+      "text": "36 ft",
+      "relevance": 0.345452,
+      "count": 1,
+      "confidence": 0.8
+    },
+    {
+      "type": "Quantity",
+      "text": "300 kilometers",
+      "relevance": 0.087965,
+      "count": 1,
+      "confidence": 0.8
+    },
+    {
+      "type": "Quantity",
+      "text": "190 mi",
+      "relevance": 0.075884,
+      "count": 1,
+      "confidence": 0.8
+    }
+  ],
+  "concepts": [
+    {
+      "text": "Mars",
+      "relevance": 0.949124,
+      "dbpedia_resource": "http://dbpedia.org/resource/Mars"
+    },
+    {
+      "text": "Moon",
+      "relevance": 0.472903,
+      "dbpedia_resource": "http://dbpedia.org/resource/Moon"
+    },
+    {
+      "text": "Mercury",
+      "relevance": 0.468896,
+      "dbpedia_resource": "http://dbpedia.org/resource/Mercury_(planet)"
+    },
+    {
+      "text": "Earth",
+      "relevance": 0.466435,
+      "dbpedia_resource": "http://dbpedia.org/resource/Earth"
+    },
+    {
+      "text": "Venus",
+      "relevance": 0.445031,
+      "dbpedia_resource": "http://dbpedia.org/resource/Venus"
+    },
+    {
+      "text": "Sun",
+      "relevance": 0.435899,
+      "dbpedia_resource": "http://dbpedia.org/resource/Sun"
+    },
+    {
+      "text": "Solar System",
+      "relevance": 0.433376,
+      "dbpedia_resource": "http://dbpedia.org/resource/Solar_System"
+    },
+    {
+      "text": "Planet",
+      "relevance": 0.425907,
+      "dbpedia_resource": "http://dbpedia.org/resource/Planet"
+    }
+  ]
+}
