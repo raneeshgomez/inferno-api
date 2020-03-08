@@ -5,6 +5,7 @@ class Corpus:
 
     def __init__(self, text):
         self.text = text
+        self.resolved_text = ''
         self.tokens = []
         self.lemmas = []
         self.pos_tags = []
@@ -17,6 +18,15 @@ class Corpus:
         self.lemmas = lemmas
         self.pos_tags = pos_tags
         self.named_entities = named_entities
+        self.corefs = corefs
+
+    def set_resolved_text(self, resolved_text):
+        self.resolved_text = resolved_text
+
+    def set_named_entities(self, named_entities):
+        self.named_entities = named_entities
+
+    def set_corefs(self, corefs):
         self.corefs = corefs
 
     def fetch_all_linguistic_sets(self):

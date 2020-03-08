@@ -21,7 +21,7 @@ class WatsonNluAnnotator:
     def execute_pipeline(self, corpus):
         try:
             return self.service.analyze(
-                text=corpus.text,
+                text=corpus.resolved_text,
                 features=Features(
                     entities=EntitiesOptions(),
                     keywords=KeywordsOptions(),
