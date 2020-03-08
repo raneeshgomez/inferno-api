@@ -77,6 +77,11 @@ class RecommendationController:
                 if len(result['results']['bindings']) > 0:
                     triples.append(result['results']['bindings'])
 
+        # TODO 01 - Transform fetched triples to well-formed sentences
+        # TODO 02 - Run new set of sentences through sentence similarity matcher against segmented sentences from input
+        # TODO 03 - Find one other metric to score formed sentences against input and execute it
+        # TODO 04 - Invoke fuzzy controller and pass scores from (TODO 02) and (TODO 02) and fetch fuzzy relevance score
+        # TODO 05 - Rank sentences in descending order based on relevance score and return to client
 
         return {
             'result': triples,

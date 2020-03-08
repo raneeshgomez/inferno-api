@@ -13,23 +13,26 @@ class FuzzyController:
     def initialize_fuzzy_engine(self):
         # Declare 2 fuzzy input variables and a fuzzy output variable
         sentence_similarity = control.Antecedent(np.arange(0, 1, 0.1), 'Sentence_Similarity')
+
+        # TODO Figure out 2nd Antecedent metric
+
         unknown_metric = control.Antecedent(np.arange(0, 1, 0.1), 'Unknown_Metric')
         recommendation_relevance = control.Consequent(np.arange(0, 100, 1), 'Recommendation_Relevance')
 
         # Define membership functions for the sentence similarity antecedent
         sentence_similarity['low_relevance'] = fuzzy.trimf(sentence_similarity.universe, [0, 0, 0.5])
-        sentence_similarity['moderate_relevance'] = fuzzy.trimf(sentence_similarity.universe, [0, 0.5, 1])
-        sentence_similarity['high_relevance'] = fuzzy.trimf(sentence_similarity.universe, [0.5, 1, 1])
+        sentence_similarity['moderate_relevance'] = fuzzy.trimf(sentence_similarity.universe, [0, 0.5, 0.9])
+        sentence_similarity['high_relevance'] = fuzzy.trimf(sentence_similarity.universe, [0.5, 0.9, 0.9])
 
         # Define membership functions for the antecedent
         unknown_metric['low_relevance'] = fuzzy.trimf(unknown_metric.universe, [0, 0, 0.5])
-        unknown_metric['moderate_relevance'] = fuzzy.trimf(unknown_metric.universe, [0, 0.5, 1])
-        unknown_metric['high_relevance'] = fuzzy.trimf(unknown_metric.universe, [0.5, 1, 1])
+        unknown_metric['moderate_relevance'] = fuzzy.trimf(unknown_metric.universe, [0, 0.5, 0.9])
+        unknown_metric['high_relevance'] = fuzzy.trimf(unknown_metric.universe, [0.5, 0.9, 0.9])
 
         # Define membership functions for the recommendation relevance consequent
         recommendation_relevance['low_relevance'] = fuzzy.trimf(recommendation_relevance.universe, [0, 0, 50])
-        recommendation_relevance['moderate_relevance'] = fuzzy.trimf(recommendation_relevance.universe, [0, 50, 100])
-        recommendation_relevance['high_relevance'] = fuzzy.trimf(recommendation_relevance.universe, [50, 100, 100])
+        recommendation_relevance['moderate_relevance'] = fuzzy.trimf(recommendation_relevance.universe, [0, 50, 99])
+        recommendation_relevance['high_relevance'] = fuzzy.trimf(recommendation_relevance.universe, [50, 99, 99])
 
         # Define rules for the Fuzzy Controller
         rule_1 = control.Rule(sentence_similarity['low_relevance'] & unknown_metric['low_relevance'],
@@ -65,6 +68,6 @@ class FuzzyController:
         return int(round(relevance_score))
 
 
-fuzz = FuzzyController()
-fuzz.initialize_fuzzy_engine()
-print(fuzz.predict_fuzzy_score(0.45, 0.32))
+# fuzz = FuzzyController()
+# fuzz.initialize_fuzzy_engine()
+# print(fuzz.predict_fuzzy_score(0.3, 0.8))
