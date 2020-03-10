@@ -1,0 +1,696 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#"
+     xml:base="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:obda="https://w3id.org/obda/vocabulary#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#isMoonOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#isMoonOf"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#age -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#age"/>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#circumference -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#circumference"/>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#dbpedia_equivalent -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#dbpedia_equivalent"/>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#dbpedia_parent -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#dbpedia_parent"/>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#description -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#description"/>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#discovered_by -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#discovered_by"/>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#discovered_on -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#discovered_on"/>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#mass -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#mass"/>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#mean_distance_to_sun -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#mean_distance_to_sun"/>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#mean_temperature -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#mean_temperature"/>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#order_from_sun -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#order_from_sun"/>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#radius -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#radius"/>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#surface_area -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#surface_area"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Asteroid_Belt -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Asteroid_Belt">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Solar_System"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Centaur -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Centaur">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Solar_System"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Central_Star -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Central_Star">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Solar_System"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Comet -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Comet">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Solar_System"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Farthest_Regions -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Farthest_Regions">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Solar_System"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Inner_Planet -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Inner_Planet">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Planet"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Interplanetary_Medium -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Interplanetary_Medium">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Solar_System"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Kuiper_Belt -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Kuiper_Belt">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Trans_Neptunian_Region"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Outer_Planet -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Outer_Planet">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Planet"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Planet -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Planet">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Solar_System"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Satellite -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Satellite">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Solar_System"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Scattered_Disc -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Scattered_Disc">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Trans_Neptunian_Region"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Solar_System -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Solar_System"/>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Trans_Neptunian_Region -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Trans_Neptunian_Region">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Solar_System"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Ariel -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Ariel">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Satellite"/>
+        <isMoonOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Uranus"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Boundaries -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Boundaries">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Farthest_Regions"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Callisto -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Callisto">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Satellite"/>
+        <isMoonOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Jupiter"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Ceres -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Ceres">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Asteroid_Belt"/>
+        <mean_distance_to_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#double">2.767</mean_distance_to_sun>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Charon -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Charon">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Kuiper_Belt"/>
+        <isMoonOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Pluto"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Cosmic_ray -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Cosmic_ray">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Interplanetary_Medium"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Deimos -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Deimos">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Satellite"/>
+        <isMoonOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Mars"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Dione -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Dione">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Satellite"/>
+        <isMoonOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Saturn"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Dust -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Dust">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Interplanetary_Medium"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Earth -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Earth">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Inner_Planet"/>
+        <age rdf:datatype="http://www.w3.org/2001/XMLSchema#double">4.5E9</age>
+        <circumference rdf:datatype="http://www.w3.org/2001/XMLSchema#string">40,075.017 km</circumference>
+        <dbpedia_equivalent rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/resource/Earth</dbpedia_equivalent>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Earth (otherwise known as the world, in Greek: Γαῖα Gaia, or in Latin: Terra) is the third planet from the Sun, the densest planet in the Solar System, the largest of the Solar System&apos;s four terrestrial planets, and the only astronomical object known to harbor life. According to radiometric dating and other sources of evidence, Earth formed about 4.54 billion years ago. Earth gravitationally interacts with other objects in space, especially the Sun and the Moon. During one orbit around the Sun, Earth rotates about its axis 366.26 times, creating 365.26 solar days or one sidereal year. Earth&apos;s axis of rotation is tilted 23.4° away from the perpendicular of its orbital plane, producing seasonal variations on the planet&apos;s surface within a period of one tropical year (365.24 solar days). The Moon is the Earth&apos;s only permanent natural satellite; their gravitational interaction causes ocean tides, stabilizes the orientation of Earth&apos;s rotational axis, and gradually slows Earth&apos;s rotational rate. Earth&apos;s lithosphere is divided into several rigid tectonic plates that migrate across the surface over periods of many millions of years. 71% of Earth&apos;s surface is covered with water. The remaining 29% is land mass—consisting of continents and islands—that together has many lakes, rivers, and other sources of water that contribute to the hydrosphere. The majority of Earth&apos;s polar regions are covered in ice, including the Antarctic ice sheet and the sea ice of the Arctic ice pack. Earth&apos;s interior remains active with a solid iron inner core, a liquid outer core that generates the Earth&apos;s magnetic field, and a convecting mantle that drives plate tectonics. Within the first billion years of Earth&apos;s history, life appeared in the oceans and began to affect the atmosphere and surface, leading to the proliferation of aerobic and anaerobic organisms. Since then, the combination of Earth&apos;s distance from the Sun, physical properties, and geological history have allowed life to evolve and thrive. Life arose on Earth by 3.5 billion years ago, though some geological evidence indicates that life may have arisen as much as 4.1 billion years ago. In the history of the Earth, biodiversity has gone through long durations of expansion but occasionally punctuated by mass extinction events. Over 99% of all species of life that ever lived on Earth are extinct. Estimates of the number of species on Earth today vary widely; most species have not been described. Over 7.3 billion humans live on Earth and depend on its biosphere and minerals for their survival. Humanity has developed diverse societies and cultures; politically, the world is divided into about 200 sovereign states.</description>
+        <mass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5.97237 × (10^24) kg</mass>
+        <mean_distance_to_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 AU</mean_distance_to_sun>
+        <mean_temperature rdf:datatype="http://www.w3.org/2001/XMLSchema#string">14 °C</mean_temperature>
+        <order_from_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</order_from_sun>
+        <radius rdf:datatype="http://www.w3.org/2001/XMLSchema#string">6,371 km</radius>
+        <surface_area rdf:datatype="http://www.w3.org/2001/XMLSchema#string">510,072,000 square km</surface_area>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Eris -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Eris">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Scattered_Disc"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Europa -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Europa">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Satellite"/>
+        <isMoonOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Jupiter"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Ganymede -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Ganymede">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Satellite"/>
+        <isMoonOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Jupiter"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Haumea -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Haumea">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Kuiper_Belt"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Heliopause -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Heliopause">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Farthest_Regions"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Io -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Io">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Satellite"/>
+        <isMoonOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Jupiter"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Jupiter -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Jupiter">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Outer_Planet"/>
+        <mean_distance_to_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#double">5.203</mean_distance_to_sun>
+        <order_from_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</order_from_sun>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Makemake -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Makemake">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Kuiper_Belt"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Mars -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Mars">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Inner_Planet"/>
+        <age rdf:datatype="http://www.w3.org/2001/XMLSchema#double">4.603E9</age>
+        <circumference rdf:datatype="http://www.w3.org/2001/XMLSchema#string">21,344 km</circumference>
+        <dbpedia_equivalent rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Mars</dbpedia_equivalent>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System, after Mercury. Named after the Roman god of war, it is often referred to as the &quot;Red Planet&quot; because the iron oxide prevalent on its surface gives it a reddish appearance. Mars is a terrestrial planet with a thin atmosphere, having surface features reminiscent both of the impact craters of the Moon and the valleys, deserts, and polar ice caps of Earth. The rotational period and seasonal cycles of Mars are likewise similar to those of Earth, as is the tilt that produces the seasons. Mars is the site of Olympus Mons, the largest volcano and second-highest known mountain in the Solar System, and of Valles Marineris, one of the largest canyons in the Solar System. The smooth Borealis basin in the northern hemisphere covers 40% of the planet and may be a giant impact feature. Mars has two moons, Phobos and Deimos, which are small and irregularly shaped. These may be captured asteroids, similar to 5261 Eureka, a Mars trojan. There are ongoing investigations assessing the past habitability potential of Mars, as well as the possibility of extant life. Future astrobiology missions are planned, including the Mars 2020 and ExoMars rovers. Liquid water cannot exist on the surface of Mars due to low atmospheric pressure, which is about  6⁄1000 that of the Earth&apos;s, except at the lowest elevations for short periods. The two polar ice caps appear to be made largely of water. The volume of water ice in the south polar ice cap, if melted, would be sufficient to cover the entire planetary surface to a depth of 11 meters (36 ft). Mars can easily be seen from Earth with the naked eye, as can its reddish coloring. Its apparent magnitude reaches −2.91, which is surpassed only by Jupiter, Venus, the Moon, and the Sun. Optical ground-based telescopes are typically limited to resolving features about 300 kilometers (190 mi) across when Earth and Mars are closest because of Earth&apos;s atmosphere.</description>
+        <discovered_by rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Galileo</discovered_by>
+        <discovered_on rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1610 AD</discovered_on>
+        <mass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">6.4171 × (10^23) kg</mass>
+        <mean_distance_to_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1.524 AU</mean_distance_to_sun>
+        <mean_temperature rdf:datatype="http://www.w3.org/2001/XMLSchema#string">−63 °C</mean_temperature>
+        <order_from_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</order_from_sun>
+        <radius rdf:datatype="http://www.w3.org/2001/XMLSchema#string">3389.5 ± 0.2 km</radius>
+        <surface_area rdf:datatype="http://www.w3.org/2001/XMLSchema#string">144,798,500 km</surface_area>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Mercury -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Mercury">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Inner_Planet"/>
+        <age rdf:datatype="http://www.w3.org/2001/XMLSchema#double">4.503E9</age>
+        <circumference rdf:datatype="http://www.w3.org/2001/XMLSchema#string">15,329 km</circumference>
+        <dbpedia_equivalent rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Mercury_(planet)</dbpedia_equivalent>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mercury is the smallest and innermost planet in the Solar System. Its orbital period (about 88 Earth days) is less than any other planet in the Solar System. Seen from Earth, it appears to move around its orbit in about 116 days. It has no known natural satellites. It is named after the Roman deity Mercury, the messenger to the gods. Partly because it has almost no atmosphere to retain heat, Mercury&apos;s surface temperature varies diurnally more than any other planet in the Solar System, ranging from 100 K (−173 °C; −280 °F) at night to 700 K (427 °C; 800 °F) during the day in some equatorial regions. The poles are constantly below 180 K (−93 °C; −136 °F). Mercury&apos;s axis has the smallest tilt of any of the Solar System&apos;s planets (about  1⁄30 degree), and its orbital eccentricity is the largest of all known planets in the Solar System. At aphelion, Mercury is about 1.5 times as far from the Sun as it is at perihelion. Mercury&apos;s surface is heavily cratered and similar in appearance to the Moon, indicating that it has been geologically inactive for billions of years. Mercury is tidally or gravitationally locked with the Sun in a 3:2 resonance, and rotates in a way that is unique in the Solar System. As seen relative to the fixed stars, it rotates on its axis exactly three times for every two revolutions it makes around the Sun. As seen from the Sun, in a frame of reference that rotates with the orbital motion, it appears to rotate only once every two Mercurian years. An observer on Mercury would therefore see only one day every two years. Because Mercury orbits the Sun within Earth&apos;s orbit (as does Venus), it can appear in Earth&apos;s sky in the morning or the evening, but not in the middle of the night. Also, like Venus and the Moon, it displays a complete range of phases as it moves around its orbit relative to Earth. Although Mercury can appear as a bright object when viewed from Earth, its proximity to the Sun makes it more difficult to see than Venus. Two spacecraft have visited Mercury: Mariner 10 flew by in 1974 and 1975; and MESSENGER, launched in 2004, orbited Mercury over 4,000 times in four years, before exhausting its fuel and crashing into the planet&apos;s surface on April 30, 2015.</description>
+        <discovered_by rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sumerians</discovered_by>
+        <discovered_on rdf:datatype="http://www.w3.org/2001/XMLSchema#string">3000 BC</discovered_on>
+        <mass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">3.3011 x (10^23) kg</mass>
+        <mean_distance_to_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0.387 AU</mean_distance_to_sun>
+        <mean_temperature rdf:datatype="http://www.w3.org/2001/XMLSchema#string">66 °C</mean_temperature>
+        <order_from_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</order_from_sun>
+        <radius rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2439.7 km</radius>
+        <surface_area rdf:datatype="http://www.w3.org/2001/XMLSchema#string">74,800,000 square km</surface_area>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Moon -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Moon">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Satellite"/>
+        <isMoonOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Earth"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Neptune -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Neptune">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Outer_Planet"/>
+        <mean_distance_to_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#double">30.047</mean_distance_to_sun>
+        <order_from_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</order_from_sun>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Oberon -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Oberon">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Satellite"/>
+        <isMoonOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Uranus"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Oort_cloud -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Oort_cloud">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Farthest_Regions"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Phobos -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Phobos">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Satellite"/>
+        <isMoonOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Mars"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Planet -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Planet">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Planet"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Plasma -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Plasma">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Interplanetary_Medium"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Pluto -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Pluto">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Kuiper_Belt"/>
+        <dbpedia_equivalent rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Pluto</dbpedia_equivalent>
+        <dbpedia_parent rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Kuiper_belt</dbpedia_parent>
+        <mean_distance_to_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#double">39.53</mean_distance_to_sun>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Rhea -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Rhea">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Satellite"/>
+        <isMoonOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Saturn"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Saturn -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Saturn">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Outer_Planet"/>
+        <mean_distance_to_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#double">9.582</mean_distance_to_sun>
+        <order_from_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</order_from_sun>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Sedna -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Sedna">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Farthest_Regions"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Solar_System -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Solar_System">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Solar_System"/>
+        <age rdf:datatype="http://www.w3.org/2001/XMLSchema#double">4.571E9</age>
+        <dbpedia_equivalent rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Solar_System</dbpedia_equivalent>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Solar System is the gravitationally bound system comprising the Sun and the objects that orbit it, either directly or indirectly. Of those objects that orbit the Sun directly, the largest eight are the planets, with the remainder being significantly smaller objects, such as dwarf planets and small Solar System bodies. Of the objects that orbit the Sun indirectly, the moons, two are larger than the smallest planet, Mercury. The Solar System formed 4.6 billion years ago from the gravitational collapse of a giant interstellar molecular cloud. The vast majority of the system&apos;s mass is in the Sun, with most of the remaining mass contained in Jupiter. The four smaller inner planets, Mercury, Venus, Earth and Mars, are terrestrial planets, being primarily composed of rock and metal. The four outer planets are giant planets, being substantially more massive than the terrestrials. The two largest, Jupiter and Saturn, are gas giants, being composed mainly of hydrogen and helium; the two outermost planets, Uranus and Neptune, are ice giants, being composed mostly of substances with relatively high melting points compared with hydrogen and helium, called ices, such as water, ammonia and methane. All planets have almost circular orbits that lie within a nearly flat disc called the ecliptic. The Solar System also contains smaller objects. The asteroid belt, which lies between the orbits of Mars and Jupiter, mostly contains objects composed, like the terrestrial planets, of rock and metal. Beyond Neptune&apos;s orbit lie the Kuiper belt and scattered disc, which are populations of trans-Neptunian objects composed mostly of ices, and beyond them a newly discovered population of sednoids. Within these populations are several dozen to possibly tens of thousands of objects large enough that they have been rounded by their own gravity. Such objects are categorized as dwarf planets. Identified dwarf planets include the asteroid Ceres and the trans-Neptunian objects Pluto and Eris. In addition to these two regions, various other small-body populations, including comets, centaurs and interplanetary dust, freely travel between regions. Six of the planets, at least four of the dwarf planets, and many of the smaller bodies are orbited by natural satellites, usually termed &quot;moons&quot; after the Moon. Each of the outer planets is encircled by planetary rings of dust and other small objects. The solar wind, a stream of charged particles flowing outwards from the Sun, creates a bubble-like region in the interstellar medium known as the heliosphere. The heliopause is the point at which pressure from the solar wind is equal to the opposing pressure of interstellar wind; it extends out to the edge of the scattered disc. The Oort cloud, which is thought to be the source for long-period comets, may also exist at a distance roughly a thousand times further than the heliosphere. The Solar System is located in the Orion Arm, 26,000 light-years from the center of the Milky Way.</description>
+        <discovered_by rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Nicolaus Copernicus</discovered_by>
+        <discovered_on rdf:datatype="http://www.w3.org/2001/XMLSchema#string">16th Century</discovered_on>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Sun -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Sun">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Central_Star"/>
+        <age rdf:datatype="http://www.w3.org/2001/XMLSchema#double">4.6E9</age>
+        <circumference rdf:datatype="http://www.w3.org/2001/XMLSchema#string">4,379,000,000 km</circumference>
+        <dbpedia_equivalent rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Sun</dbpedia_equivalent>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Sun is the star at the center of the Solar System. It is a nearly perfect sphere of hot plasma, with internal convective motion that generates a magnetic field via a dynamo process. It is by far the most important source of energy for life on Earth. Its diameter is about 109 times that of Earth, and its mass is about 330,000 times that of Earth, accounting for about 99.86% of the total mass of the Solar System.About three quarters of the Sun&apos;s mass consists of hydrogen (~73%); the rest is mostly helium (~25%), with much smaller quantities of heavier elements, including oxygen, carbon, neon, and iron. The Sun is a G-type main-sequence star (G2V) based on its spectral class, and is informally referred to as a yellow dwarf. It formed approximately 4.6 billion years ago from the gravitational collapse of matter within a region of a large molecular cloud. Most of this matter gathered in the center, whereas the rest flattened into an orbiting disk that became the Solar System. The central mass became so hot and dense that it eventually initiated nuclear fusion in its core. It is thought that almost all stars form by this process. The Sun is roughly middle-aged: it has not changed dramatically for more than four billion years, and will remain fairly stable for more than another five billion years. After hydrogen fusion in its core has stopped, the Sun will undergo severe changes and become a red giant. It is calculated that the Sun will become sufficiently large to engulf the current orbits of Mercury, Venus, and possibly Earth. The enormous effect of the Sun on Earth has been recognized since prehistoric times, and the Sun has been regarded by some cultures as a deity. The synodic rotation of Earth and its orbit around the Sun are the basis of the solar calendar, which is the predominant calendar in use today.</description>
+        <discovered_by rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Greek Philosopher Anaxagoras</discovered_by>
+        <discovered_on rdf:datatype="http://www.w3.org/2001/XMLSchema#string">450 BC</discovered_on>
+        <mass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1.9885 × (10^30) kg</mass>
+        <mean_distance_to_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0 AU</mean_distance_to_sun>
+        <mean_temperature rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5000000 K</mean_temperature>
+        <order_from_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</order_from_sun>
+        <radius rdf:datatype="http://www.w3.org/2001/XMLSchema#string">695,700 km</radius>
+        <surface_area rdf:datatype="http://www.w3.org/2001/XMLSchema#string">6.09 × (10^12) square km</surface_area>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Tempel_1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Tempel_1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Comet"/>
+        <dbpedia_equivalent rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Tempel_1</dbpedia_equivalent>
+        <dbpedia_parent rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Comet</dbpedia_parent>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Tethys -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Tethys">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Satellite"/>
+        <isMoonOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Saturn"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Titan -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Titan">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Satellite"/>
+        <isMoonOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Saturn"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Titania -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Titania">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Satellite"/>
+        <isMoonOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Uranus"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Triton -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Triton">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Satellite"/>
+        <isMoonOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Neptune"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Umbriel -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Umbriel">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Satellite"/>
+        <isMoonOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Uranus"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Uranus -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Uranus">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Outer_Planet"/>
+        <mean_distance_to_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#double">19.201</mean_distance_to_sun>
+        <order_from_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</order_from_sun>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Venus -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Venus">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Inner_Planet"/>
+        <age rdf:datatype="http://www.w3.org/2001/XMLSchema#double">4.503E9</age>
+        <circumference rdf:datatype="http://www.w3.org/2001/XMLSchema#string">38,025 km</circumference>
+        <dbpedia_equivalent rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/resource/Venus</dbpedia_equivalent>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Venus is the second planet in the Solar System in order of distance from the Sun with an almost circular orbit that leads it to make a revolution in 224.7 Earth days. It takes its name from the Roman goddess of love and beauty and its astronomical symbol is the stylized representation of the hand of Venus holding up a mirror. It is the brightest natural object in the night sky, after the Moon, with a maximum apparent magnitude of -4.6, and for this reason it has been known since ancient times. Venus is visible only shortly before sunrise or shortly after sunset and for this reason it has often been called by ancient peoples the &quot;Morning Star&quot; or the &quot;Evening Star&quot;, until Pythagoras identified Venus as the person responsible for both the apparitions. Classified as a terrestrial planet, it is sometimes referred to as the &quot;twin planet&quot; of the Earth, to which it is very similar in size and mass. In other respects, however, it is quite different from our planet. Venus in fact has an atmosphere consisting mainly of carbon dioxide, much denser than Earth&apos;s, with a pressure at ground level equal to 92 atmospheres. The density and composition of the atmosphere create an imposing greenhouse effect, which makes Venus the hottest planet in the solar system. Venus is surrounded by a thick layer of highly reflective clouds, mainly composed of sulfuric acid, which prevent the surface from being viewed in visible light. The planet is not equipped with satellites or rings and has a weak magnetic field, compared to Earth&apos;s.</description>
+        <discovered_by rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Galileo Galilei</discovered_by>
+        <discovered_on rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1610 AD</discovered_on>
+        <mass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">4.8675 × (10^24) kg</mass>
+        <mean_distance_to_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.723</mean_distance_to_sun>
+        <mean_temperature rdf:datatype="http://www.w3.org/2001/XMLSchema#string">464 °C</mean_temperature>
+        <order_from_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</order_from_sun>
+        <radius rdf:datatype="http://www.w3.org/2001/XMLSchema#string">6,051.8 km</radius>
+        <surface_area rdf:datatype="http://www.w3.org/2001/XMLSchema#string">460,230,000 square km</surface_area>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#19P/Borelly -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#19P/Borelly">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Comet"/>
+        <dbpedia_equivalent rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/19P/Borelly</dbpedia_equivalent>
+        <dbpedia_parent rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Comet</dbpedia_parent>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Halley&apos;s_Comet -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Halley&apos;s_Comet">
+        <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Comet"/>
+        <dbpedia_equivalent rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Halley&apos;s_Comet</dbpedia_equivalent>
+        <dbpedia_parent rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Comet</dbpedia_parent>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
