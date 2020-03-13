@@ -1,20 +1,18 @@
 import pprint
 from nltk.tokenize import sent_tokenize
 import time
-from functools import partial
-from multiprocessing.pool import Pool
 import math
-from py_stringmatching import MongeElkan, Cosine
+from py_stringmatching import MongeElkan
 import operator
 
 # Custom imports
-from inference.FuzzyController import FuzzyController
-from matchers.SentenceSimilarityMatcher import SentenceSimilarityMatcher
-from models.Corpus import Corpus
-from nlg.NlgEngine import NlgEngine
-from preprocessor.WatsonNluAnnotator import WatsonNluAnnotator
-from sparql.SparqlRepository import SparqlRepository
-from preprocessor.SpacyNluAnnotator import SpacyNluAnnotator
+from inferno.inference.FuzzyController import FuzzyController
+from inferno.matchers.SentenceSimilarityMatcher import SentenceSimilarityMatcher
+from inferno.models.Corpus import Corpus
+from inferno.nlg.NlgEngine import NlgEngine
+from inferno.sparql.SparqlRepository import SparqlRepository
+from inferno.preprocessors.SpacyNluAnnotator import SpacyNluAnnotator
+from inferno.preprocessors.WatsonNluAnnotator import WatsonNluAnnotator
 
 
 class RecommendationsController:
@@ -52,6 +50,7 @@ class RecommendationsController:
         # Annotate corpus for NLU purposes
         nlu = SpacyNluAnnotator(text)
         # Set resolved text to corpus
+        # noinspection PyProtectedMember
         resolved_text = nlu.doc._.coref_resolved
         corpus.set_resolved_text(resolved_text)
         # Reinitialize NLU object with coreference resolved text
@@ -104,22 +103,24 @@ class RecommendationsController:
         print(f"Queried ontology in {query_tock - query_tick:0.4f} seconds")
 
         # Generate sentences from retrieved triples
+        # TODO Optimize NLG logic (possibly with multithreading)
         generated_sentences = []
         nlg_tick = time.perf_counter()
+
         nlg = NlgEngine()
         for triple in triples:
             if triple['predicate']['value'] != "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" and triple['predicate']['value'] != "http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#description":
                 sentence = nlg.transform(triple)
                 generated_sentences.append(sentence)
+
         nlg_tock = time.perf_counter()
         print(f"Transformed sentences in {nlg_tock - nlg_tick:0.4f} seconds")
 
         # Match sentences (generated vs. segmented input) and generate scores for each pair
+        # Sentence similarity is scored using 2 metrics using Knowledge-based approach (w/ Wordnet)
+        # and Monge-Elkan text distance metric
         similarity_scores = []
         similarity_tick = time.perf_counter()
-
-        # Run sentence similarity using 2 metrics using Knowledge-based approach (w/ Wordnet)
-        # and Monge-Elkan text distance metric
 
         me = MongeElkan()
         matcher = SentenceSimilarityMatcher()
@@ -143,13 +144,13 @@ class RecommendationsController:
         fuzzy.initialize_fuzzy_engine()
         fuzzy_scores = []
         for score in similarity_scores:
-            score_1 = score['kb_score']
-            score_2 = score['me_score']
-            if math.isinf(score_1):
-                score_1 = 0
-            if math.isinf(score_2):
-                score_2 = 0
-            fuzzy_score = fuzzy.predict_fuzzy_score(score_1, score_2)
+            kb_score = score['kb_score']
+            me_score = score['me_score']
+            if math.isinf(kb_score):
+                kb_score = 0
+            if math.isinf(me_score):
+                me_score = 0
+            fuzzy_score = fuzzy.predict_fuzzy_score(kb_score, me_score)
             fuzzy_scores.append({
                 "sentence": score['generated'],
                 "score": fuzzy_score
@@ -165,12 +166,14 @@ class RecommendationsController:
         }
 
 
-total_tick = time.perf_counter()
-rec = RecommendationsController()
-pp = pprint.PrettyPrinter(indent=2)
-pp.pprint(rec.fetch_recommendations("Mercury is the smallest planet in the Solar System. It is the first planet from the Sun and is named after a Roman God."))
-total_tock = time.perf_counter()
-print(f"Total process in {total_tock - total_tick:0.4f} seconds")
+if __name__ == "__main__":
+    total_tick = time.perf_counter()
+    rec = RecommendationsController()
+    pp = pprint.PrettyPrinter(indent=2)
+    pp.pprint(rec.fetch_recommendations("Mercury is the smallest planet in the Solar System. "
+                                        "It is the first planet from the Sun and is named after a Roman God."))
+    total_tock = time.perf_counter()
+    print(f"Total process in {total_tock - total_tick:0.4f} seconds")
 
 # Figure out how to optimize this code for multithreading (this is inefficient)
 # To use this code, replace it with the inner for loop in sentence similarity section

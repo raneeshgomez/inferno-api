@@ -1,24 +1,20 @@
-# from preprocessor.NLUAnnotator import NLUAnnotator
-from preprocessor.SpacyNluAnnotator import SpacyNluAnnotator
-from preprocessor.TextRanker import TextRanker
+# from preprocessors.NLUAnnotator import NLUAnnotator
+from inferno.preprocessors import SpacyNluAnnotator
+from inferno.preprocessors import TextRanker
 # from sparql.SparqlQueryEngine import SparqlQueryEngine
 # from svo_extractor.subject_verb_object_extract import findSVOs, nlp
 # from openie import StanfordOpenIE
 # from pycorenlp import StanfordCoreNLP
 # from rake_nltk import Rake
-import pke
 # import requests
-import numpy as np
-import json
 
-from models.Corpus import Corpus
+from inferno.models import Corpus
 import pprint
 
 # DBPedia Resource <http://dbpedia.org/resource/Asturias>
 # Fuseki Resource <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#%s>
 
 # Base URLs for Spotlight API
-from preprocessor.WatsonNluAnnotator import WatsonNluAnnotator
 
 annotate_base_url = "http://api.dbpedia-spotlight.org/en/annotate"
 candidates_base_url = "http://api.dbpedia-spotlight.org/en/candidates"
@@ -349,7 +345,6 @@ pp.pprint(predicate_keywords)
 #         'error': 'DBpedia Spotlight Error with code ' + str(res.status_code)
 #     }
 
-import textdistance
 from py_stringmatching import MongeElkan
 
 me = MongeElkan()
