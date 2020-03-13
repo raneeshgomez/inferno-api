@@ -56,6 +56,40 @@ class SparqlRepository:
         query = query % limit
         return self.sparql.query_fuseki(query)
 
+    def get_triples_by_subject_with_regex(self, regex, limit=1000):
+        # FILTER(?subject = fss: % s)
+        query = """
+            PREFIX fss: <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#>
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+            SELECT DISTINCT ?subject ?predicate ?object
+            WHERE {
+              ?subject ?predicate ?object .
+              FILTER(?subject = <%s>)
+            }
+            LIMIT %s
+        """
+        query = query % (regex, limit)
+        return self.sparql.query_fuseki(query)
+
+    def get_individuals_by_name_with_regex(self, regex, limit=1000):
+        query = """
+            PREFIX fss: <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#>
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+            SELECT DISTINCT ?individual
+            WHERE {
+              ?individual rdf:type ?type .
+              ?type rdfs:subClassOf ?class .
+              FILTER(regex(str(?individual), "%s"))
+            }
+            LIMIT %s
+        """
+        query = query % (regex, limit)
+        return self.sparql.query_fuseki(query)
+
     def get_individuals_by_name_or_desc_with_regex(self, regex, limit=1000):
         query = """
             PREFIX fss: <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#>

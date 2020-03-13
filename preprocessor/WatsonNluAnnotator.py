@@ -23,11 +23,11 @@ class WatsonNluAnnotator:
             return self.service.analyze(
                 text=corpus.resolved_text,
                 features=Features(
-                    entities=EntitiesOptions(),
-                    keywords=KeywordsOptions(),
+                    # entities=EntitiesOptions(),
+                    # keywords=KeywordsOptions(),
                     concepts=ConceptsOptions(),
-                    relations=RelationsOptions(),
-                    semantic_roles=SemanticRolesOptions()
+                    # relations=RelationsOptions(),
+                    # semantic_roles=SemanticRolesOptions()
                 )
             ).get_result()
         except ApiException as ex:

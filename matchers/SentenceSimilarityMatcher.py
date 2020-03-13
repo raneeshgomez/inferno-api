@@ -7,6 +7,9 @@ from wn.constants import wordnet_30_dir
 
 class SentenceSimilarityMatcher:
 
+    def __init__(self):
+        self.wordnet = WordNet(wordnet_30_dir)
+
     def extract_words_to_compare(self, sentence):
         """
             Extracting nouns and verbs for word-based comparison
@@ -17,7 +20,6 @@ class SentenceSimilarityMatcher:
         pos_tags = nltk.pos_tag(tokens)
         # Filter tags that are nouns and verbs
         pos_tags = [tag for tag in pos_tags if tag[1].startswith('N') or tag[1].startswith('V')]
-        print("POS Tags for '" + sentence + "': " + str(pos_tags))
         return pos_tags
 
     def disambiguate_word_senses(self, sentence):
@@ -36,7 +38,6 @@ class SentenceSimilarityMatcher:
         """
             Generate similarity indexes and vectors
         """
-        wordnet = WordNet(wordnet_30_dir)
         # Initialize list with length of synset with most senses
         vector = [0.0] * vector_length
         count = 0
@@ -45,7 +46,7 @@ class SentenceSimilarityMatcher:
             for synset_2 in sense_array_2:
                 # Wu-Palmer similarity is used to calculate the similarity between synsets from each sentence
                 # This method is based on the depth of the synsets in the WordNet taxonomy and their common ancestor
-                similarity = wordnet.wup_similarity(synset_1, synset_2)
+                similarity = self.wordnet.wup_similarity(synset_1, synset_2)
                 if similarity is not None:
                     similarity_indexes.append(similarity)
                 else:
@@ -54,10 +55,8 @@ class SentenceSimilarityMatcher:
             similarity_indexes = sorted(similarity_indexes, reverse=True)
             # Get index with highest similarity
             vector[i] = similarity_indexes[0]
-            if vector[i] >= 0.804:
+            if vector[i] >= 0.7:
                 count += 1
-            print("Similarity indexes: " + str(similarity_indexes))
-        print("******************************************************************************************************")
         return vector, count
 
     def get_shortest_path_distance(self, first_sentence_sense, second_sentence_sense):
@@ -84,13 +83,14 @@ class SentenceSimilarityMatcher:
         """
         first_sentence_sense = self.disambiguate_word_senses(first_sentence)
         second_sentence_sense = self.disambiguate_word_senses(second_sentence)
+        filtered_first_sentence_sense = {sense for sense in first_sentence_sense if sense is not None}
+        filtered_second_sentence_sense = {sense for sense in second_sentence_sense if sense is not None}
         print("******************************************************************************************************")
-        print("Sense for '" + first_sentence + "': " + str(first_sentence_sense))
-        print("Sense for '" + second_sentence + "': " + str(second_sentence_sense))
+        print("Sense for '" + first_sentence + "': " + str(filtered_first_sentence_sense))
+        print("Sense for '" + second_sentence + "': " + str(filtered_second_sentence_sense))
         print("******************************************************************************************************")
-        v1, v2, c1, c2 = self.get_shortest_path_distance(first_sentence_sense, second_sentence_sense)
+        v1, v2, c1, c2 = self.get_shortest_path_distance(filtered_first_sentence_sense, filtered_second_sentence_sense)
         dot_product = np.dot(v1, v2)
-        print("Dot Product: ", dot_product)
         tow = (c1 + c2) / 1.8
         final_similarity = dot_product / tow
         print("Similarity: ", final_similarity)
@@ -98,6 +98,6 @@ class SentenceSimilarityMatcher:
 
 
 # matcher = SentenceSimilarityMatcher()
-# a = 'Mars is the fourth planet after the Sun in the Solar System'
-# b = 'The Solar System consists of a planet called Mars'
+# a = 'Mars'
+# b = 'Mercury'
 # matcher.match_and_fetch_score(a, b)

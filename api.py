@@ -1,10 +1,9 @@
 from __future__ import unicode_literals, print_function
-from flask import Flask, flash, redirect, url_for, session, logging, request, jsonify
+from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 
 # Custom imports
-from models.Corpus import Corpus
-from controllers.RecommendationsController import RecommendationController
+from RecommendationsController import RecommendationsController
 
 # Define constants for host and port configuration
 HOST = 'localhost'
@@ -33,7 +32,7 @@ def home():
 @app.route('/api/recommendation', methods=['GET', 'POST'])
 @cross_origin()
 def generate_recommendations():
-    controller = RecommendationController()
+    controller = RecommendationsController()
     if request.method == 'GET':
         result = controller.fetch_starter_fact()
         # If result status is falsy

@@ -226,7 +226,9 @@
 
     <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Solar_System -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Solar_System"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Solar_System">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Universe"/>
+    </owl:Class>
     
 
 
@@ -235,6 +237,12 @@
     <owl:Class rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Trans_Neptunian_Region">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Solar_System"/>
     </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Universe -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Universe"/>
     
 
 
@@ -279,7 +287,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Ceres">
         <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Asteroid_Belt"/>
-        <mean_distance_to_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#double">2.767</mean_distance_to_sun>
+        <mean_distance_to_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2.767 AU</mean_distance_to_sun>
     </owl:NamedIndividual>
     
 
@@ -335,7 +343,7 @@
         <circumference rdf:datatype="http://www.w3.org/2001/XMLSchema#string">40,075.017 km</circumference>
         <dbpedia_equivalent rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/resource/Earth</dbpedia_equivalent>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Earth (otherwise known as the world, in Greek: Γαῖα Gaia, or in Latin: Terra) is the third planet from the Sun, the densest planet in the Solar System, the largest of the Solar System&apos;s four terrestrial planets, and the only astronomical object known to harbor life. According to radiometric dating and other sources of evidence, Earth formed about 4.54 billion years ago. Earth gravitationally interacts with other objects in space, especially the Sun and the Moon. During one orbit around the Sun, Earth rotates about its axis 366.26 times, creating 365.26 solar days or one sidereal year. Earth&apos;s axis of rotation is tilted 23.4° away from the perpendicular of its orbital plane, producing seasonal variations on the planet&apos;s surface within a period of one tropical year (365.24 solar days). The Moon is the Earth&apos;s only permanent natural satellite; their gravitational interaction causes ocean tides, stabilizes the orientation of Earth&apos;s rotational axis, and gradually slows Earth&apos;s rotational rate. Earth&apos;s lithosphere is divided into several rigid tectonic plates that migrate across the surface over periods of many millions of years. 71% of Earth&apos;s surface is covered with water. The remaining 29% is land mass—consisting of continents and islands—that together has many lakes, rivers, and other sources of water that contribute to the hydrosphere. The majority of Earth&apos;s polar regions are covered in ice, including the Antarctic ice sheet and the sea ice of the Arctic ice pack. Earth&apos;s interior remains active with a solid iron inner core, a liquid outer core that generates the Earth&apos;s magnetic field, and a convecting mantle that drives plate tectonics. Within the first billion years of Earth&apos;s history, life appeared in the oceans and began to affect the atmosphere and surface, leading to the proliferation of aerobic and anaerobic organisms. Since then, the combination of Earth&apos;s distance from the Sun, physical properties, and geological history have allowed life to evolve and thrive. Life arose on Earth by 3.5 billion years ago, though some geological evidence indicates that life may have arisen as much as 4.1 billion years ago. In the history of the Earth, biodiversity has gone through long durations of expansion but occasionally punctuated by mass extinction events. Over 99% of all species of life that ever lived on Earth are extinct. Estimates of the number of species on Earth today vary widely; most species have not been described. Over 7.3 billion humans live on Earth and depend on its biosphere and minerals for their survival. Humanity has developed diverse societies and cultures; politically, the world is divided into about 200 sovereign states.</description>
-        <mass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5.97237 × (10^24) kg</mass>
+        <mass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5,972,370,000,000,000,000,000,000 kg</mass>
         <mean_distance_to_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 AU</mean_distance_to_sun>
         <mean_temperature rdf:datatype="http://www.w3.org/2001/XMLSchema#string">14 °C</mean_temperature>
         <order_from_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</order_from_sun>
@@ -400,7 +408,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Jupiter">
         <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Outer_Planet"/>
-        <mean_distance_to_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#double">5.203</mean_distance_to_sun>
+        <mean_distance_to_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5.203 AU</mean_distance_to_sun>
         <order_from_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</order_from_sun>
     </owl:NamedIndividual>
     
@@ -422,13 +430,13 @@
         <circumference rdf:datatype="http://www.w3.org/2001/XMLSchema#string">21,344 km</circumference>
         <dbpedia_equivalent rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Mars</dbpedia_equivalent>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System, after Mercury. Named after the Roman god of war, it is often referred to as the &quot;Red Planet&quot; because the iron oxide prevalent on its surface gives it a reddish appearance. Mars is a terrestrial planet with a thin atmosphere, having surface features reminiscent both of the impact craters of the Moon and the valleys, deserts, and polar ice caps of Earth. The rotational period and seasonal cycles of Mars are likewise similar to those of Earth, as is the tilt that produces the seasons. Mars is the site of Olympus Mons, the largest volcano and second-highest known mountain in the Solar System, and of Valles Marineris, one of the largest canyons in the Solar System. The smooth Borealis basin in the northern hemisphere covers 40% of the planet and may be a giant impact feature. Mars has two moons, Phobos and Deimos, which are small and irregularly shaped. These may be captured asteroids, similar to 5261 Eureka, a Mars trojan. There are ongoing investigations assessing the past habitability potential of Mars, as well as the possibility of extant life. Future astrobiology missions are planned, including the Mars 2020 and ExoMars rovers. Liquid water cannot exist on the surface of Mars due to low atmospheric pressure, which is about  6⁄1000 that of the Earth&apos;s, except at the lowest elevations for short periods. The two polar ice caps appear to be made largely of water. The volume of water ice in the south polar ice cap, if melted, would be sufficient to cover the entire planetary surface to a depth of 11 meters (36 ft). Mars can easily be seen from Earth with the naked eye, as can its reddish coloring. Its apparent magnitude reaches −2.91, which is surpassed only by Jupiter, Venus, the Moon, and the Sun. Optical ground-based telescopes are typically limited to resolving features about 300 kilometers (190 mi) across when Earth and Mars are closest because of Earth&apos;s atmosphere.</description>
-        <discovered_by rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Galileo</discovered_by>
+        <discovered_by rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Galileo Galilei</discovered_by>
         <discovered_on rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1610 AD</discovered_on>
-        <mass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">6.4171 × (10^23) kg</mass>
+        <mass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">641,710,000,000,000,000,000,000 kg</mass>
         <mean_distance_to_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1.524 AU</mean_distance_to_sun>
         <mean_temperature rdf:datatype="http://www.w3.org/2001/XMLSchema#string">−63 °C</mean_temperature>
         <order_from_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</order_from_sun>
-        <radius rdf:datatype="http://www.w3.org/2001/XMLSchema#string">3389.5 ± 0.2 km</radius>
+        <radius rdf:datatype="http://www.w3.org/2001/XMLSchema#string">3,389.5 km</radius>
         <surface_area rdf:datatype="http://www.w3.org/2001/XMLSchema#string">144,798,500 km</surface_area>
     </owl:NamedIndividual>
     
@@ -444,7 +452,7 @@
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mercury is the smallest and innermost planet in the Solar System. Its orbital period (about 88 Earth days) is less than any other planet in the Solar System. Seen from Earth, it appears to move around its orbit in about 116 days. It has no known natural satellites. It is named after the Roman deity Mercury, the messenger to the gods. Partly because it has almost no atmosphere to retain heat, Mercury&apos;s surface temperature varies diurnally more than any other planet in the Solar System, ranging from 100 K (−173 °C; −280 °F) at night to 700 K (427 °C; 800 °F) during the day in some equatorial regions. The poles are constantly below 180 K (−93 °C; −136 °F). Mercury&apos;s axis has the smallest tilt of any of the Solar System&apos;s planets (about  1⁄30 degree), and its orbital eccentricity is the largest of all known planets in the Solar System. At aphelion, Mercury is about 1.5 times as far from the Sun as it is at perihelion. Mercury&apos;s surface is heavily cratered and similar in appearance to the Moon, indicating that it has been geologically inactive for billions of years. Mercury is tidally or gravitationally locked with the Sun in a 3:2 resonance, and rotates in a way that is unique in the Solar System. As seen relative to the fixed stars, it rotates on its axis exactly three times for every two revolutions it makes around the Sun. As seen from the Sun, in a frame of reference that rotates with the orbital motion, it appears to rotate only once every two Mercurian years. An observer on Mercury would therefore see only one day every two years. Because Mercury orbits the Sun within Earth&apos;s orbit (as does Venus), it can appear in Earth&apos;s sky in the morning or the evening, but not in the middle of the night. Also, like Venus and the Moon, it displays a complete range of phases as it moves around its orbit relative to Earth. Although Mercury can appear as a bright object when viewed from Earth, its proximity to the Sun makes it more difficult to see than Venus. Two spacecraft have visited Mercury: Mariner 10 flew by in 1974 and 1975; and MESSENGER, launched in 2004, orbited Mercury over 4,000 times in four years, before exhausting its fuel and crashing into the planet&apos;s surface on April 30, 2015.</description>
         <discovered_by rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sumerians</discovered_by>
         <discovered_on rdf:datatype="http://www.w3.org/2001/XMLSchema#string">3000 BC</discovered_on>
-        <mass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">3.3011 x (10^23) kg</mass>
+        <mass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">330,110,000,000,000,000,000,000 kg</mass>
         <mean_distance_to_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0.387 AU</mean_distance_to_sun>
         <mean_temperature rdf:datatype="http://www.w3.org/2001/XMLSchema#string">66 °C</mean_temperature>
         <order_from_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</order_from_sun>
@@ -576,12 +584,10 @@
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Sun is the star at the center of the Solar System. It is a nearly perfect sphere of hot plasma, with internal convective motion that generates a magnetic field via a dynamo process. It is by far the most important source of energy for life on Earth. Its diameter is about 109 times that of Earth, and its mass is about 330,000 times that of Earth, accounting for about 99.86% of the total mass of the Solar System.About three quarters of the Sun&apos;s mass consists of hydrogen (~73%); the rest is mostly helium (~25%), with much smaller quantities of heavier elements, including oxygen, carbon, neon, and iron. The Sun is a G-type main-sequence star (G2V) based on its spectral class, and is informally referred to as a yellow dwarf. It formed approximately 4.6 billion years ago from the gravitational collapse of matter within a region of a large molecular cloud. Most of this matter gathered in the center, whereas the rest flattened into an orbiting disk that became the Solar System. The central mass became so hot and dense that it eventually initiated nuclear fusion in its core. It is thought that almost all stars form by this process. The Sun is roughly middle-aged: it has not changed dramatically for more than four billion years, and will remain fairly stable for more than another five billion years. After hydrogen fusion in its core has stopped, the Sun will undergo severe changes and become a red giant. It is calculated that the Sun will become sufficiently large to engulf the current orbits of Mercury, Venus, and possibly Earth. The enormous effect of the Sun on Earth has been recognized since prehistoric times, and the Sun has been regarded by some cultures as a deity. The synodic rotation of Earth and its orbit around the Sun are the basis of the solar calendar, which is the predominant calendar in use today.</description>
         <discovered_by rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Greek Philosopher Anaxagoras</discovered_by>
         <discovered_on rdf:datatype="http://www.w3.org/2001/XMLSchema#string">450 BC</discovered_on>
-        <mass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1.9885 × (10^30) kg</mass>
-        <mean_distance_to_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0 AU</mean_distance_to_sun>
-        <mean_temperature rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5000000 K</mean_temperature>
-        <order_from_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</order_from_sun>
+        <mass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1,988,500,000,000,000,000,000,000,000,000 kg</mass>
+        <mean_temperature rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5,000,000 K</mean_temperature>
         <radius rdf:datatype="http://www.w3.org/2001/XMLSchema#string">695,700 km</radius>
-        <surface_area rdf:datatype="http://www.w3.org/2001/XMLSchema#string">6.09 × (10^12) square km</surface_area>
+        <surface_area rdf:datatype="http://www.w3.org/2001/XMLSchema#string">6,090,000,000,000 square km</surface_area>
     </owl:NamedIndividual>
     
 
@@ -661,7 +667,7 @@
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Venus is the second planet in the Solar System in order of distance from the Sun with an almost circular orbit that leads it to make a revolution in 224.7 Earth days. It takes its name from the Roman goddess of love and beauty and its astronomical symbol is the stylized representation of the hand of Venus holding up a mirror. It is the brightest natural object in the night sky, after the Moon, with a maximum apparent magnitude of -4.6, and for this reason it has been known since ancient times. Venus is visible only shortly before sunrise or shortly after sunset and for this reason it has often been called by ancient peoples the &quot;Morning Star&quot; or the &quot;Evening Star&quot;, until Pythagoras identified Venus as the person responsible for both the apparitions. Classified as a terrestrial planet, it is sometimes referred to as the &quot;twin planet&quot; of the Earth, to which it is very similar in size and mass. In other respects, however, it is quite different from our planet. Venus in fact has an atmosphere consisting mainly of carbon dioxide, much denser than Earth&apos;s, with a pressure at ground level equal to 92 atmospheres. The density and composition of the atmosphere create an imposing greenhouse effect, which makes Venus the hottest planet in the solar system. Venus is surrounded by a thick layer of highly reflective clouds, mainly composed of sulfuric acid, which prevent the surface from being viewed in visible light. The planet is not equipped with satellites or rings and has a weak magnetic field, compared to Earth&apos;s.</description>
         <discovered_by rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Galileo Galilei</discovered_by>
         <discovered_on rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1610 AD</discovered_on>
-        <mass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">4.8675 × (10^24) kg</mass>
+        <mass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">4,867,500,000,000,000,000,000,000 kg</mass>
         <mean_distance_to_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.723</mean_distance_to_sun>
         <mean_temperature rdf:datatype="http://www.w3.org/2001/XMLSchema#string">464 °C</mean_temperature>
         <order_from_sun rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</order_from_sun>

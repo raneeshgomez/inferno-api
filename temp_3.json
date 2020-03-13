@@ -1,0 +1,146 @@
+{
+  "error": "",
+  "result": [
+    {
+      "generated": "The circumference of Mercury is 15,329 km.",
+      "scores": [
+        Infinity,
+        Infinity
+      ]
+    },
+    {
+      "generated": "Mercury's age is approximately 4,503,000,000 years.",
+      "scores": [
+        Infinity,
+        Infinity
+      ]
+    },
+    {
+      "generated": "Mercury's surface area is 74,800,000 square km.",
+      "scores": [
+        Infinity,
+        Infinity
+      ]
+    },
+    {
+      "generated": "Mercury is 0.387 AUs away from the Sun, where an AU (Astronomical Unit) is the distance from the Earth to the Sun.",
+      "scores": [
+        0.6009090909090908,
+        0.9416596763482575
+      ]
+    },
+    {
+      "generated": "Mercury's mass is 330,110,000,000,000,000,000,000 kg.",
+      "scores": [
+        Infinity,
+        Infinity
+      ]
+    },
+    {
+      "generated": "Mercury was discovered by Sumerians.",
+      "scores": [
+        Infinity,
+        Infinity
+      ]
+    },
+    {
+      "generated": "The mean temperature on Mercury is 66 \u00b0C.",
+      "scores": [
+        Infinity,
+        Infinity
+      ]
+    },
+    {
+      "generated": "The radius of Mercury is 2439.7 km.",
+      "scores": [
+        0.7196794871794872,
+        Infinity
+      ]
+    },
+    {
+      "generated": "Mercury was discovered in 3000 BC.",
+      "scores": [
+        Infinity,
+        Infinity
+      ]
+    },
+    {
+      "generated": "Mercury is the 1st planet from the Sun.",
+      "scores": [
+        0.7531428571428572,
+        0.7129342403628118
+      ]
+    },
+    {
+      "generated": "For more information about Mercury, please visit http://dbpedia.org/resource/Mercury (planet).",
+      "scores": [
+        0.6650549450549451,
+        0.8718520109798304
+      ]
+    },
+    {
+      "generated": "The circumference of the Sun is 4,379,000,000 km.",
+      "scores": [
+        Infinity,
+        Infinity
+      ]
+    },
+    {
+      "generated": "The Sun's age is approximately 4,600,000,000 years.",
+      "scores": [
+        Infinity,
+        Infinity
+      ]
+    },
+    {
+      "generated": "The Sun's surface area is 6,090,000,000,000 square km.",
+      "scores": [
+        Infinity,
+        Infinity
+      ]
+    },
+    {
+      "generated": "The Sun's mass is 1,988,500,000,000,000,000,000,000,000,000 kg.",
+      "scores": [
+        0.6550160427807488,
+        0.5777285067873303
+      ]
+    },
+    {
+      "generated": "The Sun was discovered by Greek Philosopher Anaxagoras.",
+      "scores": [
+        Infinity,
+        Infinity
+      ]
+    },
+    {
+      "generated": "The mean temperature on the Sun is 5,000,000 K.",
+      "scores": [
+        Infinity,
+        Infinity
+      ]
+    },
+    {
+      "generated": "The radius of the Sun is 695,700 km.",
+      "scores": [
+        0.8793201754385964,
+        Infinity
+      ]
+    },
+    {
+      "generated": "The Sun was discovered in 450 BC.",
+      "scores": [
+        Infinity,
+        Infinity
+      ]
+    },
+    {
+      "generated": "For more information about the Sun, please visit http://dbpedia.org/resource/Sun.",
+      "scores": [
+        Infinity,
+        Infinity
+      ]
+    }
+  ],
+  "status": true
+}

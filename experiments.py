@@ -1,11 +1,12 @@
 # from preprocessor.NLUAnnotator import NLUAnnotator
-# from preprocessor.TextRanker import TextRanker
+from preprocessor.SpacyNluAnnotator import SpacyNluAnnotator
+from preprocessor.TextRanker import TextRanker
 # from sparql.SparqlQueryEngine import SparqlQueryEngine
 # from svo_extractor.subject_verb_object_extract import findSVOs, nlp
 # from openie import StanfordOpenIE
 # from pycorenlp import StanfordCoreNLP
 # from rake_nltk import Rake
-# import pke
+import pke
 # import requests
 import numpy as np
 import json
@@ -30,28 +31,7 @@ candidates_base_url = "http://api.dbpedia-spotlight.org/en/candidates"
 #                "}"
 # print(sparql.query_fuseki(query_string))
 
-corpus = Corpus("Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System, "
-                "after Mercury. Named af"
-                "ter the Roman god of war, it is often referred to as the 'Red Planet' because "
-                "the iron oxide prevalent on its surface gives it a reddish appearance. Mars is a terrestrial planet "
-                "with a thin atmosphere, having surface features reminiscent both of the impact craters of the Moon "
-                "and the valleys, deserts, and polar ice caps of Earth. The rotational period and seasonal cycles of "
-                "Mars are likewise similar to those of Earth, as is the tilt that produces the seasons. Mars is the "
-                "site of Olympus Mons, the largest volcano and second-highest known mountain in the Solar System, "
-                "and of Valles Marineris, one of the largest canyons in the Solar System. The smooth Borealis basin "
-                "in the northern hemisphere covers 40% of the planet and may be a giant impact feature. Mars has two "
-                "moons, Phobos and Deimos, which are small and irregularly shaped. These may be captured asteroids, "
-                "similar to 5261 Eureka, a Mars trojan. There are ongoing investigations assessing the past "
-                "habitability potential of Mars, as well as the possibility of extant life. Future astrobiology "
-                "missions are planned, including the Mars 2020 and ExoMars rovers. Liquid water cannot exist on the "
-                "surface of Mars due to low atmospheric pressure, which is about  6⁄1000 that of the Earth's, "
-                "except at the lowest elevations for short periods. The two polar ice caps appear to be made largely "
-                "of water. The volume of water ice in the south polar ice cap, if melted, would be sufficient to "
-                "cover the entire planetary surface to a depth of 11 meters (36 ft). Mars can easily be seen from "
-                "Earth with the naked eye, as can its reddish coloring. Its apparent magnitude reaches −2.91, "
-                "which is surpassed only by Jupiter, Venus, the Moon, and the Sun. Optical ground-based telescopes "
-                "are typically limited to resolving features about 300 kilometers (190 mi) across when Earth and Mars "
-                "are closest because of Earth's atmosphere.")
+corpus = Corpus("Mars is the fourth planet in the Solar System. It is named after the Roman God of war. It has a reddish appearance.")
 
 # corpus = Corpus("Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System"
 #                 ". Named after the Roman god of war, it is often referred to as the 'Red Planet' because "
@@ -113,21 +93,21 @@ corpus = Corpus("Mars is the fourth planet from the Sun and the second-smallest 
 # Using TextRank
 
 # sparql_engine = SparqlQueryEngine()
-# pp = pprint.PrettyPrinter(indent=2)
-#
-# subject_textranker = TextRanker(corpus.text)
-# # Analyze corpus with specified candidate POS
-# subject_textranker.analyze(candidate_pos=['NOUN', 'PROPN'], window_size=4, lower=False)
-# # Extract keywords using TextRank algorithm
-# subject_keywords = subject_textranker.get_all_keywords()
-# pp.pprint(subject_keywords)
-#
-# predicate_textranker = TextRanker(corpus.text)
-# # Analyze corpus with specified candidate POS
-# predicate_textranker.analyze(candidate_pos=['VERB', 'ADJ'], window_size=4, lower=False)
-# # Extract keywords using TextRank algorithm
-# predicate_keywords = predicate_textranker.get_all_keywords()
-# pp.pprint(predicate_keywords)
+pp = pprint.PrettyPrinter(indent=2)
+
+subject_textranker = TextRanker(corpus.text)
+# Analyze corpus with specified candidate POS
+subject_textranker.analyze(candidate_pos=['NOUN', 'PROPN'], window_size=4, lower=False)
+# Extract keywords using TextRank algorithm
+subject_keywords = subject_textranker.get_all_keywords()
+pp.pprint(subject_keywords)
+
+predicate_textranker = TextRanker(corpus.text)
+# Analyze corpus with specified candidate POS
+predicate_textranker.analyze(candidate_pos=['VERB', 'ADJ'], window_size=4, lower=False)
+# Extract keywords using TextRank algorithm
+predicate_keywords = predicate_textranker.get_all_keywords()
+pp.pprint(predicate_keywords)
 #
 # vo_result_list = []
 # for i, (key, value) in enumerate(subject_keywords.items()):
@@ -204,7 +184,7 @@ corpus = Corpus("Mars is the fourth planet from the Sun and the second-smallest 
 # Using PKE (https://github.com/boudinfl/pke)
 
 # # initialize keyphrase extraction model, here TopicRank
-# extractor = pke.unsupervised.TopicRank()
+# extractor = pke.unsupervised.TextRank()
 # # load the content of the document, here document is expected to be in raw
 # # format (i.e. a simple text file) and preprocessing is carried out using spacy
 # extractor.load_document(input=corpus.text, language='en')
@@ -369,5 +349,22 @@ corpus = Corpus("Mars is the fourth planet from the Sun and the second-smallest 
 #         'error': 'DBpedia Spotlight Error with code ' + str(res.status_code)
 #     }
 
+import textdistance
+from py_stringmatching import MongeElkan
 
-print(np.arange(0, 1, 0.1))
+me = MongeElkan()
+spacy_1 = SpacyNluAnnotator("Mercury is the smallest planet in the Solar System and is the first planet from the Sun")
+spacy_2 = SpacyNluAnnotator("My name is Khan")
+tokens_1 = spacy_1.extract_tokens()
+tokens_2 = spacy_2.extract_tokens()
+print(me.get_raw_score(tokens_1, tokens_2))
+
+# me_sim = textdistance.hamming.similarity("Mercury",
+#                                             "Mercury")
+# me_dis = textdistance.hamming.distance("Mercury is the smallest planet in the Solar System and is the first planet from the Sun",
+#                                             "Mercury is the smallest planet in the Solar System and is the first planet from the Sun")
+
+# Mercury is the smallest planet in the Solar System and is the first planet from the Sun
+#Mercury is 0.387 AUs away from the Sun, where an AU (Astronomical Unit) is the distance from the Earth to the Sun.
+# print(me_sim)
+# print(me_dis)
