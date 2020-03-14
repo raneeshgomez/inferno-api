@@ -5,6 +5,10 @@ import numpy as np
 
 class SentenceSimilarityMatcher:
 
+    def __init__(self):
+        print("Initializing INFERNO Knowledge-based Sentence Similarity Matcher...")
+        self.word_order = False
+
     def extract_words_to_compare(self, sentence):
         """
             Extracting nouns and verbs for word-based comparison
@@ -77,19 +81,33 @@ class SentenceSimilarityMatcher:
         second_sentence_sense = self.disambiguate_word_senses(second_sentence)
         filtered_first_sentence_sense = {sense for sense in first_sentence_sense if sense is not None}
         filtered_second_sentence_sense = {sense for sense in second_sentence_sense if sense is not None}
-        print("******************************************************************************************************")
-        print("Sense for '" + first_sentence + "': " + str(filtered_first_sentence_sense))
-        print("Sense for '" + second_sentence + "': " + str(filtered_second_sentence_sense))
-        print("******************************************************************************************************")
+        # print("******************************************************************************************************")
+        # print("Sense for '" + first_sentence + "': " + str(filtered_first_sentence_sense))
+        # print("Sense for '" + second_sentence + "': " + str(filtered_second_sentence_sense))
+        # print("******************************************************************************************************")
 
         v1, v2, c1, c2 = self.get_shortest_path_distance(filtered_first_sentence_sense, filtered_second_sentence_sense)
-        print("Vector 01: " + str(v1))
-        print("Vector 02: " + str(v2))
-        print("Count 01: " + str(c1))
-        print("Count 02: " + str(c2))
+        # print("Vector 01: " + str(v1))
+        # print("Vector 02: " + str(v2))
+        # print("Count 01: " + str(c1))
+        # print("Count 02: " + str(c2))
 
         dot_product = np.dot(v1, v2)
         tow = (c1 + c2) / 1.8
         final_similarity = dot_product / tow
-        print("Similarity: ", final_similarity)
+        # print("Similarity: ", final_similarity)
         return final_similarity
+
+
+if __name__ == "__main__":
+    matcher = SentenceSimilarityMatcher()
+    sentence_1 = "An apple a day keeps the doctor away."
+    sentence_2 = "An apple a day keeps the doctor away."
+    print("Similarity: " + str(matcher.match_and_fetch_score(sentence_1, sentence_2)))
+    print("Similarity: " + str(matcher.match_and_fetch_score(sentence_1, sentence_2)))
+    print("Similarity: " + str(matcher.match_and_fetch_score(sentence_1, sentence_2)))
+    print("Similarity: " + str(matcher.match_and_fetch_score(sentence_1, sentence_2)))
+    print("Similarity: " + str(matcher.match_and_fetch_score(sentence_1, sentence_2)))
+    print("Similarity: " + str(matcher.match_and_fetch_score(sentence_1, sentence_2)))
+    print("Similarity: " + str(matcher.match_and_fetch_score(sentence_1, sentence_2)))
+    print("Similarity: " + str(matcher.match_and_fetch_score(sentence_1, sentence_2)))
