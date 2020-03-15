@@ -1,4 +1,7 @@
 import pprint
+from functools import partial
+from multiprocessing.pool import Pool
+
 from nltk.tokenize import sent_tokenize
 import time
 import math
@@ -27,18 +30,18 @@ class RecommendationsController:
             result = self.sparql.get_description_by_subject("Solar_System")
             if result == "SPARQL Error!":
                 return {
-                    'result': '',
+                    'result': None,
                     'status': False,
                     'error': result
                 }
             return {
                 'result': result['results']['bindings'][0]['object']['value'],
                 'status': True,
-                'error': ''
+                'error': None
             }
         else:
             return {
-                'result': '',
+                'result': None,
                 'status': False,
                 'error': 'Invalid domain'
             }
@@ -46,6 +49,8 @@ class RecommendationsController:
     def fetch_recommendations(self, text):
         # Initialize new corpus
         corpus = Corpus(text)
+
+        # TODO Utilize only last 3 sentences for algorithm
 
         # Annotate corpus for NLU purposes
         nlu = SpacyNluAnnotator(text)
@@ -83,7 +88,7 @@ class RecommendationsController:
             result = self.sparql.get_individuals_by_name_with_regex(concept)
             if result == "SPARQL Error!":
                 return {
-                    'result': '',
+                    'result': None,
                     'status': False,
                     'error': result
                 }
@@ -93,7 +98,7 @@ class RecommendationsController:
                     individual_result = self.sparql.get_triples_by_subject_with_regex(individual_name)
                     if individual_result == "SPARQL Error!":
                         return {
-                            'result': '',
+                            'result': None,
                             'status': False,
                             'error': individual_result
                         }
@@ -103,15 +108,15 @@ class RecommendationsController:
         print(f"Queried ontology in {query_tock - query_tick:0.4f} seconds")
 
         # Generate sentences from retrieved triples
-        # TODO Optimize NLG logic (possibly with multithreading)
+        # TODO Optimize NLG logic
         generated_sentences = []
         nlg_tick = time.perf_counter()
 
         nlg = NlgEngine()
-        for triple in triples:
-            if triple['predicate']['value'] != "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" and triple['predicate']['value'] != "http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#description":
-                sentence = nlg.transform(triple)
-                generated_sentences.append(sentence)
+        nlg_func = partial(nlg.transform)
+        with Pool(4) as p:
+            gen_sents = p.map(nlg_func, triples)
+            generated_sentences = [sent for sent in gen_sents if sent is not None]
 
         nlg_tock = time.perf_counter()
         print(f"Transformed sentences in {nlg_tock - nlg_tick:0.4f} seconds")
@@ -140,6 +145,8 @@ class RecommendationsController:
         print(f"Scored sentence similarity in {similarity_tock - similarity_tick:0.4f} seconds")
 
         # Compute fuzzy score for generated sentences
+        fuzzy_tick = time.perf_counter()
+
         fuzzy = FuzzyController()
         fuzzy.initialize_fuzzy_engine()
         fuzzy_scores = []
@@ -156,13 +163,35 @@ class RecommendationsController:
                 "score": fuzzy_score
             })
 
-        # Rank scored sentences in order of relevance
-        fuzzy_scores.sort(key=operator.itemgetter('score'), reverse=True)
+        fuzzy_tock = time.perf_counter()
+        print(f"Fuzzy scored in {fuzzy_tock - fuzzy_tick:0.4f} seconds")
+
+        # Remove duplicate recommendations from the list
+        unique_tick = time.perf_counter()
+
+        unique_recommendations = []
+        for obj_1 in fuzzy_scores:
+            for obj_2 in fuzzy_scores:
+                if obj_1["sentence"] == obj_2["sentence"]:
+                    if obj_1["score"] >= obj_2["score"]:
+                        if not any(sentence["sentence"] == obj_1["sentence"] for sentence in unique_recommendations):
+                            unique_recommendations.append(obj_1)
+                    else:
+                        if not any(sentence["sentence"] == obj_2["sentence"] for sentence in unique_recommendations):
+                            unique_recommendations.append(obj_2)
+                else:
+                    continue
+
+        unique_tock = time.perf_counter()
+        print(f"Removed redundancies in {unique_tock - unique_tick:0.4f} seconds")
+
+        # Rank scored recommendations in order of relevance
+        unique_recommendations.sort(key=operator.itemgetter('score'), reverse=False)
 
         return {
-            'result': fuzzy_scores,
+            'result': unique_recommendations,
             'status': True,
-            'error': ''
+            'error': None
         }
 
 
@@ -174,14 +203,3 @@ if __name__ == "__main__":
                                         "It is the first planet from the Sun and is named after a Roman God."))
     total_tock = time.perf_counter()
     print(f"Total process in {total_tock - total_tick:0.4f} seconds")
-
-# Figure out how to optimize this code for multithreading (this is inefficient)
-# To use this code, replace it with the inner for loop in sentence similarity section
-#
-# similarity = partial(matcher.match_and_fetch_score, nlg_sentence)
-# with Pool(4) as p:
-#     scores = p.map(similarity, sentences)
-#     similarity_scores.append({
-#         "generated": nlg_sentence,
-#         "scores": scores
-#     })

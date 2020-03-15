@@ -6,6 +6,7 @@ import math, time
 class NlgEngine:
 
     def __init__(self):
+        print("Initializing INFERNO NLG Engine...")
         self.realise = Realiser(host='nlg.kutlak.info', port=40000)
         self.ontology_base_url = "http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#"
         self.rdf_base_url = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -26,11 +27,10 @@ class NlgEngine:
         ont_object = self.add_whitespaces(ont_object)
 
         structure = self.build_sentence(ont_subject, ont_predicate, ont_object)
+        if structure is None:
+            return structure
 
-        realiser_tick = time.perf_counter()
         sentence = self.realise(structure)
-        realiser_tock = time.perf_counter()
-        print(f"Built sentence structure in {realiser_tock - realiser_tick:0.4f} seconds")
 
         return sentence
 
@@ -41,7 +41,8 @@ class NlgEngine:
             sentence['TENSE'] = 'PRESENT'
         elif ont_predicate == "subClassOf":
             if ont_subject == "Solar System":
-                sentence = Clause(NP("The", ont_subject), VP("be"), NP("our residential system of planets in the", ont_object))
+                sentence = Clause(NP("The", ont_subject), VP("be"),
+                                  NP("our residential system of planets in the", ont_object))
             else:
                 sentence = Clause(NP(ont_subject), VP("be"), NP("a", ont_object))
             sentence['TENSE'] = 'PRESENT'
@@ -55,7 +56,8 @@ class NlgEngine:
             temp_age = math.trunc(float(ont_object))
             ont_object = format(temp_age, ",d")
             if ont_subject == "Sun" or ont_subject == "Solar System":
-                sentence = Clause(NP("The", ont_subject + "'s", "age"), VP("be"), NP("approximately", ont_object, "years"))
+                sentence = Clause(NP("The", ont_subject + "'s", "age"), VP("be"),
+                                  NP("approximately", ont_object, "years"))
             else:
                 sentence = Clause(NP(ont_subject + "'s", "age"), VP("be"), NP("approximately", ont_object, "years"))
             sentence['TENSE'] = 'PRESENT'
@@ -107,10 +109,13 @@ class NlgEngine:
                 sentence = Clause(NP("The radius of", ont_subject), VP("be"), NP(ont_object))
             sentence['TENSE'] = 'PRESENT'
         elif ont_predicate == "order_from_sun":
-            ordinal_generator = lambda n: "%d%s" % (n,"tsnrhtdd"[(math.floor(n/10)%10!=1)*(n%10<4)*n%10::4])
+            ordinal_generator = lambda n: "%d%s" % (
+            n, "tsnrhtdd"[(math.floor(n / 10) % 10 != 1) * (n % 10 < 4) * n % 10::4])
             position_ordinal = ordinal_generator(int(ont_object))
             sentence = Clause(NP(ont_subject), VP("be"), NP("the", position_ordinal, "planet from the Sun"))
             sentence['TENSE'] = 'PRESENT'
+        else:
+            return None
 
         return sentence
 

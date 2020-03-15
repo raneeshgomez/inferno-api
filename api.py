@@ -1,6 +1,7 @@
 from __future__ import unicode_literals, print_function
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
+import time
 
 # Custom imports
 from RecommendationsController import RecommendationsController
@@ -50,7 +51,10 @@ def generate_recommendations():
     elif request.method == 'POST':
         data = request.json
         text = data['corpus']
+        total_tick = time.perf_counter()
         result = controller.fetch_recommendations(text)
+        total_tock = time.perf_counter()
+        print(f"Fetched recommendations in {total_tock - total_tick:0.4f} seconds")
         # If result status is falsy
         if not result['status']:
             # 3rd party API or SPARQL errors

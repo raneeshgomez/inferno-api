@@ -8,7 +8,7 @@ class FuzzyController:
     _relevance_percentage = None
 
     def __init__(self):
-        print("Initializing INFERNO Fuzzy Controller")
+        print("Initializing INFERNO Fuzzy Controller...")
 
     def initialize_fuzzy_engine(self):
         # Declare 2 fuzzy input variables and a fuzzy output variable
