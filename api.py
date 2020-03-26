@@ -1,7 +1,7 @@
 from __future__ import unicode_literals, print_function
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
-import time
+import time, pprint
 
 # Custom imports
 from RecommendationsController import RecommendationsController
@@ -30,12 +30,22 @@ app.config['MONGODB_SETTINGS'] = {
 init_db(app)
 
 # FOR DEBUG ONLY
-con = RecommendationsController()
-status = con.save_verbalized_recommendations()
-if status['status']:
-    print(status['result'])
-else:
-    print(status['error'])
+
+# Verbalize ontology
+# con = RecommendationsController()
+# status = con.save_verbalized_recommendations()
+# if status['status']:
+#     print(status['result'])
+# else:
+#     print(status['error'])
+
+# Test fetching recommendations
+total_tick = time.perf_counter()
+rec = RecommendationsController()
+pp = pprint.PrettyPrinter(indent=2)
+pp.pprint(rec.fetch_recommendations("Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System, after Mercury. Named after the Roman god of war, it is often referred to as the Red Planet because the iron oxide prevalent on its surface gives it a reddish appearance. Mars is a terrestrial planet with a thin atmosphere, having surface features reminiscent both of the impact craters of the Moon and the valleys, deserts, and polar ice caps of Earth. The rotational period and seasonal cycles of Mars are likewise similar to those of Earth, as is the tilt that produces the seasons. Mars is the site of Olympus Mons, the largest volcano and second-highest known mountain in the Solar System, and of Valles Marineris, one of the largest canyons in the Solar System."))
+total_tock = time.perf_counter()
+print(f"Total process in {total_tock - total_tick:0.4f} seconds")
 
 # *******************************************************************
 # Define routes

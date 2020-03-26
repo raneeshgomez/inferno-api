@@ -20,6 +20,24 @@ class MongoRepository:
                 'error': ex.message
             }
 
+    def text_search(self, term):
+        try:
+            objects = Recommendation.objects.search_text(term)
+            if objects:
+                return {
+                    'status': True,
+                    'result': 'Text search successful',
+                    'data': objects,
+                    'error': None
+                }
+        except Exception as ex:
+            return {
+                'status': False,
+                'result': None,
+                'data': None,
+                'error': ex.message
+            }
+
     def truncate_collection(self):
         try:
             Recommendation.objects.delete()

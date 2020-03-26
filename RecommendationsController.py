@@ -1,24 +1,21 @@
 import pprint
-from functools import partial
-from multiprocessing.pool import Pool
 
 from nltk.tokenize import sent_tokenize
 import time
 import math
 from py_stringmatching import MongeElkan
 import operator
+import collections
 
 # Custom imports
-from Verbalizer import Verbalizer
+from inferno.nlg.Verbalizer import Verbalizer
 from inferno.db.Models import Recommendation
 from inferno.db.MongoRepository import MongoRepository
 from inferno.inference.FuzzyController import FuzzyController
 from inferno.matchers.SentenceSimilarityMatcher import SentenceSimilarityMatcher
 from inferno.models.Corpus import Corpus
-from inferno.nlg.NlgEngine import NlgEngine
 from inferno.sparql.SparqlRepository import SparqlRepository
 from inferno.preprocessors.SpacyNluAnnotator import SpacyNluAnnotator
-from inferno.preprocessors.WatsonNluAnnotator import WatsonNluAnnotator
 
 
 class RecommendationsController:
@@ -58,35 +55,37 @@ class RecommendationsController:
 
         # Annotate corpus for NLU purposes
         nlu = SpacyNluAnnotator(text)
+
         # Set resolved text to corpus
         # noinspection PyProtectedMember
         resolved_text = nlu.doc._.coref_resolved
         corpus.set_resolved_text(resolved_text)
+
+        # Tokenize resolved text into sentences
+        sentences = sent_tokenize(resolved_text)
+
+        # Execute NLU pipeline
+        nlu_tick = time.perf_counter()
+
         # Reinitialize NLU object with coreference resolved text
         nlu_resolved = SpacyNluAnnotator(resolved_text)
         named_ents = nlu_resolved.extract_named_ents()
         self.pp.pprint(named_ents)
 
-        # Tokenize resolved text into sentences
-        sentences = sent_tokenize(resolved_text)
-
-        # Execute Watson NLU pipeline
-        watson_tick = time.perf_counter()
-        watson = WatsonNluAnnotator()
-        watson_annotations = watson.execute_pipeline(corpus)
-        self.pp.pprint(watson_annotations['concepts'])
-        watson_tock = time.perf_counter()
-        print(f"Identified concepts in {watson_tock - watson_tick:0.4f} seconds")
-
-        # Filter out the similar concepts appearing in both the Spacy and Watson pipelines
-        watson_concepts = {term['text'] for term in watson_annotations['concepts']}
-        spacy_concepts = {term[0] for term in named_ents}
-        similar_concepts = set(watson_concepts).intersection(spacy_concepts)
+        # Filter out the most common concepts in the Spacy pipeline
+        spacy_concepts = [term[0] for term in named_ents if term[1] == 'ORG' or term[1] == 'LOC' or term[1] == 'PERSON']
+        entity_counter = collections.Counter(spacy_concepts)
+        most_common_entities = entity_counter.most_common(2)
+        similar_concepts = [most_common_entities[i][0] for i, entity in enumerate(most_common_entities)]
         self.pp.pprint(similar_concepts)
+
+        nlu_tock = time.perf_counter()
+        print(f"NLU done in {nlu_tock - nlu_tick:0.4f} seconds")
 
         # Retrieve relevant triples by concept matching
         query_tick = time.perf_counter()
-        triples = []
+
+        concepts = []
         for concept in similar_concepts:
             concept = concept.replace(" ", "_")
             result = self.sparql.get_individuals_by_name_with_regex(concept)
@@ -96,38 +95,37 @@ class RecommendationsController:
                     'status': False,
                     'error': result
                 }
-            if len(result['results']['bindings']) > 0:
-                for individual in result['results']['bindings']:
-                    individual_name = individual['individual']['value']
-                    individual_result = self.sparql.get_triples_by_subject_with_regex(individual_name)
-                    if individual_result == "SPARQL Error!":
-                        return {
-                            'result': None,
-                            'status': False,
-                            'error': individual_result
-                        }
-                    for triple in individual_result['results']['bindings']:
-                        triples.append(triple)
+            for individual in result['results']['bindings']:
+                individual_name = individual['individual']['value']
+                filtered_name = individual_name.replace("http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#", "")
+                concepts.append(filtered_name)
+
         query_tock = time.perf_counter()
         print(f"Queried ontology in {query_tock - query_tick:0.4f} seconds")
 
-        # Generate sentences from retrieved triples
-        # TODO Optimize NLG logic
-        generated_sentences = []
+        # Fetch sentences for retrieved concepts
         nlg_tick = time.perf_counter()
 
-        nlg = NlgEngine()
-        nlg_func = partial(nlg.transform)
-        with Pool(4) as p:
-            gen_sents = p.map(nlg_func, triples)
-            generated_sentences = [sent for sent in gen_sents if sent is not None]
+        obj_collection = []
+        for concept in concepts:
+            db_result = self.mongo.text_search(concept)
+            if db_result['status']:
+                for obj in db_result['data']:
+                    obj_collection.append(obj)
+            else:
+                return db_result
+        generated_sentences = [sent_obj.to_mongo().to_dict()['recommendation'] for sent_obj in obj_collection]
 
         nlg_tock = time.perf_counter()
-        print(f"Transformed sentences in {nlg_tock - nlg_tick:0.4f} seconds")
+        print(f"Fetched sentences in {nlg_tock - nlg_tick:0.4f} seconds")
 
         # Match sentences (generated vs. segmented input) and generate scores for each pair
+
         # Sentence similarity is scored using 2 metrics using Knowledge-based approach (w/ Wordnet)
         # and Monge-Elkan text distance metric
+
+        # TODO Optimize similarity logic
+
         similarity_scores = []
         similarity_tick = time.perf_counter()
 
@@ -215,12 +213,12 @@ class RecommendationsController:
 
 
 if __name__ == "__main__":
-    # total_tick = time.perf_counter()
+    total_tick = time.perf_counter()
     rec = RecommendationsController()
-    # pp = pprint.PrettyPrinter(indent=2)
-    # pp.pprint(rec.fetch_recommendations("Mercury is the smallest planet in the Solar System. "
-    #                                     "It is the first planet from the Sun and is named after a Roman God."))
-    # total_tock = time.perf_counter()
-    # print(f"Total process in {total_tock - total_tick:0.4f} seconds")
+    pp = pprint.PrettyPrinter(indent=2)
+    pp.pprint(rec.fetch_recommendations("Mercury is the smallest planet in the Solar System. "
+                                        "It is the first planet from the Sun and is named after a Roman God."))
+    total_tock = time.perf_counter()
+    print(f"Total process in {total_tock - total_tick:0.4f} seconds")
 
-    rec.save_verbalized_recommendations()
+    # rec.save_verbalized_recommendations()
