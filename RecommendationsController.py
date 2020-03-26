@@ -9,6 +9,9 @@ from py_stringmatching import MongeElkan
 import operator
 
 # Custom imports
+from Verbalizer import Verbalizer
+from inferno.db.Models import Recommendation
+from inferno.db.MongoRepository import MongoRepository
 from inferno.inference.FuzzyController import FuzzyController
 from inferno.matchers.SentenceSimilarityMatcher import SentenceSimilarityMatcher
 from inferno.models.Corpus import Corpus
@@ -22,6 +25,7 @@ class RecommendationsController:
 
     def __init__(self):
         self.sparql = SparqlRepository()
+        self.mongo = MongoRepository()
         # Debug logging
         self.pp = pprint.PrettyPrinter(indent=4)
 
@@ -194,12 +198,29 @@ class RecommendationsController:
             'error': None
         }
 
+    def save_verbalized_recommendations(self):
+        verbalizer = Verbalizer()
+        recommendations = verbalizer.verbalize()
+        # Spread sentence dictionary and filter out null objects
+        spread_recommendations = [Recommendation(**recommendation) for recommendation in recommendations
+                                  if recommendation is not None]
+        # Truncate recommendations collection
+        truncate_status = self.mongo.truncate_collection()
+        if truncate_status['status']:
+            # Batch insert recommendations
+            batch_insert_status = self.mongo.batch_insert(spread_recommendations)
+            return batch_insert_status
+        else:
+            return truncate_status
+
 
 if __name__ == "__main__":
-    total_tick = time.perf_counter()
+    # total_tick = time.perf_counter()
     rec = RecommendationsController()
-    pp = pprint.PrettyPrinter(indent=2)
-    pp.pprint(rec.fetch_recommendations("Mercury is the smallest planet in the Solar System. "
-                                        "It is the first planet from the Sun and is named after a Roman God."))
-    total_tock = time.perf_counter()
-    print(f"Total process in {total_tock - total_tick:0.4f} seconds")
+    # pp = pprint.PrettyPrinter(indent=2)
+    # pp.pprint(rec.fetch_recommendations("Mercury is the smallest planet in the Solar System. "
+    #                                     "It is the first planet from the Sun and is named after a Roman God."))
+    # total_tock = time.perf_counter()
+    # print(f"Total process in {total_tock - total_tick:0.4f} seconds")
+
+    rec.save_verbalized_recommendations()

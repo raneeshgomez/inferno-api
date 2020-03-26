@@ -5,6 +5,7 @@ import time
 
 # Custom imports
 from RecommendationsController import RecommendationsController
+from inferno.db.MongoDb import init_db
 
 # Define constants for host and port configuration
 HOST = 'localhost'
@@ -19,6 +20,22 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
+# Configure database
+app.config['MONGODB_SETTINGS'] = {
+    'host': 'localhost',
+    'port': 27017,
+    'db': 'inferno'
+}
+# Initialize database
+init_db(app)
+
+# FOR DEBUG ONLY
+con = RecommendationsController()
+status = con.save_verbalized_recommendations()
+if status['status']:
+    print(status['result'])
+else:
+    print(status['error'])
 
 # *******************************************************************
 # Define routes

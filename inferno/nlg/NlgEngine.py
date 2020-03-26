@@ -1,6 +1,6 @@
 from nlglib.realisation.simplenlg.realisation import Realiser
 from nlglib.microplanning import *
-import math, time
+import math
 
 
 class NlgEngine:
@@ -15,12 +15,9 @@ class NlgEngine:
 
     def transform(self, triple):
         # Remove base URLs from triple
-        try:
-            ont_subject = self.remove_base_url(triple['subject']['value'])
-            ont_predicate = self.remove_base_url(triple['predicate']['value'])
-            ont_object = self.remove_base_url(triple['object']['value'])
-        except ValueError as ex:
-            return ex
+        ont_subject = self.remove_base_url(triple['subject']['value'])
+        ont_predicate = self.remove_base_url(triple['predicate']['value'])
+        ont_object = self.remove_base_url(triple['object']['value'])
 
         # Remove underscores and add whitespaces to multi-word concepts
         ont_subject = self.add_whitespaces(ont_subject)
@@ -28,23 +25,30 @@ class NlgEngine:
 
         structure = self.build_sentence(ont_subject, ont_predicate, ont_object)
         if structure is None:
-            return structure
+            return None
 
         sentence = self.realise(structure)
 
-        return sentence
+        return {
+            'semantic_subj': ont_subject,
+            'semantic_pred': ont_predicate,
+            'semantic_obj': ont_object,
+            'recommendation': sentence
+        }
 
     def build_sentence(self, ont_subject, ont_predicate, ont_object):
         sentence = Clause()
-        if ont_predicate == "isMoonOf":
+        if ont_predicate == "is_moon_of":
             sentence = Clause(NP(ont_subject), VP("be"), NP("a moon of", ont_object))
             sentence['TENSE'] = 'PRESENT'
+        elif ont_predicate == "exist_in":
+            sentence = Clause(NP(ont_subject), VP("exist"), NP("in", ont_object))
+            sentence['TENSE'] = 'PRESENT'
+        elif ont_predicate == "contains":
+            sentence = Clause(NP(ont_subject), VP("contain"), NP(ont_object))
+            sentence['TENSE'] = 'PRESENT'
         elif ont_predicate == "subClassOf":
-            if ont_subject == "Solar System":
-                sentence = Clause(NP("The", ont_subject), VP("be"),
-                                  NP("our residential system of planets in the", ont_object))
-            else:
-                sentence = Clause(NP(ont_subject), VP("be"), NP("a", ont_object))
+            sentence = Clause(NP(ont_subject), VP("be"), NP("a", ont_object))
             sentence['TENSE'] = 'PRESENT'
         elif ont_predicate == "circumference":
             if ont_subject == "Sun":
@@ -71,12 +75,6 @@ class NlgEngine:
             sentence = Clause(NP(ont_subject), VP("be"), NP(ont_object + "s", "away from the Sun, where an AU ("
                                                                               "Astronomical Unit) is the distance "
                                                                               "from the Earth to the Sun"))
-            sentence['TENSE'] = 'PRESENT'
-        elif ont_predicate == "dbpedia_equivalent":
-            if ont_subject == "Sun" or ont_subject == "Solar System":
-                sentence = Clause(NP("For more information about the", ont_subject, ", please visit"), NP(ont_object))
-            else:
-                sentence = Clause(NP("For more information about", ont_subject, ", please visit"), NP(ont_object))
             sentence['TENSE'] = 'PRESENT'
         elif ont_predicate == "mass":
             if ont_subject == "Sun":

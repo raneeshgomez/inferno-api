@@ -1,0 +1,964 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system">
+    <Prefix name="" IRI="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="obda" IRI="https://w3id.org/obda/vocabulary#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="#Asteroid_Belt"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Celestial_Body"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Centaur"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Central_Star"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Comet"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Farthest_Region"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Inner_Planet"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Interplanetary_Medium"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Kuiper_Belt"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Outer_Planet"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Planet"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Satellite"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Scattered_Disc"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Solar_System"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Trans_Neptunian_Region"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#contains"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#exist_in"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#is_moon_of"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#age"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#circumference"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#dbpedia_equivalent"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#dbpedia_parent"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#description"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#discovered_by"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#discovered_on"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#mass"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#mean_distance_to_sun"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#mean_temperature"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#order_from_sun"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#radius"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#surface_area"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Ariel"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Boundaries"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Callisto"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Celestial_Body"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Ceres"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Charon"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Cosmic_ray"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Deimos"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Dione"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Dust"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Earth"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Eris"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Europa"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Ganymede"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Haumea"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Heliopause"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Io"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Jupiter"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Makemake"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Mars"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Mercury"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Moon"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Neptune"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Oberon"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Oort_cloud"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Phobos"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Planet"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Plasma"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Pluto"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Rhea"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Saturn"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Sedna"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Solar_System"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Sun"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Tempel_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Tethys"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Titan"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Titania"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Triton"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Umbriel"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Uranus"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Venus"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#19P/Borelly"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Halley&apos;s_Comet"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#Asteroid_Belt"/>
+        <Class IRI="#Celestial_Body"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Centaur"/>
+        <Class IRI="#Celestial_Body"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Central_Star"/>
+        <Class IRI="#Celestial_Body"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Comet"/>
+        <Class IRI="#Celestial_Body"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Farthest_Region"/>
+        <Class IRI="#Celestial_Body"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Inner_Planet"/>
+        <Class IRI="#Planet"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Interplanetary_Medium"/>
+        <Class IRI="#Celestial_Body"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Kuiper_Belt"/>
+        <Class IRI="#Trans_Neptunian_Region"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Outer_Planet"/>
+        <Class IRI="#Planet"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Planet"/>
+        <Class IRI="#Celestial_Body"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Satellite"/>
+        <Class IRI="#Celestial_Body"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Scattered_Disc"/>
+        <Class IRI="#Trans_Neptunian_Region"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Trans_Neptunian_Region"/>
+        <Class IRI="#Celestial_Body"/>
+    </SubClassOf>
+    <ClassAssertion>
+        <Class IRI="#Satellite"/>
+        <NamedIndividual IRI="#Ariel"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Farthest_Region"/>
+        <NamedIndividual IRI="#Boundaries"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Satellite"/>
+        <NamedIndividual IRI="#Callisto"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Celestial_Body"/>
+        <NamedIndividual IRI="#Celestial_Body"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Asteroid_Belt"/>
+        <NamedIndividual IRI="#Ceres"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Kuiper_Belt"/>
+        <NamedIndividual IRI="#Charon"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Interplanetary_Medium"/>
+        <NamedIndividual IRI="#Cosmic_ray"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Satellite"/>
+        <NamedIndividual IRI="#Deimos"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Satellite"/>
+        <NamedIndividual IRI="#Dione"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Interplanetary_Medium"/>
+        <NamedIndividual IRI="#Dust"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Inner_Planet"/>
+        <NamedIndividual IRI="#Earth"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Scattered_Disc"/>
+        <NamedIndividual IRI="#Eris"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Satellite"/>
+        <NamedIndividual IRI="#Europa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Satellite"/>
+        <NamedIndividual IRI="#Ganymede"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Kuiper_Belt"/>
+        <NamedIndividual IRI="#Haumea"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Farthest_Region"/>
+        <NamedIndividual IRI="#Heliopause"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Satellite"/>
+        <NamedIndividual IRI="#Io"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Outer_Planet"/>
+        <NamedIndividual IRI="#Jupiter"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Kuiper_Belt"/>
+        <NamedIndividual IRI="#Makemake"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Inner_Planet"/>
+        <NamedIndividual IRI="#Mars"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Inner_Planet"/>
+        <NamedIndividual IRI="#Mercury"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Satellite"/>
+        <NamedIndividual IRI="#Moon"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Outer_Planet"/>
+        <NamedIndividual IRI="#Neptune"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Satellite"/>
+        <NamedIndividual IRI="#Oberon"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Farthest_Region"/>
+        <NamedIndividual IRI="#Oort_cloud"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Satellite"/>
+        <NamedIndividual IRI="#Phobos"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Planet"/>
+        <NamedIndividual IRI="#Planet"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Interplanetary_Medium"/>
+        <NamedIndividual IRI="#Plasma"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Kuiper_Belt"/>
+        <NamedIndividual IRI="#Pluto"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Satellite"/>
+        <NamedIndividual IRI="#Rhea"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Outer_Planet"/>
+        <NamedIndividual IRI="#Saturn"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Farthest_Region"/>
+        <NamedIndividual IRI="#Sedna"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Solar_System"/>
+        <NamedIndividual IRI="#Solar_System"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Central_Star"/>
+        <NamedIndividual IRI="#Sun"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Comet"/>
+        <NamedIndividual IRI="#Tempel_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Satellite"/>
+        <NamedIndividual IRI="#Tethys"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Satellite"/>
+        <NamedIndividual IRI="#Titan"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Satellite"/>
+        <NamedIndividual IRI="#Titania"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Satellite"/>
+        <NamedIndividual IRI="#Triton"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Satellite"/>
+        <NamedIndividual IRI="#Umbriel"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Outer_Planet"/>
+        <NamedIndividual IRI="#Uranus"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Inner_Planet"/>
+        <NamedIndividual IRI="#Venus"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Comet"/>
+        <NamedIndividual IRI="#19P/Borelly"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Comet"/>
+        <NamedIndividual IRI="#Halley&apos;s_Comet"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_moon_of"/>
+        <NamedIndividual IRI="#Ariel"/>
+        <NamedIndividual IRI="#Uranus"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_moon_of"/>
+        <NamedIndividual IRI="#Callisto"/>
+        <NamedIndividual IRI="#Jupiter"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#exist_in"/>
+        <NamedIndividual IRI="#Celestial_Body"/>
+        <NamedIndividual IRI="#Solar_System"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_moon_of"/>
+        <NamedIndividual IRI="#Charon"/>
+        <NamedIndividual IRI="#Pluto"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_moon_of"/>
+        <NamedIndividual IRI="#Deimos"/>
+        <NamedIndividual IRI="#Mars"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_moon_of"/>
+        <NamedIndividual IRI="#Dione"/>
+        <NamedIndividual IRI="#Saturn"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_moon_of"/>
+        <NamedIndividual IRI="#Europa"/>
+        <NamedIndividual IRI="#Jupiter"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_moon_of"/>
+        <NamedIndividual IRI="#Ganymede"/>
+        <NamedIndividual IRI="#Jupiter"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_moon_of"/>
+        <NamedIndividual IRI="#Io"/>
+        <NamedIndividual IRI="#Jupiter"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_moon_of"/>
+        <NamedIndividual IRI="#Moon"/>
+        <NamedIndividual IRI="#Earth"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_moon_of"/>
+        <NamedIndividual IRI="#Oberon"/>
+        <NamedIndividual IRI="#Uranus"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_moon_of"/>
+        <NamedIndividual IRI="#Phobos"/>
+        <NamedIndividual IRI="#Mars"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_moon_of"/>
+        <NamedIndividual IRI="#Rhea"/>
+        <NamedIndividual IRI="#Saturn"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#contains"/>
+        <NamedIndividual IRI="#Solar_System"/>
+        <NamedIndividual IRI="#Celestial_Body"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_moon_of"/>
+        <NamedIndividual IRI="#Tethys"/>
+        <NamedIndividual IRI="#Saturn"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_moon_of"/>
+        <NamedIndividual IRI="#Titan"/>
+        <NamedIndividual IRI="#Saturn"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_moon_of"/>
+        <NamedIndividual IRI="#Titania"/>
+        <NamedIndividual IRI="#Uranus"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_moon_of"/>
+        <NamedIndividual IRI="#Triton"/>
+        <NamedIndividual IRI="#Neptune"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#is_moon_of"/>
+        <NamedIndividual IRI="#Umbriel"/>
+        <NamedIndividual IRI="#Uranus"/>
+    </ObjectPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#mean_distance_to_sun"/>
+        <NamedIndividual IRI="#Ceres"/>
+        <Literal>2.767 AU</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#age"/>
+        <NamedIndividual IRI="#Earth"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#double">4.5E9</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#circumference"/>
+        <NamedIndividual IRI="#Earth"/>
+        <Literal>40,075.017 km</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#dbpedia_equivalent"/>
+        <NamedIndividual IRI="#Earth"/>
+        <Literal>http://dbpedia.org/resource/Earth</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#description"/>
+        <NamedIndividual IRI="#Earth"/>
+        <Literal>Earth (otherwise known as the world, in Greek: Γαῖα Gaia, or in Latin: Terra) is the third planet from the Sun, the densest planet in the Solar System, the largest of the Solar System&apos;s four terrestrial planets, and the only astronomical object known to harbor life. According to radiometric dating and other sources of evidence, Earth formed about 4.54 billion years ago. Earth gravitationally interacts with other objects in space, especially the Sun and the Moon. During one orbit around the Sun, Earth rotates about its axis 366.26 times, creating 365.26 solar days or one sidereal year. Earth&apos;s axis of rotation is tilted 23.4° away from the perpendicular of its orbital plane, producing seasonal variations on the planet&apos;s surface within a period of one tropical year (365.24 solar days). The Moon is the Earth&apos;s only permanent natural satellite; their gravitational interaction causes ocean tides, stabilizes the orientation of Earth&apos;s rotational axis, and gradually slows Earth&apos;s rotational rate. Earth&apos;s lithosphere is divided into several rigid tectonic plates that migrate across the surface over periods of many millions of years. 71% of Earth&apos;s surface is covered with water. The remaining 29% is land mass—consisting of continents and islands—that together has many lakes, rivers, and other sources of water that contribute to the hydrosphere. The majority of Earth&apos;s polar regions are covered in ice, including the Antarctic ice sheet and the sea ice of the Arctic ice pack. Earth&apos;s interior remains active with a solid iron inner core, a liquid outer core that generates the Earth&apos;s magnetic field, and a convecting mantle that drives plate tectonics. Within the first billion years of Earth&apos;s history, life appeared in the oceans and began to affect the atmosphere and surface, leading to the proliferation of aerobic and anaerobic organisms. Since then, the combination of Earth&apos;s distance from the Sun, physical properties, and geological history have allowed life to evolve and thrive. Life arose on Earth by 3.5 billion years ago, though some geological evidence indicates that life may have arisen as much as 4.1 billion years ago. In the history of the Earth, biodiversity has gone through long durations of expansion but occasionally punctuated by mass extinction events. Over 99% of all species of life that ever lived on Earth are extinct. Estimates of the number of species on Earth today vary widely; most species have not been described. Over 7.3 billion humans live on Earth and depend on its biosphere and minerals for their survival. Humanity has developed diverse societies and cultures; politically, the world is divided into about 200 sovereign states.</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#mass"/>
+        <NamedIndividual IRI="#Earth"/>
+        <Literal>5,972,370,000,000,000,000,000,000 kg</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#mean_distance_to_sun"/>
+        <NamedIndividual IRI="#Earth"/>
+        <Literal>1 AU</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#mean_temperature"/>
+        <NamedIndividual IRI="#Earth"/>
+        <Literal>14 °C</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#order_from_sun"/>
+        <NamedIndividual IRI="#Earth"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">3</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#radius"/>
+        <NamedIndividual IRI="#Earth"/>
+        <Literal>6,371 km</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#surface_area"/>
+        <NamedIndividual IRI="#Earth"/>
+        <Literal>510,072,000 square km</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#mean_distance_to_sun"/>
+        <NamedIndividual IRI="#Jupiter"/>
+        <Literal>5.203 AU</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#order_from_sun"/>
+        <NamedIndividual IRI="#Jupiter"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#age"/>
+        <NamedIndividual IRI="#Mars"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#double">4.603E9</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#circumference"/>
+        <NamedIndividual IRI="#Mars"/>
+        <Literal>21,344 km</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#dbpedia_equivalent"/>
+        <NamedIndividual IRI="#Mars"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Mars</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#description"/>
+        <NamedIndividual IRI="#Mars"/>
+        <Literal>Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System, after Mercury. Named after the Roman god of war, it is often referred to as the &quot;Red Planet&quot; because the iron oxide prevalent on its surface gives it a reddish appearance. Mars is a terrestrial planet with a thin atmosphere, having surface features reminiscent both of the impact craters of the Moon and the valleys, deserts, and polar ice caps of Earth. The rotational period and seasonal cycles of Mars are likewise similar to those of Earth, as is the tilt that produces the seasons. Mars is the site of Olympus Mons, the largest volcano and second-highest known mountain in the Solar System, and of Valles Marineris, one of the largest canyons in the Solar System. The smooth Borealis basin in the northern hemisphere covers 40% of the planet and may be a giant impact feature. Mars has two moons, Phobos and Deimos, which are small and irregularly shaped. These may be captured asteroids, similar to 5261 Eureka, a Mars trojan. There are ongoing investigations assessing the past habitability potential of Mars, as well as the possibility of extant life. Future astrobiology missions are planned, including the Mars 2020 and ExoMars rovers. Liquid water cannot exist on the surface of Mars due to low atmospheric pressure, which is about  6⁄1000 that of the Earth&apos;s, except at the lowest elevations for short periods. The two polar ice caps appear to be made largely of water. The volume of water ice in the south polar ice cap, if melted, would be sufficient to cover the entire planetary surface to a depth of 11 meters (36 ft). Mars can easily be seen from Earth with the naked eye, as can its reddish coloring. Its apparent magnitude reaches −2.91, which is surpassed only by Jupiter, Venus, the Moon, and the Sun. Optical ground-based telescopes are typically limited to resolving features about 300 kilometers (190 mi) across when Earth and Mars are closest because of Earth&apos;s atmosphere.</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#discovered_by"/>
+        <NamedIndividual IRI="#Mars"/>
+        <Literal>Galileo Galilei</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#discovered_on"/>
+        <NamedIndividual IRI="#Mars"/>
+        <Literal>1610 AD</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#mass"/>
+        <NamedIndividual IRI="#Mars"/>
+        <Literal>641,710,000,000,000,000,000,000 kg</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#mean_distance_to_sun"/>
+        <NamedIndividual IRI="#Mars"/>
+        <Literal>1.524 AU</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#mean_temperature"/>
+        <NamedIndividual IRI="#Mars"/>
+        <Literal>−63 °C</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#order_from_sun"/>
+        <NamedIndividual IRI="#Mars"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">4</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#radius"/>
+        <NamedIndividual IRI="#Mars"/>
+        <Literal>3,389.5 km</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#surface_area"/>
+        <NamedIndividual IRI="#Mars"/>
+        <Literal>144,798,500 km</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#age"/>
+        <NamedIndividual IRI="#Mercury"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#double">4.503E9</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#circumference"/>
+        <NamedIndividual IRI="#Mercury"/>
+        <Literal>15,329 km</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#dbpedia_equivalent"/>
+        <NamedIndividual IRI="#Mercury"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Mercury_(planet)</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#description"/>
+        <NamedIndividual IRI="#Mercury"/>
+        <Literal>Mercury is the smallest and innermost planet in the Solar System. Its orbital period (about 88 Earth days) is less than any other planet in the Solar System. Seen from Earth, it appears to move around its orbit in about 116 days. It has no known natural satellites. It is named after the Roman deity Mercury, the messenger to the gods. Partly because it has almost no atmosphere to retain heat, Mercury&apos;s surface temperature varies diurnally more than any other planet in the Solar System, ranging from 100 K (−173 °C; −280 °F) at night to 700 K (427 °C; 800 °F) during the day in some equatorial regions. The poles are constantly below 180 K (−93 °C; −136 °F). Mercury&apos;s axis has the smallest tilt of any of the Solar System&apos;s planets (about  1⁄30 degree), and its orbital eccentricity is the largest of all known planets in the Solar System. At aphelion, Mercury is about 1.5 times as far from the Sun as it is at perihelion. Mercury&apos;s surface is heavily cratered and similar in appearance to the Moon, indicating that it has been geologically inactive for billions of years. Mercury is tidally or gravitationally locked with the Sun in a 3:2 resonance, and rotates in a way that is unique in the Solar System. As seen relative to the fixed stars, it rotates on its axis exactly three times for every two revolutions it makes around the Sun. As seen from the Sun, in a frame of reference that rotates with the orbital motion, it appears to rotate only once every two Mercurian years. An observer on Mercury would therefore see only one day every two years. Because Mercury orbits the Sun within Earth&apos;s orbit (as does Venus), it can appear in Earth&apos;s sky in the morning or the evening, but not in the middle of the night. Also, like Venus and the Moon, it displays a complete range of phases as it moves around its orbit relative to Earth. Although Mercury can appear as a bright object when viewed from Earth, its proximity to the Sun makes it more difficult to see than Venus. Two spacecraft have visited Mercury: Mariner 10 flew by in 1974 and 1975; and MESSENGER, launched in 2004, orbited Mercury over 4,000 times in four years, before exhausting its fuel and crashing into the planet&apos;s surface on April 30, 2015.</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#discovered_by"/>
+        <NamedIndividual IRI="#Mercury"/>
+        <Literal>Sumerians</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#discovered_on"/>
+        <NamedIndividual IRI="#Mercury"/>
+        <Literal>3000 BC</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#mass"/>
+        <NamedIndividual IRI="#Mercury"/>
+        <Literal>330,110,000,000,000,000,000,000 kg</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#mean_distance_to_sun"/>
+        <NamedIndividual IRI="#Mercury"/>
+        <Literal>0.387 AU</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#mean_temperature"/>
+        <NamedIndividual IRI="#Mercury"/>
+        <Literal>66 °C</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#order_from_sun"/>
+        <NamedIndividual IRI="#Mercury"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">1</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#radius"/>
+        <NamedIndividual IRI="#Mercury"/>
+        <Literal>2439.7 km</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#surface_area"/>
+        <NamedIndividual IRI="#Mercury"/>
+        <Literal>74,800,000 square km</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#mean_distance_to_sun"/>
+        <NamedIndividual IRI="#Neptune"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#double">30.047</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#order_from_sun"/>
+        <NamedIndividual IRI="#Neptune"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">8</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#dbpedia_equivalent"/>
+        <NamedIndividual IRI="#Pluto"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Pluto</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#dbpedia_parent"/>
+        <NamedIndividual IRI="#Pluto"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Kuiper_belt</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#mean_distance_to_sun"/>
+        <NamedIndividual IRI="#Pluto"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#double">39.53</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#mean_distance_to_sun"/>
+        <NamedIndividual IRI="#Saturn"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#double">9.582</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#order_from_sun"/>
+        <NamedIndividual IRI="#Saturn"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">6</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#age"/>
+        <NamedIndividual IRI="#Solar_System"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#double">4.571E9</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#dbpedia_equivalent"/>
+        <NamedIndividual IRI="#Solar_System"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Solar_System</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#description"/>
+        <NamedIndividual IRI="#Solar_System"/>
+        <Literal>The Solar System is the gravitationally bound system comprising the Sun and the objects that orbit it, either directly or indirectly. Of those objects that orbit the Sun directly, the largest eight are the planets, with the remainder being significantly smaller objects, such as dwarf planets and small Solar System bodies. Of the objects that orbit the Sun indirectly, the moons, two are larger than the smallest planet, Mercury. The Solar System formed 4.6 billion years ago from the gravitational collapse of a giant interstellar molecular cloud. The vast majority of the system&apos;s mass is in the Sun, with most of the remaining mass contained in Jupiter. The four smaller inner planets, Mercury, Venus, Earth and Mars, are terrestrial planets, being primarily composed of rock and metal. The four outer planets are giant planets, being substantially more massive than the terrestrials. The two largest, Jupiter and Saturn, are gas giants, being composed mainly of hydrogen and helium; the two outermost planets, Uranus and Neptune, are ice giants, being composed mostly of substances with relatively high melting points compared with hydrogen and helium, called ices, such as water, ammonia and methane. All planets have almost circular orbits that lie within a nearly flat disc called the ecliptic. The Solar System also contains smaller objects. The asteroid belt, which lies between the orbits of Mars and Jupiter, mostly contains objects composed, like the terrestrial planets, of rock and metal. Beyond Neptune&apos;s orbit lie the Kuiper belt and scattered disc, which are populations of trans-Neptunian objects composed mostly of ices, and beyond them a newly discovered population of sednoids. Within these populations are several dozen to possibly tens of thousands of objects large enough that they have been rounded by their own gravity. Such objects are categorized as dwarf planets. Identified dwarf planets include the asteroid Ceres and the trans-Neptunian objects Pluto and Eris. In addition to these two regions, various other small-body populations, including comets, centaurs and interplanetary dust, freely travel between regions. Six of the planets, at least four of the dwarf planets, and many of the smaller bodies are orbited by natural satellites, usually termed &quot;moons&quot; after the Moon. Each of the outer planets is encircled by planetary rings of dust and other small objects. The solar wind, a stream of charged particles flowing outwards from the Sun, creates a bubble-like region in the interstellar medium known as the heliosphere. The heliopause is the point at which pressure from the solar wind is equal to the opposing pressure of interstellar wind; it extends out to the edge of the scattered disc. The Oort cloud, which is thought to be the source for long-period comets, may also exist at a distance roughly a thousand times further than the heliosphere. The Solar System is located in the Orion Arm, 26,000 light-years from the center of the Milky Way.</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#discovered_by"/>
+        <NamedIndividual IRI="#Solar_System"/>
+        <Literal>Nicolaus Copernicus</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#discovered_on"/>
+        <NamedIndividual IRI="#Solar_System"/>
+        <Literal>16th Century</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#age"/>
+        <NamedIndividual IRI="#Sun"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#double">4.6E9</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#circumference"/>
+        <NamedIndividual IRI="#Sun"/>
+        <Literal>4,379,000,000 km</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#dbpedia_equivalent"/>
+        <NamedIndividual IRI="#Sun"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Sun</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#description"/>
+        <NamedIndividual IRI="#Sun"/>
+        <Literal>The Sun is the star at the center of the Solar System. It is a nearly perfect sphere of hot plasma, with internal convective motion that generates a magnetic field via a dynamo process. It is by far the most important source of energy for life on Earth. Its diameter is about 109 times that of Earth, and its mass is about 330,000 times that of Earth, accounting for about 99.86% of the total mass of the Solar System.About three quarters of the Sun&apos;s mass consists of hydrogen (~73%); the rest is mostly helium (~25%), with much smaller quantities of heavier elements, including oxygen, carbon, neon, and iron. The Sun is a G-type main-sequence star (G2V) based on its spectral class, and is informally referred to as a yellow dwarf. It formed approximately 4.6 billion years ago from the gravitational collapse of matter within a region of a large molecular cloud. Most of this matter gathered in the center, whereas the rest flattened into an orbiting disk that became the Solar System. The central mass became so hot and dense that it eventually initiated nuclear fusion in its core. It is thought that almost all stars form by this process. The Sun is roughly middle-aged: it has not changed dramatically for more than four billion years, and will remain fairly stable for more than another five billion years. After hydrogen fusion in its core has stopped, the Sun will undergo severe changes and become a red giant. It is calculated that the Sun will become sufficiently large to engulf the current orbits of Mercury, Venus, and possibly Earth. The enormous effect of the Sun on Earth has been recognized since prehistoric times, and the Sun has been regarded by some cultures as a deity. The synodic rotation of Earth and its orbit around the Sun are the basis of the solar calendar, which is the predominant calendar in use today.</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#discovered_by"/>
+        <NamedIndividual IRI="#Sun"/>
+        <Literal>Greek Philosopher Anaxagoras</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#discovered_on"/>
+        <NamedIndividual IRI="#Sun"/>
+        <Literal>450 BC</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#mass"/>
+        <NamedIndividual IRI="#Sun"/>
+        <Literal>1,988,500,000,000,000,000,000,000,000,000 kg</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#mean_temperature"/>
+        <NamedIndividual IRI="#Sun"/>
+        <Literal>5,000,000 K</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#radius"/>
+        <NamedIndividual IRI="#Sun"/>
+        <Literal>695,700 km</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#surface_area"/>
+        <NamedIndividual IRI="#Sun"/>
+        <Literal>6,090,000,000,000 square km</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#dbpedia_equivalent"/>
+        <NamedIndividual IRI="#Tempel_1"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Tempel_1</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#dbpedia_parent"/>
+        <NamedIndividual IRI="#Tempel_1"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Comet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#mean_distance_to_sun"/>
+        <NamedIndividual IRI="#Uranus"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#double">19.201</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#order_from_sun"/>
+        <NamedIndividual IRI="#Uranus"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">7</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#age"/>
+        <NamedIndividual IRI="#Venus"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#double">4.503E9</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#circumference"/>
+        <NamedIndividual IRI="#Venus"/>
+        <Literal>38,025 km</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#dbpedia_equivalent"/>
+        <NamedIndividual IRI="#Venus"/>
+        <Literal>http://dbpedia.org/resource/Venus</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#description"/>
+        <NamedIndividual IRI="#Venus"/>
+        <Literal>Venus is the second planet in the Solar System in order of distance from the Sun with an almost circular orbit that leads it to make a revolution in 224.7 Earth days. It takes its name from the Roman goddess of love and beauty and its astronomical symbol is the stylized representation of the hand of Venus holding up a mirror. It is the brightest natural object in the night sky, after the Moon, with a maximum apparent magnitude of -4.6, and for this reason it has been known since ancient times. Venus is visible only shortly before sunrise or shortly after sunset and for this reason it has often been called by ancient peoples the &quot;Morning Star&quot; or the &quot;Evening Star&quot;, until Pythagoras identified Venus as the person responsible for both the apparitions. Classified as a terrestrial planet, it is sometimes referred to as the &quot;twin planet&quot; of the Earth, to which it is very similar in size and mass. In other respects, however, it is quite different from our planet. Venus in fact has an atmosphere consisting mainly of carbon dioxide, much denser than Earth&apos;s, with a pressure at ground level equal to 92 atmospheres. The density and composition of the atmosphere create an imposing greenhouse effect, which makes Venus the hottest planet in the solar system. Venus is surrounded by a thick layer of highly reflective clouds, mainly composed of sulfuric acid, which prevent the surface from being viewed in visible light. The planet is not equipped with satellites or rings and has a weak magnetic field, compared to Earth&apos;s.</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#discovered_by"/>
+        <NamedIndividual IRI="#Venus"/>
+        <Literal>Galileo Galilei</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#discovered_on"/>
+        <NamedIndividual IRI="#Venus"/>
+        <Literal>1610 AD</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#mass"/>
+        <NamedIndividual IRI="#Venus"/>
+        <Literal>4,867,500,000,000,000,000,000,000 kg</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#mean_distance_to_sun"/>
+        <NamedIndividual IRI="#Venus"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#double">0.723</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#mean_temperature"/>
+        <NamedIndividual IRI="#Venus"/>
+        <Literal>464 °C</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#order_from_sun"/>
+        <NamedIndividual IRI="#Venus"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">2</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#radius"/>
+        <NamedIndividual IRI="#Venus"/>
+        <Literal>6,051.8 km</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#surface_area"/>
+        <NamedIndividual IRI="#Venus"/>
+        <Literal>460,230,000 square km</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#dbpedia_equivalent"/>
+        <NamedIndividual IRI="#19P/Borelly"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/19P/Borelly</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#dbpedia_parent"/>
+        <NamedIndividual IRI="#19P/Borelly"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Comet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#dbpedia_equivalent"/>
+        <NamedIndividual IRI="#Halley&apos;s_Comet"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Halley&apos;s_Comet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#dbpedia_parent"/>
+        <NamedIndividual IRI="#Halley&apos;s_Comet"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#anyURI">http://dbpedia.org/resource/Comet</Literal>
+    </DataPropertyAssertion>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
