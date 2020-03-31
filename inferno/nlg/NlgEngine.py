@@ -57,11 +57,9 @@ class NlgEngine:
                 sentence = Clause(NP("The circumference of", ont_subject), VP("be"), NP(ont_object))
             sentence['TENSE'] = 'PRESENT'
         elif ont_predicate == "age":
-            temp_age = math.trunc(float(ont_object))
-            ont_object = format(temp_age, ",d")
             if ont_subject == "Sun" or ont_subject == "Solar System":
                 sentence = Clause(NP("The", ont_subject + "'s", "age"), VP("be"),
-                                  NP("approximately", ont_object, "years"))
+                                  NP("approximately", ont_object))
             else:
                 sentence = Clause(NP(ont_subject + "'s", "age"), VP("be"), NP("approximately", ont_object, "years"))
             sentence['TENSE'] = 'PRESENT'
@@ -107,8 +105,7 @@ class NlgEngine:
                 sentence = Clause(NP("The radius of", ont_subject), VP("be"), NP(ont_object))
             sentence['TENSE'] = 'PRESENT'
         elif ont_predicate == "order_from_sun":
-            ordinal_generator = lambda n: "%d%s" % (
-            n, "tsnrhtdd"[(math.floor(n / 10) % 10 != 1) * (n % 10 < 4) * n % 10::4])
+            ordinal_generator = lambda n: "%d%s" % (n, "tsnrhtdd"[(math.floor(n / 10) % 10 != 1) * (n % 10 < 4) * n % 10::4])
             position_ordinal = ordinal_generator(int(ont_object))
             sentence = Clause(NP(ont_subject), VP("be"), NP("the", position_ordinal, "planet from the Sun"))
             sentence['TENSE'] = 'PRESENT'

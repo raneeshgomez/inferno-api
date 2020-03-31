@@ -17,7 +17,7 @@ class MongoRepository:
                 'status': False,
                 'result': None,
                 'data': None,
-                'error': ex.message
+                'error': ex
             }
 
     def text_search(self, term):
@@ -35,7 +35,7 @@ class MongoRepository:
                 'status': False,
                 'result': None,
                 'data': None,
-                'error': ex.message
+                'error': ex
             }
 
     def truncate_collection(self):
@@ -52,10 +52,10 @@ class MongoRepository:
                 'status': False,
                 'result': None,
                 'data': None,
-                'error': ex.message
+                'error': ex
             }
 
-    def batch_insert(self, spread_documents):
+    def batch_insert(spread_documents):
         try:
             batch_insert_status = Recommendation.objects.insert(spread_documents)
             if batch_insert_status:
@@ -70,5 +70,5 @@ class MongoRepository:
                 'status': False,
                 'result': None,
                 'data': None,
-                'error': ex.message
+                'error': ex
             }

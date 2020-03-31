@@ -13,7 +13,6 @@ from inferno.db.Models import Recommendation
 from inferno.db.MongoRepository import MongoRepository
 from inferno.inference.FuzzyController import FuzzyController
 from inferno.matchers.SentenceSimilarityMatcher import SentenceSimilarityMatcher
-from inferno.models.Corpus import Corpus
 from inferno.sparql.SparqlRepository import SparqlRepository
 from inferno.preprocessors.SpacyNluAnnotator import SpacyNluAnnotator
 
@@ -48,41 +47,29 @@ class RecommendationsController:
             }
 
     def fetch_recommendations(self, text):
-        # Initialize new corpus
-        corpus = Corpus(text)
-
-        # TODO Utilize only last 3 sentences for algorithm
-
-        # Annotate corpus for NLU purposes
-        nlu = SpacyNluAnnotator(text)
-
-        # Set resolved text to corpus
-        # noinspection PyProtectedMember
-        resolved_text = nlu.doc._.coref_resolved
-        corpus.set_resolved_text(resolved_text)
-
-        # Tokenize resolved text into sentences
-        sentences = sent_tokenize(resolved_text)
-
         # Execute NLU pipeline
         nlu_tick = time.perf_counter()
 
+        # Annotate corpus for NLU purposes
+        nlu = SpacyNluAnnotator(text)
+        # Set resolved text to corpus
+        resolved_text = nlu.doc._.coref_resolved
+        # Tokenize resolved text into sentences
+        sentences = sent_tokenize(resolved_text)
         # Reinitialize NLU object with coreference resolved text
-        nlu_resolved = SpacyNluAnnotator(resolved_text)
-        named_ents = nlu_resolved.extract_named_ents()
-        self.pp.pprint(named_ents)
+        nlu = SpacyNluAnnotator(resolved_text)
+        named_ents = nlu.extract_named_ents()
 
         # Filter out the most common concepts in the Spacy pipeline
         spacy_concepts = [term[0] for term in named_ents if term[1] == 'ORG' or term[1] == 'LOC' or term[1] == 'PERSON']
         entity_counter = collections.Counter(spacy_concepts)
         most_common_entities = entity_counter.most_common(2)
         similar_concepts = [most_common_entities[i][0] for i, entity in enumerate(most_common_entities)]
-        self.pp.pprint(similar_concepts)
 
         nlu_tock = time.perf_counter()
         print(f"NLU done in {nlu_tock - nlu_tick:0.4f} seconds")
 
-        # Retrieve relevant triples by concept matching
+        # Retrieve relevant individuals by concept matching
         query_tick = time.perf_counter()
 
         concepts = []
@@ -125,14 +112,18 @@ class RecommendationsController:
         # and Monge-Elkan text distance metric
 
         # TODO Optimize similarity logic
+        # Try corpus based text distance metrics (LSI etc.) instead of string based
 
         similarity_scores = []
+        # Consider only the latest 3 sentences for similarity matching to maintain consistent response times
+        considered_sentences = sentences[-3:]
+        self.pp.pprint(considered_sentences)
         similarity_tick = time.perf_counter()
 
         me = MongeElkan()
         matcher = SentenceSimilarityMatcher()
         for nlg_sentence in generated_sentences:
-            for sentence in sentences:
+            for sentence in considered_sentences:
                 tokens_nlg = SpacyNluAnnotator(nlg_sentence).extract_tokens()
                 tokens_input = SpacyNluAnnotator(sentence).extract_tokens()
                 kb_score = matcher.match_and_fetch_score(nlg_sentence, sentence)
@@ -216,8 +207,34 @@ if __name__ == "__main__":
     total_tick = time.perf_counter()
     rec = RecommendationsController()
     pp = pprint.PrettyPrinter(indent=2)
-    pp.pprint(rec.fetch_recommendations("Mercury is the smallest planet in the Solar System. "
-                                        "It is the first planet from the Sun and is named after a Roman God."))
+    pp.pprint(rec.fetch_recommendations("Mars is the fourth planet from the Sun and the second-smallest planet in the "
+                                        "Solar System, after Mercury. Named after the Roman god of war, it is often "
+                                        "referred to as the Red Planet because the iron oxide prevalent on its "
+                                        "surface gives it a reddish appearance. Mars is a terrestrial planet with a "
+                                        "thin atmosphere, having surface features reminiscent both of the impact "
+                                        "craters of the Moon and the valleys, deserts, and polar ice caps of Earth. "
+                                        "The rotational period and seasonal cycles of Mars are likewise similar to "
+                                        "those of Earth, as is the tilt that produces the seasons. Mars is the site "
+                                        "of Olympus Mons, the largest volcano and second-highest known mountain in "
+                                        "the Solar System, and of Valles Marineris, one of the largest canyons in the "
+                                        "Solar System. The smooth Borealis basin in the northern hemisphere covers "
+                                        "40% of the planet and may be a giant impact feature. Mars has two moons, "
+                                        "Phobos and Deimos, which are small and irregularly shaped. These may be "
+                                        "captured asteroids, similar to 5261 Eureka, a Mars trojan. There are ongoing "
+                                        "investigations assessing the past habitability potential of Mars, "
+                                        "as well as the possibility of extant life. Future astrobiology missions are "
+                                        "planned, including the Mars 2020 and ExoMars rovers. Liquid water cannot "
+                                        "exist on the surface of Mars due to low atmospheric pressure, which is about "
+                                        " 6⁄1000 that of the Earth's, except at the lowest elevations for short "
+                                        "periods. The two polar ice caps appear to be made largely of water. The "
+                                        "volume of water ice in the south polar ice cap, if melted, "
+                                        "would be sufficient to cover the entire planetary surface to a depth of 11 "
+                                        "meters (36 ft). Mars can easily be seen from Earth with the naked eye, "
+                                        "as can its reddish coloring. Its apparent magnitude reaches −2.91, "
+                                        "which is surpassed only by Jupiter, Venus, the Moon, and the Sun. Optical "
+                                        "ground-based telescopes are typically limited to resolving features about "
+                                        "300 kilometers (190 mi) across when Earth and Mars are closest because of "
+                                        "Earth's atmosphere."))
     total_tock = time.perf_counter()
     print(f"Total process in {total_tock - total_tick:0.4f} seconds")
 

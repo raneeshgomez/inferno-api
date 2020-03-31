@@ -8,6 +8,10 @@ class SparqlRepository:
 
     def get_all_triples(self, limit=1000):
         query = """
+            PREFIX fss: <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#>
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            
             SELECT DISTINCT *
             WHERE {
               ?subject ?predicate ?object .
@@ -19,6 +23,9 @@ class SparqlRepository:
 
     def get_all_classes(self, limit=1000):
         query = """
+            PREFIX fss: <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#>
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX owl: <http://www.w3.org/2002/07/owl#>
             
             SELECT DISTINCT ?class
@@ -32,6 +39,7 @@ class SparqlRepository:
 
     def get_all_individuals(self, limit=1000):
         query = """
+            PREFIX fss: <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#>
             PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             
@@ -47,6 +55,10 @@ class SparqlRepository:
 
     def get_all_properties(self, limit=1000):
         query = """
+            PREFIX fss: <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#>
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            
             SELECT DISTINCT ?property
             WHERE {
               ?subject ?property ?object

@@ -1,8 +1,11 @@
 <component name="ProjectDictionaryState">
   <dictionary name="raneeshgomez">
     <words>
+      <w>coreference</w>
       <w>dbpedia</w>
+      <w>ents</w>
       <w>fuseki</w>
+      <w>spacy</w>
       <w>sparql</w>
     </words>
   </dictionary>
