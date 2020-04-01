@@ -41,6 +41,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#has_moon -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#has_moon">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#is_moon_of"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#is_moon_of -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#is_moon_of">
@@ -338,6 +346,8 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Satellite"/>
         <is_moon_of rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Jupiter"/>
     </owl:NamedIndividual>
+    
+
 
     <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Celestial_Body -->
 
@@ -351,6 +361,8 @@
         </rdf:type>
         <exist_in rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Solar_System"/>
     </owl:NamedIndividual>
+    
+
 
     <!-- http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Ceres -->
 
@@ -392,6 +404,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Earth">
         <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Inner_Planet"/>
+        <has_moon rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Moon"/>
         <age rdf:datatype="http://www.w3.org/2001/XMLSchema#string">4.543 billion years</age>
         <circumference rdf:datatype="http://www.w3.org/2001/XMLSchema#string">40,075.017 km</circumference>
         <mass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5.97237 septillion kg</mass>
@@ -454,6 +467,10 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Jupiter">
         <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Outer_Planet"/>
+        <has_moon rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Callisto"/>
+        <has_moon rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Europa"/>
+        <has_moon rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Ganymede"/>
+        <has_moon rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Io"/>
         <age rdf:datatype="http://www.w3.org/2001/XMLSchema#string">4.503 billion years</age>
         <circumference rdf:datatype="http://www.w3.org/2001/XMLSchema#string">439,264 km</circumference>
         <mass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1.8982 octillion kg</mass>
@@ -481,6 +498,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Mars">
         <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Inner_Planet"/>
+        <has_moon rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Deimos"/>
+        <has_moon rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Phobos"/>
         <age rdf:datatype="http://www.w3.org/2001/XMLSchema#string">4.603 billion years</age>
         <circumference rdf:datatype="http://www.w3.org/2001/XMLSchema#string">21,344 km</circumference>
         <discovered_by rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Galileo Galilei</discovered_by>
@@ -532,6 +551,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Neptune">
         <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Outer_Planet"/>
+        <has_moon rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Triton"/>
         <age rdf:datatype="http://www.w3.org/2001/XMLSchema#string">4.503 billion years</age>
         <circumference rdf:datatype="http://www.w3.org/2001/XMLSchema#string">155,600 km</circumference>
         <discovered_by rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Urbain Le Verrier, Johann Gottfried Galle and John Couch Adams</discovered_by>
@@ -597,6 +617,10 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Saturn">
         <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Outer_Planet"/>
+        <has_moon rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Dione"/>
+        <has_moon rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Rhea"/>
+        <has_moon rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Tethys"/>
+        <has_moon rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Titan"/>
         <age rdf:datatype="http://www.w3.org/2001/XMLSchema#string">4.503 billion years</age>
         <circumference rdf:datatype="http://www.w3.org/2001/XMLSchema#string">378,675 km</circumference>
         <discovered_by rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Galileo Galilei</discovered_by>
@@ -715,6 +739,10 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Uranus">
         <rdf:type rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Outer_Planet"/>
+        <has_moon rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Ariel"/>
+        <has_moon rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Oberon"/>
+        <has_moon rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Titania"/>
+        <has_moon rdf:resource="http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#Umbriel"/>
         <age rdf:datatype="http://www.w3.org/2001/XMLSchema#string">4.503 billion years</age>
         <circumference rdf:datatype="http://www.w3.org/2001/XMLSchema#string">160,590 km</circumference>
         <discovered_by rdf:datatype="http://www.w3.org/2001/XMLSchema#string">William Herschel</discovered_by>

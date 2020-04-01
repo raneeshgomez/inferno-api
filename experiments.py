@@ -1,6 +1,5 @@
 # from preprocessors.NLUAnnotator import NLUAnnotator
 from inferno.preprocessors import SpacyNluAnnotator
-from inferno.preprocessors import TextRanker
 # from sparql.SparqlQueryEngine import SparqlQueryEngine
 # from svo_extractor.subject_verb_object_extract import findSVOs, nlp
 # from openie import StanfordOpenIE
@@ -8,7 +7,6 @@ from inferno.preprocessors import TextRanker
 # from rake_nltk import Rake
 # import requests
 
-from inferno.models import Corpus
 import pprint
 
 # DBPedia Resource <http://dbpedia.org/resource/Asturias>
@@ -26,8 +24,6 @@ candidates_base_url = "http://api.dbpedia-spotlight.org/en/candidates"
 #                     "FILTER (?o < 6)" \
 #                "}"
 # print(sparql.query_fuseki(query_string))
-
-corpus = Corpus("Mars is the fourth planet in the Solar System. It is named after the Roman God of war. It has a reddish appearance.")
 
 # corpus = Corpus("Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System"
 #                 ". Named after the Roman god of war, it is often referred to as the 'Red Planet' because "
@@ -89,21 +85,21 @@ corpus = Corpus("Mars is the fourth planet in the Solar System. It is named afte
 # Using TextRank
 
 # sparql_engine = SparqlQueryEngine()
-pp = pprint.PrettyPrinter(indent=2)
-
-subject_textranker = TextRanker(corpus.text)
-# Analyze corpus with specified candidate POS
-subject_textranker.analyze(candidate_pos=['NOUN', 'PROPN'], window_size=4, lower=False)
-# Extract keywords using TextRank algorithm
-subject_keywords = subject_textranker.get_all_keywords()
-pp.pprint(subject_keywords)
-
-predicate_textranker = TextRanker(corpus.text)
-# Analyze corpus with specified candidate POS
-predicate_textranker.analyze(candidate_pos=['VERB', 'ADJ'], window_size=4, lower=False)
-# Extract keywords using TextRank algorithm
-predicate_keywords = predicate_textranker.get_all_keywords()
-pp.pprint(predicate_keywords)
+# pp = pprint.PrettyPrinter(indent=2)
+#
+# subject_textranker = TextRanker(corpus.text)
+# # Analyze corpus with specified candidate POS
+# subject_textranker.analyze(candidate_pos=['NOUN', 'PROPN'], window_size=4, lower=False)
+# # Extract keywords using TextRank algorithm
+# subject_keywords = subject_textranker.get_all_keywords()
+# pp.pprint(subject_keywords)
+#
+# predicate_textranker = TextRanker(corpus.text)
+# # Analyze corpus with specified candidate POS
+# predicate_textranker.analyze(candidate_pos=['VERB', 'ADJ'], window_size=4, lower=False)
+# # Extract keywords using TextRank algorithm
+# predicate_keywords = predicate_textranker.get_all_keywords()
+# pp.pprint(predicate_keywords)
 #
 # vo_result_list = []
 # for i, (key, value) in enumerate(subject_keywords.items()):
@@ -345,14 +341,14 @@ pp.pprint(predicate_keywords)
 #         'error': 'DBpedia Spotlight Error with code ' + str(res.status_code)
 #     }
 
-from py_stringmatching import MongeElkan
-
-me = MongeElkan()
-spacy_1 = SpacyNluAnnotator("Mercury is the smallest planet in the Solar System and is the first planet from the Sun")
-spacy_2 = SpacyNluAnnotator("My name is Khan")
-tokens_1 = spacy_1.extract_tokens()
-tokens_2 = spacy_2.extract_tokens()
-print(me.get_raw_score(tokens_1, tokens_2))
+# from py_stringmatching import MongeElkan
+#
+# me = MongeElkan()
+# spacy_1 = SpacyNluAnnotator("Mercury is the smallest planet in the Solar System and is the first planet from the Sun")
+# spacy_2 = SpacyNluAnnotator("My name is Khan")
+# tokens_1 = spacy_1.extract_tokens()
+# tokens_2 = spacy_2.extract_tokens()
+# print(me.get_raw_score(tokens_1, tokens_2))
 
 # me_sim = textdistance.hamming.similarity("Mercury",
 #                                             "Mercury")
@@ -363,3 +359,220 @@ print(me.get_raw_score(tokens_1, tokens_2))
 #Mercury is 0.387 AUs away from the Sun, where an AU (Astronomical Unit) is the distance from the Earth to the Sun.
 # print(me_sim)
 # print(me_dis)
+
+import logging
+
+from nlglib.realisation.simplenlg.realisation import Realiser
+from nlglib.lexicalisation import Lexicaliser
+from nlglib.macroplanning import *
+from nlglib.microplanning import *
+from nlglib.features import TENSE, ASPECT, NUMBER
+
+realise = Realiser(host='nlg.kutlak.info')
+
+
+def main():
+    c = Clause('Mary', 'chase', 'the monkey')
+    print(realise(c))
+    tense()
+    negation()
+    interrogative()
+    complements()
+    modifiers()
+    coordinations()
+    prepositional_phrase()
+    coordinated_clause()
+    subordinate_clause()
+
+
+def tense():
+    c = Clause('Mary', 'chase', 'the monkey')
+    c['TENSE'] = 'PAST'
+    print(realise(c))
+    c['TENSE'] = 'FUTURE'
+    print(realise(c))
+
+
+def negation():
+    c = Clause('Mary', 'chase', 'the monkey')
+    c['NEGATED'] = 'true'
+    print(realise(c))
+
+
+def interrogative():
+    c = Clause('Mary', 'chase', 'the monkey')
+    c['INTERROGATIVE_TYPE'] = 'YES_NO'
+    print(realise(c))
+    c['INTERROGATIVE_TYPE'] = 'WHO_OBJECT'
+    print(realise(c))
+
+
+def complements():
+    c = Clause('Mary', 'chase', 'the monkey',
+               complements=['very quickly', 'despite her exhaustion'])
+    print(realise(c))
+
+
+def modifiers():
+    subject = NP('Mary')
+    verb = VP('chase')
+    objekt = NP('the', 'monkey')
+    subject += Adjective('fast')
+    c = Clause()
+    c.subject = subject
+    c.predicate = verb
+    c.object = objekt
+    print(realise(c))
+    verb += Adverb('quickly')
+    c = Clause(subject, verb, objekt)
+    print(realise(c))
+
+
+def coordinations():
+    subject1 = NP('Mary')
+    subject2 = NP('your', 'giraffe')  # BUG
+    subj1 = Coordination(subject1, subject2)
+    subj2 = CC(subject1, subject2)
+    assert subj1 == subj2
+    c = Clause(subj1, VP('chase'), NP('the', 'monkey'))
+    print(realise(c))
+    subject1 = NP('Mary')
+    subject2 = NP('your giraffe')
+    subj = subject1 + subject2
+    obj = NP('the monkey') + NP('George')
+    obj += NP('Martha')
+    c = Clause(subj, VP('chase'), obj)
+    print(realise(c))
+    obj.conj = 'or'
+    print(realise(c))
+
+
+def prepositional_phrase():
+    c = Clause('Mary', 'chase', 'the monkey')
+    c.complements += PP('in', 'the park')
+    print(realise(c))
+    c = Clause('Mary', 'chase', 'the monkey')
+    c.complements += PP('in', NP('the', 'park'))
+    print(realise(c))
+
+
+def coordinated_clause():
+    s1 = Clause('my cat', 'like', 'fish', features={'TENSE': 'PAST'})
+    s2 = Clause('my dog', 'like', 'big bones', features={'TENSE': 'PRESENT'})
+    s3 = Clause('my horse', 'like', 'grass', features={'TENSE': 'FUTURE'})
+    c = s1 + s2 + s3
+    c = CC(s1, s2, s3)
+    print(realise(s1))
+    print(realise(s2))
+    print(realise(s3))
+    print(realise(s1 + s2))
+    print(realise(c))
+
+
+def subordinate_clause():
+    p = Clause('I', 'be', 'happy')
+    q = Clause('I', 'eat', 'fish')
+    q['COMPLEMENTISER'] = 'because'
+    q['TENSE'] = 'PAST'
+    p.complements += q
+    print(realise(p))
+
+def run():
+
+    realise = Realiser(host='nlg.kutlak.info')
+    lex = Lexicaliser(templates={
+        'x': String('X'),
+        'arthur': Male('Arthur'),
+        'shrubbery': Clause(Var(0), VP('find', NP('a', 'shrubbery'), features=[TENSE.future])),
+        'knight': Clause(Var(0), VP('is', NP('a', 'knight'))),
+        'say_ni': Clause(Var(0), VP('say', Interjection('"Ni!"'))),
+    })
+    print(realise(lex(formula_to_rst(expr(r'x')))))
+    print(realise(lex(formula_to_rst(expr(r'-x')))))
+
+    print(realise(lex(formula_to_rst(expr(r'x = 5')))))
+    print(realise(lex(formula_to_rst(expr(r'x != 5')))))
+
+    print(realise(lex(formula_to_rst(expr(r'knight(arthur)')))))
+    print(realise(lex(formula_to_rst(expr(r'-knight(arthur)')))))
+    print(realise(lex(formula_to_rst(expr(r'say_ni(arthur)')))))
+    print(realise(lex(formula_to_rst(expr(r'-say_ni(arthur)')))))
+    print(realise(lex(formula_to_rst(expr(r'shrubbery(arthur)')))))
+    print(realise(lex(formula_to_rst(expr(r'-shrubbery(arthur)')))))
+
+    print(realise(lex(formula_to_rst(expr(r'knight(arthur) & say_ni(arthur)')))))
+    print(realise(lex(formula_to_rst(expr(r'say_ni(arthur) | knight(arthur)')))))
+    print(realise(lex(formula_to_rst(expr(r'say_ni(arthur) -> knight(arthur)')))))
+    print(realise(lex(formula_to_rst(expr(r'knight(arthur) <-> say_ni(arthur)')))))
+
+    print(realise(lex(formula_to_rst(expr(r'say_ni(arthur) & -knight(arthur)')))))
+    print(realise(lex(formula_to_rst(expr(r'say_ni(arthur) | -knight(arthur)')))))
+    print(realise(lex(formula_to_rst(expr(r'say_ni(arthur) -> -knight(arthur)')))))
+    print(realise(lex(formula_to_rst(expr(r'-knight(arthur) <-> say_ni(arthur)')))))
+    print(realise(lex(formula_to_rst(expr(r'-knight(arthur) <-> -say_ni(arthur)')))))
+    print(realise(lex(formula_to_rst(expr(r'-(knight(arthur) <-> say_ni(arthur))')))))
+
+    print(realise(lex(formula_to_rst(expr(r'say_ni(arthur) & knight(arthur) & shrubbery(arthur)')))))
+    print(realise(lex(formula_to_rst(expr(r'say_ni(arthur) | knight(arthur) | shrubbery(arthur)')))))
+
+def run_simple_examples():
+    s = String('This is my string')
+    print(realise(s))
+
+    s = Clause(NNP('John'), VP('be', AdjP('happy')))
+    print(realise(s))
+
+    s = Clause(NNP('Paul'), VP('play', NP('guitar'), features={ASPECT.progressive, }))
+    print(realise(s))
+
+    guitarists = Coordination(Clause(NNP('John'),
+                                     VP('play', NP('a', 'guitar'),
+                                        features={ASPECT.progressive, TENSE.past, })),
+                              Clause(NNP('George'),
+                                     VP('play', NP('a', 'guitar'),
+                                        features={ASPECT.progressive, TENSE.past, })),
+                              Clause(NNP('Paul'),
+                                     VP('play', NP('a', 'guitar'),
+                                        features={ASPECT.progressive, TENSE.past, }))
+                              )
+    print(realise(guitarists))
+
+    gringo = Coordination(Clause(NNP('George'),
+                                 VP('play', NP('a', 'bass'),
+                                    features={ASPECT.progressive, TENSE.past, })),
+                          Clause(NNP('Ringo'),
+                                 VP('play', NP('drum', features={NUMBER.plural, }),
+                                    features={ASPECT.progressive, TENSE.past, }))
+                          )
+    print(realise(gringo))
+
+def run_pipeline():
+    templates = {
+        'john': NNP(Male('John')),
+        'paul': NNP(Male('Paul')),
+        'george': NNP(Male('George')),
+        'ringo': NNP(Male('Ringo')),
+        'guitar': Noun('guitar'),
+        'bass': Noun('bass guitar'),
+        'drums': Noun('drum', features={NUMBER.plural, }),
+        'Happy': Clause(NP(Var(0)), VP('be', AdjP('happy'))),
+        'Play': Clause(NP(Var(0)), VP('play', NP(Var(1)))),
+    }
+
+    lex = Lexicaliser(templates=templates)
+    # FIXME: embedded coordination doesn't work; flatten or fix in simplenlg?
+    input_str = 'Play(john, guitar) & Play(paul, guitar) & ' \
+                'Play(george, bass) & Play(ringo, drums)'
+    sentence = lex(formula_to_rst(expr(input_str)))
+    for e in sentence.elements():
+        print(repr(e))
+
+    output_str = realise(sentence)
+    print(output_str)
+
+if __name__ == '__main__':
+    logging.basicConfig(level=logging.WARNING)
+    # main()
+    # run()
+    # run_simple_examples()
+    # run_pipeline()

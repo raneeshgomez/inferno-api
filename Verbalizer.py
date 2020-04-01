@@ -15,14 +15,15 @@ class Verbalizer:
         self.triples = self.fetch_triples_from_kb()
 
     def verbalize(self):
-        recommendations = []
+
         if self.triples['status']:
             self.pp.pprint("Commencing verbalization...")
             nlg_tick = time.perf_counter()
 
-            for triple in self.triples['result']:
-                recommendation_dict = self.nlg.transform(triple)
-                recommendations.append(recommendation_dict)
+            if self.triples['status']:
+                recommendations = self.nlg.transform(self.triples['result'])
+            else:
+                return self.triples
 
             nlg_tock = time.perf_counter()
             self.pp.pprint(f"Verbalized ontology in {nlg_tock - nlg_tick:0.4f} seconds")
@@ -48,12 +49,19 @@ class Verbalizer:
 
         query_tock = time.perf_counter()
         self.pp.pprint(f"Fetched all triples in {query_tock - query_tick:0.4f} seconds")
+
+        if not result['results']['bindings']:
+            return {
+                'result': None,
+                'status': False,
+                'error': "No triples found!"
+            }
+
         return {
             'result': result['results']['bindings'],
             'status': True,
             'error': None
         }
-
 
 if __name__ == "__main__":
     verbalizer = Verbalizer()

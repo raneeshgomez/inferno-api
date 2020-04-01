@@ -1,5 +1,6 @@
 from nlglib.realisation.simplenlg.realisation import Realiser
 from nlglib.microplanning import *
+from nlglib.features import NUMBER
 import math
 
 
@@ -13,42 +14,77 @@ class NlgEngine:
         self.rdfs_base_url = "http://www.w3.org/2000/01/rdf-schema#"
         self.owl_base_url = "http://www.w3.org/2002/07/owl#"
 
-    def transform(self, triple):
-        # Remove base URLs from triple
-        ont_subject = self.remove_base_url(triple['subject']['value'])
-        ont_predicate = self.remove_base_url(triple['predicate']['value'])
-        ont_object = self.remove_base_url(triple['object']['value'])
+    def transform(self, triples):
+        sentence_collection = []
 
-        # Remove underscores and add whitespaces to multi-word concepts
-        ont_subject = self.add_whitespaces(ont_subject)
-        ont_object = self.add_whitespaces(ont_object)
+        # Preprocess and format semantic triples
+        preprocessed_triples = self.preprocess_and_format_triples(triples)
 
-        structure = self.build_sentence(ont_subject, ont_predicate, ont_object)
-        if structure is None:
+        for subject_relations in preprocessed_triples:
+            sentence_structures_for_subject = self.build_sentences_for_subject(subject_relations)
+            if sentence_structures_for_subject:
+                for structure in sentence_structures_for_subject:
+                    sentence = self.realise(structure['structure'])
+                    sentence_collection.append({
+                        'semantic_subj': subject_relations['subject'],
+                        'semantic_pred': structure['predicate'],
+                        'semantic_obj': structure['object'],
+                        'recommendation': sentence
+                    })
+
+        return sentence_collection
+
+    def build_sentences_for_subject(self, triple):
+        structures = []
+        if triple['subject'][0].isupper():
+            ont_subject = triple['subject']
+            moons = []
+            for relationship in triple['relationships']:
+                ont_predicate = relationship['predicate']
+                ont_object = relationship['object']
+                if ont_predicate == "has_moon":
+                    moons.append(ont_object)
+                else:
+                    structure = self.build_sentence(ont_subject, ont_predicate, ont_object)
+                    if structure:
+                        structures.append({
+                            'predicate': ont_predicate,
+                            'object': ont_object,
+                            'structure': structure
+                        })
+            if len(moons) > 1:
+                moon_string = ", ".join(moons[:-2] + [" and ".join(moons[-2:])])
+                sentence = Clause(NP(ont_subject + "'s", "moons", features={NUMBER.plural}), VP("be"), NP(moon_string))
+                sentence['TENSE'] = 'PRESENT'
+                structures.append({
+                    'predicate': 'has_moon',
+                    'object': moon_string,
+                    'structure': sentence
+                })
+            elif len(moons) == 1:
+                sentence = Clause(NP(ont_subject + "'s", "moon"), VP("be"), NP(moons[0]))
+                sentence['TENSE'] = 'PRESENT'
+                structures.append({
+                    'predicate': 'has_moon',
+                    'object': moons[0],
+                    'structure': sentence
+                })
+        else:
             return None
 
-        sentence = self.realise(structure)
+        return structures
 
-        return {
-            'semantic_subj': ont_subject,
-            'semantic_pred': ont_predicate,
-            'semantic_obj': ont_object,
-            'recommendation': sentence
-        }
-
+    # TODO Add more complexity to sentences and use new properties
     def build_sentence(self, ont_subject, ont_predicate, ont_object):
         sentence = Clause()
-        if ont_predicate == "is_moon_of":
-            sentence = Clause(NP(ont_subject), VP("be"), NP("a moon of", ont_object))
-            sentence['TENSE'] = 'PRESENT'
-        elif ont_predicate == "exist_in":
-            sentence = Clause(NP(ont_subject), VP("exist"), NP("in", ont_object))
+        if ont_predicate == "exist_in":
+            sentence = Clause(NP(ont_subject), VP("exist"), NP("in the", ont_object))
             sentence['TENSE'] = 'PRESENT'
         elif ont_predicate == "contains":
-            sentence = Clause(NP(ont_subject), VP("contain"), NP(ont_object))
+            sentence = Clause(NP("The", ont_subject), VP("contain"), NP(ont_object, features={NUMBER.plural}))
             sentence['TENSE'] = 'PRESENT'
         elif ont_predicate == "subClassOf":
-            sentence = Clause(NP(ont_subject), VP("be"), NP("a", ont_object))
+            sentence = Clause(NP(ont_subject), VP("be"), NP("a", ont_object, "in the Solar System"))
             sentence['TENSE'] = 'PRESENT'
         elif ont_predicate == "circumference":
             if ont_subject == "Sun":
@@ -61,7 +97,7 @@ class NlgEngine:
                 sentence = Clause(NP("The", ont_subject + "'s", "age"), VP("be"),
                                   NP("approximately", ont_object))
             else:
-                sentence = Clause(NP(ont_subject + "'s", "age"), VP("be"), NP("approximately", ont_object, "years"))
+                sentence = Clause(NP(ont_subject + "'s", "age"), VP("be"), NP("approximately", ont_object))
             sentence['TENSE'] = 'PRESENT'
         elif ont_predicate == "surface_area":
             if ont_subject == "Sun":
@@ -105,14 +141,49 @@ class NlgEngine:
                 sentence = Clause(NP("The radius of", ont_subject), VP("be"), NP(ont_object))
             sentence['TENSE'] = 'PRESENT'
         elif ont_predicate == "order_from_sun":
-            ordinal_generator = lambda n: "%d%s" % (n, "tsnrhtdd"[(math.floor(n / 10) % 10 != 1) * (n % 10 < 4) * n % 10::4])
+            ordinal_generator = lambda n: "%d%s" % (
+            n, "tsnrhtdd"[(math.floor(n / 10) % 10 != 1) * (n % 10 < 4) * n % 10::4])
             position_ordinal = ordinal_generator(int(ont_object))
-            sentence = Clause(NP(ont_subject), VP("be"), NP("the", position_ordinal, "planet from the Sun"))
+            sentence = Clause(NP(ont_subject), VP("be"), NP("the", position_ordinal, "planet from the Sun in our Solar System"))
             sentence['TENSE'] = 'PRESENT'
         else:
             return None
 
         return sentence
+
+    def preprocess_and_format_triples(self, triples):
+        formatted_triples = []
+        checked_subjects = []
+        for triple in triples:
+            checking_subject = triple['subject']['value']
+            if checking_subject not in checked_subjects:
+                checked_subjects.append(checking_subject)
+                # Remove base URLs from subject
+                processed_subject = self.remove_base_url(checking_subject)
+                # Remove underscores and add whitespaces to multi-word concepts
+                processed_subject = self.add_whitespaces(processed_subject)
+                relationships_for_single_subject = {
+                    'subject': processed_subject,
+                    'relationships': []
+                }
+                for temp in triples:
+                    temp_subject = temp['subject']['value']
+                    if temp_subject == checking_subject:
+                        # Remove base URLs from predicate and object
+                        processed_predicate = self.remove_base_url(temp['predicate']['value'])
+                        processed_object = self.remove_base_url(temp['object']['value'])
+                        # Remove underscores and add whitespaces to multi-word concepts
+                        processed_object = self.add_whitespaces(processed_object)
+                        relationships_for_single_subject['relationships'].append({
+                            'predicate': processed_predicate,
+                            'object': processed_object
+                        })
+                    else:
+                        continue
+                formatted_triples.append(relationships_for_single_subject)
+            else:
+                continue
+        return formatted_triples
 
     def remove_base_url(self, url):
         if self.ontology_base_url in url:

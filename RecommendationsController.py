@@ -8,7 +8,7 @@ import operator
 import collections
 
 # Custom imports
-from inferno.nlg.Verbalizer import Verbalizer
+from Verbalizer import Verbalizer
 from inferno.db.Models import Recommendation
 from inferno.db.MongoRepository import MongoRepository
 from inferno.inference.FuzzyController import FuzzyController
@@ -82,10 +82,17 @@ class RecommendationsController:
                     'status': False,
                     'error': result
                 }
-            for individual in result['results']['bindings']:
-                individual_name = individual['individual']['value']
-                filtered_name = individual_name.replace("http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#", "")
-                concepts.append(filtered_name)
+            if result['results']['bindings']:
+                for individual in result['results']['bindings']:
+                    individual_name = individual['individual']['value']
+                    filtered_name = individual_name.replace("http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#", "")
+                    concepts.append(filtered_name)
+        if not concepts:
+            return {
+                'result': None,
+                'status': False,
+                'error': "Cannot generate recommendations! Composition is out of domain."
+            }
 
         query_tock = time.perf_counter()
         print(f"Queried ontology in {query_tock - query_tick:0.4f} seconds")
