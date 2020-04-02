@@ -1,15 +1,23 @@
 import nltk
+from py_stringmatching import MongeElkan
 from pywsd.lesk import simple_lesk
 import numpy as np
+
+from inferno.preprocessors.SpacyNluAnnotator import SpacyNluAnnotator
 
 
 class SentenceSimilarityMatcher:
 
     def __init__(self):
         print("Initializing INFERNO Knowledge-based Sentence Similarity Matcher...")
-        self.word_order = False
+        self.me = MongeElkan()
 
-    def extract_words_to_compare(self, sentence):
+    def compute_string_based_similarity(self, sentence1, sentence2):
+        sent1_tokens = SpacyNluAnnotator(sentence1).extract_tokens()
+        sent2_tokens = SpacyNluAnnotator(sentence2).extract_tokens()
+        return self.me.get_raw_score(sent1_tokens, sent2_tokens)
+
+    def extract_nouns_and_verbs(self, sentence):
         """
             Extracting nouns and verbs for word-based comparison
         """
@@ -26,11 +34,13 @@ class SentenceSimilarityMatcher:
             Disambiguating word senses for nouns and verbs using the LESK algorithm
         """
         # Extract nouns and verbs
-        pos_tags = self.extract_words_to_compare(sentence)
+        pos_tags = self.extract_nouns_and_verbs(sentence)
         sense = []
         for tag in pos_tags:
             # Fetch correct synset for each tag based on surrounding context
-            sense.append(simple_lesk(sentence, tag[0], pos=tag[1][0].lower()))
+            disambiguated_term = simple_lesk(sentence, tag[0], pos=tag[1][0].lower())
+            if disambiguated_term is not None:
+                sense.append(disambiguated_term)
         return set(sense)
 
     def calculate_similarity(self, sense_array_1, sense_array_2, vector_length):
@@ -55,6 +65,7 @@ class SentenceSimilarityMatcher:
             similarity_indexes = sorted(similarity_indexes, reverse=True)
             # Get index with highest similarity
             vector[i] = similarity_indexes[0]
+            # Similarity is considered important only if the score is above 0.7
             if vector[i] >= 0.7:
                 count += 1
         return vector, count
@@ -73,37 +84,49 @@ class SentenceSimilarityMatcher:
             v2, c2 = self.calculate_similarity(first_sentence_sense, second_sentence_sense, vector_length)
         return np.array(v1), np.array(v2), c1, c2
 
-    def match_and_fetch_score(self, first_sentence, second_sentence):
+    def match_and_fetch_score(self, input_sentences, generated_sentences):
         """
             Execute sentence similarity matcher
         """
-        first_sentence_sense = self.disambiguate_word_senses(first_sentence)
-        second_sentence_sense = self.disambiguate_word_senses(second_sentence)
-        filtered_first_sentence_sense = {sense for sense in first_sentence_sense if sense is not None}
-        filtered_second_sentence_sense = {sense for sense in second_sentence_sense if sense is not None}
-        print("******************************************************************************************************")
-        print("Sense for '" + first_sentence + "': " + str(filtered_first_sentence_sense))
-        print("Sense for '" + second_sentence + "': " + str(filtered_second_sentence_sense))
-        print("******************************************************************************************************")
+        similarity_scores = []
+        input_sentence_senses = []
+        generated_sentence_senses = []
+        for input_sentence in input_sentences:
+            input_sentence_sense = self.disambiguate_word_senses(input_sentence)
+            input_sentence_senses.append({
+                'sentence': input_sentence,
+                'sense': input_sentence_sense
+            })
+        for generated_sentence in generated_sentences:
+            generated_sentence_sense = self.disambiguate_word_senses(generated_sentence)
+            generated_sentence_senses.append({
+                'sentence': generated_sentence,
+                'sense': generated_sentence_sense
+            })
 
-        v1, v2, c1, c2 = self.get_shortest_path_distance(filtered_first_sentence_sense, filtered_second_sentence_sense)
-        print("Vector 01: " + str(v1))
-        print("Vector 02: " + str(v2))
-        print("Count 01: " + str(c1))
-        print("Count 02: " + str(c2))
+        # Calculate similarity
+        for input_sense in input_sentence_senses:
+            for generated_sense in generated_sentence_senses:
+                # Compute string-based similarity
+                string_similarity_score = self.compute_string_based_similarity(input_sense['sentence'],
+                                                                               generated_sense['sentence'])
+                print("*" * 80)
+                print("Monge-Elkan Score for \"" + input_sense['sentence'] + "\" & \"" +
+                      generated_sense['sentence'] + "\": " + str(string_similarity_score))
 
-        dot_product = np.dot(v1, v2)
-        tow = (c1 + c2) / 1.8
-        final_similarity = dot_product / tow
-        # print("Similarity: ", final_similarity)
-        return final_similarity
+                # Compute knowledge-based similarity
+                v1, v2, c1, c2 = self.get_shortest_path_distance(input_sense['sense'], generated_sense['sense'])
+                dot_product = np.dot(v1, v2)
+                tow = (c1 + c2) / 1.8
+                knowledge_based_similarity_score = dot_product / tow
+                print("Wu-Palmer Score for \"" + input_sense['sentence'] + "\" & \"" +
+                      generated_sense['sentence'] + "\": " + str(knowledge_based_similarity_score))
+                print("*" * 80)
 
+                similarity_scores.append({
+                    "generated": generated_sense['sentence'],
+                    "kb_score": knowledge_based_similarity_score,
+                    "me_score": string_similarity_score
+                })
 
-if __name__ == "__main__":
-    matcher = SentenceSimilarityMatcher()
-    sentence_1 = "An apple a day keeps the doctor away."
-    sentence_2 = "An apple a day keeps the doctor away."
-    sentence_3 = "Virat Kohli scores century"
-    sentence_4 = "Virat Kohli played 100 runs yesterday"
-    # print("Similarity: " + str(matcher.match_and_fetch_score(sentence_1, sentence_2)))
-    print("Similarity: " + str(matcher.match_and_fetch_score(sentence_3, sentence_4)))
+        return similarity_scores

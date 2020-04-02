@@ -123,10 +123,11 @@ class SparqlRepository:
     def get_description_by_subject(self, subject):
         query = """
             PREFIX fss: <http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     
             SELECT ?object
                 WHERE {
-                   fss:%s fss:description ?object .
+                   fss:%s rdfs:comment ?object .
             }
         """
         query = query % subject

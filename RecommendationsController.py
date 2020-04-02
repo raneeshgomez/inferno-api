@@ -113,33 +113,16 @@ class RecommendationsController:
         nlg_tock = time.perf_counter()
         print(f"Fetched sentences in {nlg_tock - nlg_tick:0.4f} seconds")
 
-        # Match sentences (generated vs. segmented input) and generate scores for each pair
-
-        # Sentence similarity is scored using 2 metrics using Knowledge-based approach (w/ Wordnet)
-        # and Monge-Elkan text distance metric
-
-        # TODO Optimize similarity logic
-        # Try corpus based text distance metrics (LSI etc.) instead of string based
-
-        similarity_scores = []
-        # Consider only the latest 3 sentences for similarity matching to maintain consistent response times
-        considered_sentences = sentences[-3:]
-        self.pp.pprint(considered_sentences)
+        # Compute similarity score for verbalized sentences and input sentences
+        # Consider only the latest 4 sentences for similarity matching to maintain consistent response times
+        if len(sentences) > 4:
+            considered_sentences = sentences[-4:]
+        else:
+            considered_sentences = sentences
         similarity_tick = time.perf_counter()
 
-        me = MongeElkan()
         matcher = SentenceSimilarityMatcher()
-        for nlg_sentence in generated_sentences:
-            for sentence in considered_sentences:
-                tokens_nlg = SpacyNluAnnotator(nlg_sentence).extract_tokens()
-                tokens_input = SpacyNluAnnotator(sentence).extract_tokens()
-                kb_score = matcher.match_and_fetch_score(nlg_sentence, sentence)
-                me_score = me.get_raw_score(tokens_nlg, tokens_input)
-                similarity_scores.append({
-                    "generated": nlg_sentence,
-                    "kb_score": kb_score,
-                    "me_score": me_score
-                })
+        similarity_scores = matcher.match_and_fetch_score(considered_sentences, generated_sentences)
 
         similarity_tock = time.perf_counter()
         print(f"Scored sentence similarity in {similarity_tock - similarity_tick:0.4f} seconds")

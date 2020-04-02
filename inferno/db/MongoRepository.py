@@ -55,7 +55,7 @@ class MongoRepository:
                 'error': ex
             }
 
-    def batch_insert(spread_documents):
+    def batch_insert(self, spread_documents):
         try:
             batch_insert_status = Recommendation.objects.insert(spread_documents)
             if batch_insert_status:
