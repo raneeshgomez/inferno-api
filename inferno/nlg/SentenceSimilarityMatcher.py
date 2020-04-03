@@ -43,12 +43,14 @@ class SentenceSimilarityMatcher:
                 sense.append(disambiguated_term)
         return set(sense)
 
-    def calculate_similarity(self, sense_array_1, sense_array_2):
+    def calculate_similarity(self, sense_array_1, sense_array_2, vector_length):
         """
             Generate similarity indexes and vectors
         """
-        # List of highest synset similarities for 2 sentences
-        similarity_vector = []
+        # Declare list and assign it the length of the synset with the highest number of senses
+        # Initialize vector list elements 0.0 by default
+        vector = [0.0] * vector_length
+        count = 0
         for i, synset_1 in enumerate(sense_array_1):
             similarity_indexes = []
             for synset_2 in sense_array_2:
@@ -62,10 +64,25 @@ class SentenceSimilarityMatcher:
             # Sort similarity indexes in descending order
             similarity_indexes = sorted(similarity_indexes, reverse=True)
             # Get index with highest similarity
-            similarity_vector.append(similarity_indexes[0])
+            vector[i] = similarity_indexes[0]
+            # Similarity is considered important only if the similarity is 70% or above
+            if vector[i] >= 0.7:
+                count += 1
+        return vector, count
 
-        average_similarity = sum(similarity_vector)/len(similarity_vector)
-        return average_similarity
+    def get_shortest_path_distance(self, first_sentence_sense, second_sentence_sense):
+        """
+            Calculating the shortest path distance for similarity
+        """
+        if len(first_sentence_sense) >= len(second_sentence_sense):
+            vector_length = len(first_sentence_sense)
+            v1, c1 = self.calculate_similarity(first_sentence_sense, second_sentence_sense, vector_length)
+            v2, c2 = self.calculate_similarity(second_sentence_sense, first_sentence_sense, vector_length)
+        if len(second_sentence_sense) > len(first_sentence_sense):
+            vector_length = len(second_sentence_sense)
+            v1, c1 = self.calculate_similarity(second_sentence_sense, first_sentence_sense, vector_length)
+            v2, c2 = self.calculate_similarity(first_sentence_sense, second_sentence_sense, vector_length)
+        return np.array(v1), np.array(v2), c1, c2
 
     def match_and_fetch_score(self, input_sentences, generated_sentences):
         """
@@ -98,7 +115,10 @@ class SentenceSimilarityMatcher:
                       generated_sense['sentence'] + "\": " + str(string_similarity_score))
 
                 # Compute knowledge-based similarity
-                knowledge_based_similarity_score = self.calculate_similarity(input_sense['sense'], generated_sense['sense'])
+                v1, v2, c1, c2 = self.get_shortest_path_distance(input_sense['sense'], generated_sense['sense'])
+                dot_product = np.dot(v1, v2)
+                tow = (c1 + c2) / 1.8
+                knowledge_based_similarity_score = dot_product / tow
                 print("Wu-Palmer Score for \"" + input_sense['sentence'] + "\" & \"" +
                       generated_sense['sentence'] + "\": " + str(knowledge_based_similarity_score))
                 print("*" * 80)

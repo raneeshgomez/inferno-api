@@ -32,14 +32,14 @@ init_db(app)
 # FOR DEBUG ONLY
 
 # Test verbalization
-controller = RecommendationsController()
-total_verb_tick = time.perf_counter()
-result = controller.save_verbalized_recommendations()
-total_verb_tock = time.perf_counter()
-if result['status']:
-    print(f"Verbalization completed in {total_verb_tock - total_verb_tick:0.4f} seconds")
-else:
-    print("Verbalization failed")
+# controller = RecommendationsController()
+# total_verb_tick = time.perf_counter()
+# result = controller.save_verbalized_recommendations()
+# total_verb_tock = time.perf_counter()
+# if result['status']:
+#     print(f"Verbalization completed in {total_verb_tock - total_verb_tick:0.4f} seconds")
+# else:
+#     print("Verbalization failed")
 
 # Test fetching recommendations
 total_tick = time.perf_counter()

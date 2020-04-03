@@ -178,11 +178,7 @@ class NlgEngine:
                             'predicate': processed_predicate,
                             'object': processed_object
                         })
-                    else:
-                        continue
                 formatted_triples.append(relationships_for_single_subject)
-            else:
-                continue
         return formatted_triples
 
     def remove_base_url(self, url):

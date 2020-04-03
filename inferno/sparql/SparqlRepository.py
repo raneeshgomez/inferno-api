@@ -112,7 +112,7 @@ class SparqlRepository:
             WHERE {
               ?individual rdf:type ?type .
               ?type rdfs:subClassOf ?class .
-              ?individual fss:description ?description .
+              ?individual rdfs:comment ?description .
               FILTER(regex(str(?individual), "%s") || regex(str(?description), "%s"))
             }
             LIMIT %s
