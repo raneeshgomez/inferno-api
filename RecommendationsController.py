@@ -3,7 +3,6 @@ import pprint
 from nltk.tokenize import sent_tokenize
 import time
 import math
-from py_stringmatching import MongeElkan
 import operator
 import collections
 
@@ -50,15 +49,14 @@ class RecommendationsController:
         # Execute NLU pipeline
         nlu_tick = time.perf_counter()
 
-        # Annotate corpus for NLU purposes
-        nlu = SpacyNluAnnotator(text)
-        # Set resolved text to corpus
-        resolved_text = nlu.doc._.coref_resolved
+        # Initialize SpaCy annotator
+        nlu = SpacyNluAnnotator()
+        # Resolve coreferences in text
+        resolved_text = nlu.resolve_corefs(text)
+        # Extract concepts as named entities
+        named_ents = nlu.extract_named_ents(resolved_text)
         # Tokenize resolved text into sentences
         sentences = sent_tokenize(resolved_text)
-        # Reinitialize NLU object with coreference resolved text
-        nlu = SpacyNluAnnotator(resolved_text)
-        named_ents = nlu.extract_named_ents()
 
         # Filter out the most common concepts in the Spacy pipeline
         spacy_concepts = [term[0] for term in named_ents if term[1] == 'ORG' or term[1] == 'LOC' or term[1] == 'PERSON']

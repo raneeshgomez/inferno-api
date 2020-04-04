@@ -1,7 +1,5 @@
-import nltk
 from py_stringmatching import MongeElkan
 from pywsd.lesk import simple_lesk
-import numpy as np
 
 from inferno.preprocessors.SpacyNluAnnotator import SpacyNluAnnotator
 
@@ -11,22 +9,29 @@ class SentenceSimilarityMatcher:
     def __init__(self):
         print("Initializing INFERNO Knowledge-based Sentence Similarity Matcher...")
         self.me = MongeElkan()
+        self.spacy = SpacyNluAnnotator()
 
-    def compute_string_based_similarity(self, sentence1, sentence2):
-        sent1_tokens = SpacyNluAnnotator(sentence1).extract_tokens()
-        sent2_tokens = SpacyNluAnnotator(sentence2).extract_tokens()
-        return self.me.get_raw_score(sent1_tokens, sent2_tokens)
+    def preprocess_sentences(self, sentences):
+        """
+            Preprocess sentence list
+        """
+        sentence_senses = []
+        for sentence in sentences:
+            sentence_sense = self.disambiguate_word_senses(sentence)
+            sentence_senses.append({
+                'sentence': sentence,
+                'sense': sentence_sense
+            })
+        return sentence_senses
 
     def extract_nouns_and_verbs(self, sentence):
         """
             Extracting nouns and verbs for word-based comparison
         """
-        # Tokenize sentence
-        tokens = nltk.word_tokenize(sentence)
         # Extract POS tags from tokens
-        pos_tags = nltk.pos_tag(tokens)
+        pos_tags = self.spacy.extract_pos_tags(sentence)
         # Filter tags that are nouns and verbs
-        pos_tags = [tag for tag in pos_tags if tag[1].startswith('N') or tag[1].startswith('V')]
+        pos_tags = [tag for tag in pos_tags if tag[2].startswith('N') or tag[2].startswith('V')]
         return pos_tags
 
     def disambiguate_word_senses(self, sentence):
@@ -38,18 +43,18 @@ class SentenceSimilarityMatcher:
         sense = []
         for tag in pos_tags:
             # Fetch correct synset for each tag based on surrounding context
-            disambiguated_term = simple_lesk(sentence, tag[0], pos=tag[1][0].lower())
+            disambiguated_term = simple_lesk(sentence, tag[0], pos=tag[2][0].lower())
             if disambiguated_term is not None:
                 sense.append(disambiguated_term)
         return set(sense)
 
-    def calculate_similarity(self, sense_array_1, sense_array_2):
+    def compute_knowledge_based_similarity(self, sense_array_1, sense_array_2):
         """
-            Generate similarity indexes and vectors
+            Compute knowledge-based similarity for senses using the Wu-Palmer algorithm
         """
-        # List of highest synset similarities for 2 sentences
+        # List of highest sense similarities for 2 sentences
         similarity_vector = []
-        for i, synset_1 in enumerate(sense_array_1):
+        for synset_1 in sense_array_1:
             similarity_indexes = []
             for synset_2 in sense_array_2:
                 # Wu-Palmer similarity is used to calculate the similarity between synsets from each sentence
@@ -67,25 +72,23 @@ class SentenceSimilarityMatcher:
         average_similarity = sum(similarity_vector)/len(similarity_vector)
         return average_similarity
 
+    def compute_string_based_similarity(self, sentence1, sentence2):
+        """
+            Compute string-based similarity for sentences using the Monge-Elkan algorithm
+        """
+        sent1_tokens = self.spacy.extract_tokens(sentence1)
+        sent2_tokens = self.spacy.extract_tokens(sentence2)
+        return self.me.get_raw_score(sent1_tokens, sent2_tokens)
+
     def match_and_fetch_score(self, input_sentences, generated_sentences):
         """
             Execute sentence similarity matcher
         """
         similarity_scores = []
-        input_sentence_senses = []
-        generated_sentence_senses = []
-        for input_sentence in input_sentences:
-            input_sentence_sense = self.disambiguate_word_senses(input_sentence)
-            input_sentence_senses.append({
-                'sentence': input_sentence,
-                'sense': input_sentence_sense
-            })
-        for generated_sentence in generated_sentences:
-            generated_sentence_sense = self.disambiguate_word_senses(generated_sentence)
-            generated_sentence_senses.append({
-                'sentence': generated_sentence,
-                'sense': generated_sentence_sense
-            })
+
+        # Preprocess inputs
+        input_sentence_senses = self.preprocess_sentences(input_sentences)
+        generated_sentence_senses = self.preprocess_sentences(generated_sentences)
 
         # Calculate similarity
         for generated_sense in generated_sentence_senses:
@@ -93,12 +96,12 @@ class SentenceSimilarityMatcher:
                 # Compute string-based similarity
                 string_similarity_score = self.compute_string_based_similarity(input_sense['sentence'],
                                                                                generated_sense['sentence'])
+                # Compute knowledge-based similarity
+                knowledge_based_similarity_score = self.compute_knowledge_based_similarity(input_sense['sense'],
+                                                                                           generated_sense['sense'])
                 print("*" * 80)
                 print("Monge-Elkan Score for \"" + input_sense['sentence'] + "\" & \"" +
                       generated_sense['sentence'] + "\": " + str(string_similarity_score))
-
-                # Compute knowledge-based similarity
-                knowledge_based_similarity_score = self.calculate_similarity(input_sense['sense'], generated_sense['sense'])
                 print("Wu-Palmer Score for \"" + input_sense['sentence'] + "\" & \"" +
                       generated_sense['sentence'] + "\": " + str(knowledge_based_similarity_score))
                 print("*" * 80)

@@ -1,5 +1,5 @@
 # from preprocessors.NLUAnnotator import NLUAnnotator
-from inferno.preprocessors import SpacyNluAnnotator
+from inferno.preprocessors.SpacyNluAnnotator import SpacyNluAnnotator
 # from sparql.SparqlQueryEngine import SparqlQueryEngine
 # from svo_extractor.subject_verb_object_extract import findSVOs, nlp
 # from openie import StanfordOpenIE
@@ -569,6 +569,20 @@ def run_pipeline():
 
     output_str = realise(sentence)
     print(output_str)
+
+
+sentence = "Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System, after Mercury."
+
+# Tokenize sentence
+tokens = nltk.word_tokenize(sentence)
+# Extract POS tags from tokens
+pos_tags = nltk.pos_tag(tokens)
+print(str(pos_tags))
+
+spacy = SpacyNluAnnotator()
+tokens = spacy.extract_tokens(sentence)
+pos_tags = spacy.extract_pos_tags(sentence)
+print(str(pos_tags))
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.WARNING)
