@@ -61,9 +61,12 @@ class RecommendationsController:
         # Filter out the most common concepts in the Spacy pipeline
         spacy_concepts = [term[0] for term in named_ents if term[1] == 'ORG' or term[1] == 'LOC' or term[1] == 'PERSON']
         entity_counter = collections.Counter(spacy_concepts)
-        most_common_entities = entity_counter.most_common(2)
+        most_common_entities = entity_counter.most_common(3)
         similar_concepts = [most_common_entities[i][0] for i, entity in enumerate(most_common_entities)]
 
+        print("Resolved text: " + resolved_text)
+        print("Named entities extracted: " + str(named_ents))
+        print("Concepts extracted: " + str(similar_concepts))
         nlu_tock = time.perf_counter()
         print(f"NLU done in {nlu_tock - nlu_tick:0.4f} seconds")
 

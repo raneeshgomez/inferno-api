@@ -62,7 +62,10 @@ class NlgEngine:
                     'structure': sentence
                 })
             elif len(moons) == 1:
-                sentence = Clause(NP(ont_subject + "'s", "moon"), VP("be"), NP(moons[0]))
+                if ont_subject == "Earth":
+                    sentence = Clause(NP(ont_subject + "'s", "only natural satellite"), VP("be"), NP("simply called the", moons[0]))
+                else:
+                    sentence = Clause(NP(ont_subject + "'s", "only natural satellite"), VP("be"), NP(moons[0]))
                 sentence['TENSE'] = 'PRESENT'
                 structures.append({
                     'predicate': 'has_moon',
@@ -74,7 +77,6 @@ class NlgEngine:
 
         return structures
 
-    # TODO Add more complexity to sentences and use new properties
     def build_sentence(self, ont_subject, ont_predicate, ont_object):
         sentence = Clause()
         if ont_predicate == "exist_in":
@@ -85,6 +87,24 @@ class NlgEngine:
             sentence['TENSE'] = 'PRESENT'
         elif ont_predicate == "subClassOf":
             sentence = Clause(NP(ont_subject), VP("be"), NP("a", ont_object, "in the Solar System"))
+            sentence['TENSE'] = 'PRESENT'
+        elif ont_predicate == "named_after":
+            sentence = Clause(NP(ont_subject), VP("be"), NP("named after", ont_object))
+            sentence['TENSE'] = 'PRESENT'
+        elif ont_predicate == "also_known_as":
+            sentence = Clause(NP(ont_subject), VP("be"), NP("also known as", ont_object))
+            sentence['TENSE'] = 'PRESENT'
+        elif ont_predicate == "planet_type":
+            sentence = Clause(NP(ont_subject), VP("be"), NP("classified as a", ont_object, "planet in the Solar System"))
+            sentence['TENSE'] = 'PRESENT'
+        elif ont_predicate == "revolution_time":
+            sentence = Clause(NP(ont_subject), VP("revolve"), NP("around the Sun in", ont_object))
+            sentence['TENSE'] = 'PRESENT'
+        elif ont_predicate == "rotation_time":
+            if ont_subject == "Sun":
+                sentence = Clause(NP("The", ont_subject), VP("rotate"), NP("around its own axis in", ont_object))
+            else:
+                sentence = Clause(NP(ont_subject), VP("rotate"), NP("around its own axis in", ont_object))
             sentence['TENSE'] = 'PRESENT'
         elif ont_predicate == "circumference":
             if ont_subject == "Sun":

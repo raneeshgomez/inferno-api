@@ -58,7 +58,6 @@ class SentenceSimilarityMatcher:
             similarity_indexes = []
             for synset_2 in sense_array_2:
                 # Wu-Palmer similarity is used to calculate the similarity between synsets from each sentence
-                # This method is based on the depth of the synsets in the WordNet taxonomy and their common ancestor
                 similarity = wn.wup_similarity(synset_1, synset_2)
                 if similarity is not None:
                     similarity_indexes.append(similarity)
