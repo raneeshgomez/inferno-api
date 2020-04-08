@@ -34,7 +34,10 @@ class RecommendationsController:
                     'error': result
                 }
             return {
-                'result': result['results']['bindings'][0]['object']['value'],
+                'result': {
+                    'text': result['results']['bindings'][0]['object']['value'],
+                    'score': None
+                },
                 'status': True,
                 'error': None
             }
@@ -64,9 +67,13 @@ class RecommendationsController:
         most_common_entities = entity_counter.most_common(3)
         similar_concepts = [most_common_entities[i][0] for i, entity in enumerate(most_common_entities)]
 
-        print("Resolved text: " + resolved_text)
-        print("Named entities extracted: " + str(named_ents))
-        print("Concepts extracted: " + str(similar_concepts))
+        if not similar_concepts:
+            return {
+                'result': None,
+                'status': False,
+                'error': "Cannot generate recommendations! Composition is out of domain."
+            }
+
         nlu_tock = time.perf_counter()
         print(f"NLU done in {nlu_tock - nlu_tick:0.4f} seconds")
 
@@ -109,15 +116,23 @@ class RecommendationsController:
                     obj_collection.append(obj)
             else:
                 return db_result
-        generated_sentences = [sent_obj.to_mongo().to_dict()['recommendation'] for sent_obj in obj_collection]
+
+        if obj_collection:
+            generated_sentences = [sent_obj.to_mongo().to_dict()['recommendation'] for sent_obj in obj_collection]
+        else:
+            return {
+                'result': None,
+                'status': False,
+                'error': "Cannot generate recommendations! No verbalized sentences matched."
+            }
 
         nlg_tock = time.perf_counter()
         print(f"Fetched sentences in {nlg_tock - nlg_tick:0.4f} seconds")
 
         # Compute similarity score for verbalized sentences and input sentences
         # Consider only the latest 4 sentences for similarity matching to maintain consistent response times
-        if len(sentences) > 4:
-            considered_sentences = sentences[-4:]
+        if len(sentences) > 3:
+            considered_sentences = sentences[-3:]
         else:
             considered_sentences = sentences
         similarity_tick = time.perf_counter()
@@ -137,13 +152,9 @@ class RecommendationsController:
         for score in similarity_scores:
             kb_score = score['kb_score']
             me_score = score['me_score']
-            if math.isinf(kb_score):
-                kb_score = 0
-            if math.isinf(me_score):
-                me_score = 0
             fuzzy_score = fuzzy.predict_fuzzy_score(kb_score, me_score)
             fuzzy_scores.append({
-                "sentence": score['generated'],
+                "text": score['generated'],
                 "score": fuzzy_score
             })
 
@@ -156,12 +167,12 @@ class RecommendationsController:
         unique_recommendations = []
         for obj_1 in fuzzy_scores:
             for obj_2 in fuzzy_scores:
-                if obj_1["sentence"] == obj_2["sentence"]:
+                if obj_1["text"] == obj_2["text"]:
                     if obj_1["score"] >= obj_2["score"]:
-                        if not any(sentence["sentence"] == obj_1["sentence"] for sentence in unique_recommendations):
+                        if not any(sentence["text"] == obj_1["text"] for sentence in unique_recommendations):
                             unique_recommendations.append(obj_1)
                     else:
-                        if not any(sentence["sentence"] == obj_2["sentence"] for sentence in unique_recommendations):
+                        if not any(sentence["text"] == obj_2["text"] for sentence in unique_recommendations):
                             unique_recommendations.append(obj_2)
                 else:
                     continue
