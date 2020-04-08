@@ -2,12 +2,11 @@ import pprint
 
 from nltk.tokenize import sent_tokenize
 import time
-import math
 import operator
 import collections
 
 # Custom imports
-from Verbalizer import Verbalizer
+from inferno.nlg.Verbalizer import Verbalizer
 from inferno.db.Models import Recommendation
 from inferno.db.MongoRepository import MongoRepository
 from inferno.inference.FuzzyController import FuzzyController
