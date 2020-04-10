@@ -1,24 +1,32 @@
 from nlglib.realisation.simplenlg.realisation import Realiser
 from nlglib.microplanning import *
 from nlglib.features import NUMBER
-import math
+import math, pprint
 
 
 class NlgEngine:
 
     def __init__(self):
         print("Initializing INFERNO NLG Engine...")
+        self.pp = pprint.PrettyPrinter(indent=4)
         self.realise = Realiser(host='nlg.kutlak.info', port=40000)
         self.ontology_base_url = "http://www.semanticweb.org/raneeshgomez/ontologies/2020/fyp-solar-system#"
         self.rdf_base_url = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
         self.rdfs_base_url = "http://www.w3.org/2000/01/rdf-schema#"
         self.owl_base_url = "http://www.w3.org/2002/07/owl#"
+        self.disregarded_types = ['DatatypeProperty', 'ObjectProperty', 'InverseObjectProperty', 'NamedIndividual',
+                                  'AnonymousIndividual', 'Class', 'TransitiveProperty', 'FunctionalProperty',
+                                  'InverseFunctionalProperty', 'SymmetricProperty', 'Restriction']
 
     def transform(self, triples):
         sentence_collection = []
 
         # Preprocess and format semantic triples
         preprocessed_triples = self.preprocess_and_format_triples(triples)
+
+        print('*' * 80 + ' PREPROCESSED TRIPLES ' + '*' * 80)
+        self.pp.pprint(preprocessed_triples)
+        print('*' * 100 + ' END PREPROCESSED TRIPLES ' + '*' * 80)
 
         for subject_relations in preprocessed_triples:
             sentence_structures_for_subject = self.build_sentences_for_subject(subject_relations)
@@ -87,6 +95,13 @@ class NlgEngine:
             sentence['TENSE'] = 'PRESENT'
         elif ont_predicate == "subClassOf":
             sentence = Clause(NP(ont_subject), VP("be"), NP("a", ont_object, "in the Solar System"))
+            sentence['TENSE'] = 'PRESENT'
+        elif ont_predicate == "type":
+            if ont_object not in self.disregarded_types:
+                if ont_object == 'Sun':
+                    sentence = Clause(NP(ont_subject), VP("is"), NP("the", ont_object, "in the Solar System"))
+                else:
+                    sentence = Clause(NP(ont_subject), VP("is"), NP("a", ont_object, "in the Solar System"))
             sentence['TENSE'] = 'PRESENT'
         elif ont_predicate == "named_after":
             sentence = Clause(NP(ont_subject), VP("be"), NP("named after", ont_object))

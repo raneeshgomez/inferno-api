@@ -13,6 +13,9 @@ class Verbalizer:
         self.nlg = NlgEngine()
         self.sparql = SparqlRepository()
         self.triples = self.fetch_triples_from_kb()
+        print('*' * 80 + ' TRIPLES ' + '*' * 80)
+        self.pp.pprint(self.triples['result'])
+        print('*' * 100 + ' END TRIPLES ' + '*' * 80)
 
     def verbalize(self):
 
