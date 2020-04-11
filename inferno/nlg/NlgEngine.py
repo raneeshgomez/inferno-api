@@ -99,7 +99,7 @@ class NlgEngine:
         elif ont_predicate == "type":
             if ont_object not in self.disregarded_types:
                 if ont_object == 'Sun':
-                    sentence = Clause(NP(ont_subject), VP("is"), NP("the", ont_object, "in the Solar System"))
+                    sentence = Clause(NP("The", ont_subject), VP("is"), NP("the", ont_object, "in the Solar System"))
                 else:
                     sentence = Clause(NP(ont_subject), VP("is"), NP("a", ont_object, "in the Solar System"))
             sentence['TENSE'] = 'PRESENT'
