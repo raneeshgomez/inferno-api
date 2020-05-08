@@ -1,6 +1,7 @@
 from .MongoDb import db
 
-
+# Define recommendation document format
+# Weights have been assigned to indexes of subject and object to prioritize text search results
 class Recommendation(db.Document):
     semantic_subj = db.StringField(required=True)
     semantic_pred = db.StringField(required=True)

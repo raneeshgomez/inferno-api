@@ -9,6 +9,7 @@ class SparqlQueryEngine:
         self.LOCAL_URL = "http://localhost:" + repr(self.PORT) + "/" + self.FUSEKI_ENDPOINT + "/query"
         self.DBPEDIA_URL = "http://dbpedia.org/sparql"
 
+    # Queries Apache Jena Fuseki triple store
     def query_fuseki(self, query):
         sparql = SPARQLWrapper(self.LOCAL_URL)
         sparql.setQuery(query)
@@ -20,6 +21,7 @@ class SparqlQueryEngine:
         except:
             return "SPARQL Error!"
 
+    # Queries DBpedia
     def query_dbpedia(self, query):
         sparql = SPARQLWrapper(self.DBPEDIA_URL)
         sparql.setQuery(query)

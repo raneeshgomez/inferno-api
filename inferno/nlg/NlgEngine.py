@@ -18,15 +18,12 @@ class NlgEngine:
                                   'AnonymousIndividual', 'Class', 'TransitiveProperty', 'FunctionalProperty',
                                   'InverseFunctionalProperty', 'SymmetricProperty', 'Restriction']
 
+    # Main function to begin NLG pipeline
     def transform(self, triples):
         sentence_collection = []
 
         # Preprocess and format semantic triples
         preprocessed_triples = self.preprocess_and_format_triples(triples)
-
-        print('*' * 80 + ' PREPROCESSED TRIPLES ' + '*' * 80)
-        self.pp.pprint(preprocessed_triples)
-        print('*' * 100 + ' END PREPROCESSED TRIPLES ' + '*' * 80)
 
         for subject_relations in preprocessed_triples:
             sentence_structures_for_subject = self.build_sentences_for_subject(subject_relations)
@@ -42,6 +39,7 @@ class NlgEngine:
 
         return sentence_collection
 
+    # Build sentence structure for triple dictionary
     def build_sentences_for_subject(self, triple):
         structures = []
         if triple['subject'][0].isupper():
@@ -53,6 +51,7 @@ class NlgEngine:
                 if ont_predicate == "has_moon":
                     moons.append(ont_object)
                 else:
+                    # Build sentence structure for extracted subject, predicate and object
                     structure = self.build_sentence(ont_subject, ont_predicate, ont_object)
                     if structure:
                         structures.append({
@@ -60,6 +59,7 @@ class NlgEngine:
                             'object': ont_object,
                             'structure': structure
                         })
+            # If planet has multiple moons
             if len(moons) > 1:
                 moon_string = ", ".join(moons[:-2] + [" and ".join(moons[-2:])])
                 sentence = Clause(NP(ont_subject + "'s", "moons", features={NUMBER.plural}), VP("be"), NP(moon_string))
@@ -69,6 +69,7 @@ class NlgEngine:
                     'object': moon_string,
                     'structure': sentence
                 })
+            # If planet has only a single moon
             elif len(moons) == 1:
                 if ont_subject == "Earth":
                     sentence = Clause(NP(ont_subject + "'s", "only natural satellite"), VP("be"), NP("simply called the", moons[0]))
@@ -85,6 +86,7 @@ class NlgEngine:
 
         return structures
 
+    # Verbalizer rulebase for sentence structure construction
     def build_sentence(self, ont_subject, ont_predicate, ont_object):
         sentence = Clause()
         if ont_predicate == "exist_in":
@@ -186,6 +188,7 @@ class NlgEngine:
 
         return sentence
 
+    # Sort and organize semantic triples into custom subject-based data structure
     def preprocess_and_format_triples(self, triples):
         formatted_triples = []
         checked_subjects = []
@@ -216,6 +219,7 @@ class NlgEngine:
                 formatted_triples.append(relationships_for_single_subject)
         return formatted_triples
 
+    # Remove base URLs from triple URIs
     def remove_base_url(self, url):
         if self.ontology_base_url in url:
             return url.replace(self.ontology_base_url, "")
@@ -228,6 +232,7 @@ class NlgEngine:
         else:
             return url
 
+    # Replace underscores with whitespaces for multi-word resources
     def add_whitespaces(self, concept):
         if "_" in concept:
             return concept.replace("_", " ")

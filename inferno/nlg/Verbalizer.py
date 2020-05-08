@@ -13,10 +13,8 @@ class Verbalizer:
         self.nlg = NlgEngine()
         self.sparql = SparqlRepository()
         self.triples = self.fetch_triples_from_kb()
-        print('*' * 80 + ' TRIPLES ' + '*' * 80)
-        self.pp.pprint(self.triples['result'])
-        print('*' * 100 + ' END TRIPLES ' + '*' * 80)
 
+    # Transform semantic triples to legible sentences
     def verbalize(self):
 
         if self.triples['status']:
@@ -25,6 +23,9 @@ class Verbalizer:
 
             if self.triples['status']:
                 recommendations = self.nlg.transform(self.triples['result'])
+                print('*' * 80 + ' RECOMMENDATIONS ' + '*' * 80)
+                self.pp.pprint("Sentences: " + str(recommendations))
+                print('*' * 100 + ' END RECOMMENDATIONS ' + '*' * 80)
             else:
                 return self.triples
 
@@ -36,6 +37,7 @@ class Verbalizer:
             self.pp.pprint("Verbalization failed!")
             return None
 
+    # Retrieve semantic triples from knowledge base
     def fetch_triples_from_kb(self):
         self.pp.pprint("Fetching triples...")
         query_tick = time.perf_counter()

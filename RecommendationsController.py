@@ -66,6 +66,11 @@ class RecommendationsController:
         most_common_entities = entity_counter.most_common(3)
         similar_concepts = [most_common_entities[i][0] for i, entity in enumerate(most_common_entities)]
 
+        print('*' * 80 + ' NAMED ENTITIES AND CONCEPTS ' + '*' * 80)
+        self.pp.pprint("Named Entities: " + str(named_ents))
+        self.pp.pprint("Concepts extracted: " + str(similar_concepts))
+        print('*' * 100 + ' END NAMED ENTITIES AND CONCEPTS ' + '*' * 80)
+
         if not similar_concepts:
             return {
                 'result': None,
@@ -138,6 +143,10 @@ class RecommendationsController:
 
         matcher = SentenceSimilarityMatcher()
         similarity_scores = matcher.match_and_fetch_score(considered_sentences, generated_sentences)
+
+        print('*' * 80 + ' SIMILARITY SCORES ' + '*' * 80)
+        self.pp.pprint("Similarity scores: " + str(similarity_scores))
+        print('*' * 100 + ' END SIMILARITY SCORES ' + '*' * 80)
 
         similarity_tock = time.perf_counter()
         print(f"Scored sentence similarity in {similarity_tock - similarity_tick:0.4f} seconds")
