@@ -1,4 +1,6 @@
 # INFERNO REST API
+[![GitHub license](https://img.shields.io/github/license/codeSmart2307/inferno-api)](https://github.com/codeSmart2307/inferno-api/blob/master/LICENSE)
+![GitHub contributors](https://img.shields.io/github/contributors/codeSmart2307/inferno-api)
 
 ## Running the app
 
