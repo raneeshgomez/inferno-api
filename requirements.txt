@@ -31,7 +31,7 @@ murmurhash==1.0.2
 networkx==2.4
 neuralcoref==4.0
 nlglib==0.2.1
-nltk==3.4.5
+nltk==3.6.6
 numpy==1.22.0
 pandas==1.0.1
 pke==1.8.1
