@@ -37,7 +37,7 @@ pandas==1.0.1
 pke==1.8.1
 plac==0.9.6
 preshed==2.0.1
-protobuf==3.11.3
+protobuf==3.15.0
 pycorenlp==0.3.0
 PyJWT==2.4.0
 pyparsing==2.4.6
